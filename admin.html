@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Admin - Infreserve</title>
-    <script type="text/javascript" src="https://me.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=EgHCK6Gx0AOXNZTV_RuE1nBYsorR5k5vinIeTtIUNRUvGzwL_h9YYstzney9yWtjdb78Fmhr0Re8cG16pQqhYcATN-wuvd55kgv8qkfuzYzBNSLVpmD2cZKhZ5I1dbWOoVwpXevgpwtZLqWAaqariM9gXxvXg7RDgWfCDz0u9dgTKmjwNco0YMAO5jP1FhzzqwIxJvIQ5R6JnVSc8TTtAwrovlyFaxAqIjWIYXc-V4qoHBhfJ-JlpnbjtIlVrWew2SHGZQOKYkgNuFT90EnedTcYDYBR2VIFNObSjPDtFZ0aVHaJalBpW7MvI8z106_vUIDBQbn8pEDOG0mU4Mm3d5cXlvI7o2SOYUuUy9POBFF89vI1rLZXb64it99HfAp0RDuu9CMQf0h3sG5reIRJgG31iZ95YVsZyUvvYxWMNVjB28RKnskZvBRbBbx_cvJAXK0elRHiRQPqYRXRlQ5ecPr5EKkMlJAoeh3oPHy8g8v8pF9kkUzCiK6niLdV6CkpSsEo4cjNBTgcMpEaYU2FEqTHaTOOQYdsXJHTqeywm6e77Di3ally2-DwgBUt17boemVwr13eIDeSrmPRbCmG9I6z_CCb5ZNW9Yesi-g1S2a7eS1PB7jQ537q7IdyqnkDAh8qgAbtmYpVIDavlZQAoQ" charset="UTF-8"></script><style>
+    <script type="text/javascript" src="https://me.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=KWlWwrGCSshqJJSKPQumrLJk0yD-8L-PvgvTxEQUJR9jsfs9A1BOg9B0uhOIfOF5NolVvBCso2vtuU4MOBkm3bKgUk1Bi3M6NX2vF_Bb6YqXiw_2gnN8MMVLorbyZX4wr2V5rtjjt-SgNzJ2nW8jcK7QXiHUYJGkfLxP852Pxtofwsm_-j6eTOOVrXLrzjH4THo23e-WJ7dIDo3GtKqBFwz1QNHbDUMW4nNotrsYtYEB0-alZ4qQwhh8FZJFQqYxECwiY3vsUQvFvvlYOZFi0E7cfWug1JLIdbLHZ7oUFRB_VilnA0dy3AyfRiO1gn4CL55RX7N8nZTlrvX-MpKNTfPU2nnXHL7-Tgds3QUGA07S6rsm4eIjx5IDFjE2y-SJ6vZNebSqSnISjkJuKXqZeTjiSBeXxWsreq04ZxkprgHHbTZH6biYzexQYqv_uZ-ktAHuMJUDJgk60HpDBB7D7gggLUDrb4ePfCoND4o1v18LYSig2tsa3E8z-uy2MdGspFESF-S48_EI5Ce1WPbYFDGUWowBBVqvBqzlcBF376wzPe_3sVXi-1VQmiDdU97CVi3VM9hMCO43ZCFnWMz6dM6dqg7NUhJB5JdwrL_6y8uYZyFq4eq-Zy2_ju5xBW5eWgRQtrs9Ge8qo9_t4f-p6w" charset="UTF-8"></script><style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; background: #f5f6fa; }
         .header { background: linear-gradient(135deg, #1B3864 0%, #4161A8 100%); color: white; padding: 20px 30px; }
@@ -96,7 +96,6 @@
     </div>
 
     <script>
-        // CONFIGURACION: Reemplaza con tu URL de Apps Script desplegado
         const API_URL = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
 
         const session = JSON.parse(localStorage.getItem('infreserve_session') || '{}');
@@ -129,8 +128,8 @@
                             '<td>' + u.departamento + '</td>' +
                             '<td><span class="badge ' + badgeClass + '">' + u.estado + '</span></td>' +
                             '<td>' +
-                            '<button class="btn btn-primary" onclick="editarUsuario('' + u.id + '')" style="padding: 6px 12px; font-size: 12px;">Editar</button> ' +
-                            '<button class="btn btn-danger" onclick="eliminarUsuario('' + u.id + '')" style="padding: 6px 12px; font-size: 12px;">Desactivar</button>' +
+                            '<button class="btn btn-primary" onclick="editarUsuario(\'' + u.id + '\')" style="padding: 6px 12px; font-size: 12px;">Editar</button> ' +
+                            '<button class="btn btn-danger" onclick="eliminarUsuario(\'' + u.id + '\')" style="padding: 6px 12px; font-size: 12px;">Desactivar</button>' +
                             '</td>';
                         tbody.appendChild(row);
                     });

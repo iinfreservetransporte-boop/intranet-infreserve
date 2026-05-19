@@ -2,35 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infreserve - Acceso Intranet</title>
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌐%3C/text%3E%3C/svg%3E">
-    <script type="text/javascript" src="https://me.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=_RswWCGgqb3hRxdok8da0t0sHzA5cPMBSyH6x8JXHVy6b_nXtsPrEO9WSwn91-8x2T8pytoVzZ0a4xxRLDVP1Uwipce4yssbLlOC7tGWTge7a7Myfa0xSYa6FvjCb7P9JyV--CdW6_2y0vVQTQPU51Lmrbq8za_EWrl9wwpULjeI35jZ0SfQjUnRtaRxaxDj6mZGZCU-9gyfNCNkfpXN7OoK_9wifDSSWHfEtoKbKqc9erouHrZxY2M2xHyLbYztLpRX-rvgLBCP34bXaBn2dJjTEOuPXHCQum9Ow2EquAvwd3yPjREbBnB-1X8M2ca_ZFc4S1qqOIEWJptPG-vRVRtMv-3YsDM6pqNSXzoFo32maO9FhbXkz69seSWcRWDTqaUvqqwsuupTch7ihK-gAiza1iudaxQI64yuqWtih2swlR9W0_REao2ZIEqf1EUf50mTeiorm0d9jE6KyjboPrZxQKGPm1HiFnkI9k8fKDh8R-3E4TVZUQ1zP5Qy-LAJ6JsMHUQr3wIA0L0fS2I2avPdqtMkR0NUXfYasHXI3yqFTOns43tjDjB9PvDvS7su38pdLNafX1CA76_FboZ7DA8F5HQDiwPgC1jXlQbQHLTAFKuVdfZgOSbt-c18v8mLY3aucfKErODPL5zvoheuJyqsn-eHAXmmOXnP2K0I6PE" charset="UTF-8"></script><style>
-        :root {
-            --primary: #4161A8;
-            --primary-dark: #2E4A7A;
-            --primary-light: #5A7BC4;
-            --secondary: #86C440;
-            --secondary-dark: #6BA332;
-            --accent: #FF6E00;
-            --dark: #1B3864;
-            --text: #333333;
-            --text-light: #666666;
-            --text-muted: #999999;
-            --bg: #F0F2F5;
-            --white: #FFFFFF;
-            --border: #DBD9D9;
-            --error: #DC2626;
-            --error-bg: #FEF2F2;
-            --success: #10B981;
-            --success-bg: #ECFDF5;
-            --shadow: rgba(0,0,0,0.08);
-            --shadow-lg: rgba(0,0,0,0.15);
-            --radius: 16px;
-            --radius-sm: 10px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Infreserve - Intranet Corporativa</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⚓%3C/text%3E%3C/svg%3E">
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -39,39 +14,40 @@
 
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            background: linear-gradient(135deg, #0B2B5E 0%, #1A4A8A 50%, #2C6EAF 100%);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 24px 20px;
             position: relative;
-            overflow: hidden;
         }
 
-        /* Background decoration */
         body::before {
             content: '';
             position: absolute;
             width: 600px;
             height: 600px;
-            background: rgba(134, 196, 64, 0.1);
+            background: rgba(134, 196, 64, 0.08);
             border-radius: 50%;
             top: -200px;
             right: -200px;
-            animation: float 20s ease-in-out infinite;
+            animation: float 22s ease-in-out infinite;
+            pointer-events: none;
         }
 
         body::after {
             content: '';
             position: absolute;
-            width: 400px;
-            height: 400px;
+            width: 500px;
+            height: 500px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 50%;
-            bottom: -100px;
-            left: -100px;
-            animation: float 25s ease-in-out infinite reverse;
+            bottom: -150px;
+            left: -150px;
+            animation: float 28s ease-in-out infinite reverse;
+            pointer-events: none;
         }
 
         @keyframes float {
@@ -80,29 +56,102 @@
             66% { transform: translate(-20px, 20px) scale(0.95); }
         }
 
-        /* Container */
+        /* Encabezado corporativo (igual al segundo archivo) */
+        .corporate-header {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto 20px auto;
+            background: white;
+            border-radius: 20px 20px 20px 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            padding: 18px 28px;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 3px solid #0d47a1;
+            background: #ffffff;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo-wrapper {
+            width: 90px;
+            height: 90px;
+            background: #f8fafc;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .logo-wrapper img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .company-titles {
+            text-align: left;
+        }
+
+        .company-titles h1 {
+            color: #0d47a1;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .company-sub {
+            font-size: 13px;
+            color: #2c3e66;
+            line-height: 1.4;
+            margin-top: 8px;
+            border-left: 3px solid #86C440;
+            padding-left: 10px;
+        }
+
+        .company-sub strong {
+            color: #0d47a1;
+        }
+
+        /* Login container (2 columnas) */
         .login-container {
             display: flex;
             width: 100%;
             max-width: 1100px;
-            min-height: 600px;
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            min-height: 580px;
+            background: #FFFFFF;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
             overflow: hidden;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
-        /* Left side - Branding */
+        /* Lado izquierdo - branding */
         .login-branding {
             flex: 1;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
-            padding: 60px 50px;
+            background: linear-gradient(145deg, #0B2B5E 0%, #1A4A8A 100%);
+            padding: 48px 40px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            color: var(--white);
+            color: white;
             position: relative;
             overflow: hidden;
         }
@@ -110,93 +159,56 @@
         .login-branding::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.4;
         }
 
         .brand-header {
             position: relative;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .brand-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.15);
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .brand-title {
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-subtitle {
-            font-size: 14px;
-            opacity: 0.8;
-            margin-top: 4px;
-        }
-
-        .brand-content {
-            position: relative;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            z-index: 1;
         }
 
         .brand-welcome {
-            font-size: 42px;
+            font-size: 36px;
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 20px;
         }
 
         .brand-welcome span {
-            color: var(--secondary);
+            color: #86C440;
         }
 
         .brand-description {
-            font-size: 16px;
-            line-height: 1.7;
-            opacity: 0.85;
-            max-width: 400px;
+            font-size: 15px;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 32px;
         }
 
         .brand-features {
-            margin-top: 40px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 18px;
         }
 
         .feature-item {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             font-size: 14px;
+            font-weight: 500;
+            background: rgba(255,255,255,0.08);
+            padding: 8px 14px;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
         }
 
         .feature-icon {
-            width: 36px;
-            height: 36px;
-            background: rgba(134, 196, 64, 0.2);
+            width: 32px;
+            height: 32px;
+            background: rgba(134, 196, 64, 0.25);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -205,90 +217,79 @@
         }
 
         .brand-footer {
-            position: relative;
-            font-size: 13px;
-            opacity: 0.6;
-            margin-top: auto;
-            padding-top: 40px;
+            margin-top: 40px;
+            font-size: 12px;
+            opacity: 0.7;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 20px;
         }
 
-        /* Right side - Form */
+        /* Lado derecho - formulario */
         .login-form-section {
             flex: 0 0 480px;
-            padding: 60px 50px;
+            padding: 50px 42px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background: var(--white);
+            background: #FFFFFF;
         }
 
         .form-header {
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
         .form-title {
             font-size: 28px;
             font-weight: 700;
-            color: var(--text);
-            margin-bottom: 8px;
+            color: #1e293b;
         }
 
         .form-subtitle {
             font-size: 14px;
-            color: var(--text-muted);
+            color: #6c757d;
+            margin-top: 5px;
         }
 
-        /* Microsoft Login Button */
         .ms-login-btn {
             width: 100%;
-            padding: 14px 20px;
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
+            padding: 13px 20px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
             cursor: pointer;
-            font-size: 14px;
             font-weight: 600;
-            color: var(--text);
-            transition: var(--transition);
+            color: #1e293b;
+            transition: 0.2s;
             margin-bottom: 24px;
             text-decoration: none;
         }
 
         .ms-login-btn:hover {
-            background: var(--bg);
-            border-color: var(--primary);
-            box-shadow: 0 4px 12px var(--shadow);
-            transform: translateY(-1px);
+            background: #f8fafc;
+            border-color: #1A4A8A;
+            transform: translateY(-2px);
         }
 
-        .ms-login-btn svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Divider */
         .divider {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             margin-bottom: 24px;
-            color: var(--text-muted);
+            color: #6c757d;
             font-size: 13px;
         }
 
-        .divider::before,
-        .divider::after {
+        .divider::before, .divider::after {
             content: '';
             flex: 1;
             height: 1px;
-            background: var(--border);
+            background: #e2e8f0;
         }
 
-        /* Form fields */
         .form-group {
             margin-bottom: 20px;
         }
@@ -296,9 +297,9 @@
         .form-label {
             display: block;
             font-size: 13px;
-            font-weight: 600;
-            color: var(--text);
+            font-weight: 700;
             margin-bottom: 8px;
+            color: #1e293b;
         }
 
         .input-wrapper {
@@ -308,24 +309,16 @@
         .form-input {
             width: 100%;
             padding: 14px 16px 14px 44px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
             font-size: 14px;
-            font-family: inherit;
-            color: var(--text);
-            background: var(--white);
-            transition: var(--transition);
+            transition: 0.2s;
             outline: none;
         }
 
         .form-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(65, 97, 168, 0.1);
-        }
-
-        .form-input.error {
-            border-color: var(--error);
-            background: var(--error-bg);
+            border-color: #1A4A8A;
+            box-shadow: 0 0 0 3px rgba(26, 74, 138, 0.15);
         }
 
         .input-icon {
@@ -334,76 +327,53 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 16px;
-            color: var(--text-muted);
-            pointer-events: none;
+            color: #94a3b8;
         }
 
         .toggle-password {
             position: absolute;
-            right: 16px;
+            right: 14px;
             top: 50%;
             transform: translateY(-50%);
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 16px;
-            color: var(--text-muted);
-            padding: 4px;
+            font-size: 18px;
+            color: #94a3b8;
         }
 
-        .toggle-password:hover {
-            color: var(--text);
-        }
-
-        /* Options row */
         .form-options {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
+            margin-bottom: 26px;
         }
 
         .remember-me {
             display: flex;
             align-items: center;
             gap: 8px;
-            cursor: pointer;
             font-size: 13px;
-            color: var(--text-light);
-        }
-
-        .remember-me input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--primary);
-            cursor: pointer;
+            color: #475569;
         }
 
         .forgot-link {
             font-size: 13px;
-            color: var(--primary);
+            color: #1A4A8A;
             text-decoration: none;
             font-weight: 600;
-            transition: var(--transition);
         }
 
-        .forgot-link:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
-        }
-
-        /* Submit button */
         .btn-submit {
             width: 100%;
-            padding: 14px 24px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: var(--white);
+            padding: 14px;
+            background: linear-gradient(100deg, #0B2B5E, #1A4A8A);
+            color: white;
             border: none;
-            border-radius: var(--radius-sm);
-            font-size: 15px;
+            border-radius: 12px;
             font-weight: 700;
+            font-size: 15px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -412,27 +382,22 @@
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(65, 97, 168, 0.4);
-        }
-
-        .btn-submit:active {
-            transform: translateY(0);
+            box-shadow: 0 10px 22px rgba(11, 43, 94, 0.3);
         }
 
         .btn-submit:disabled {
             opacity: 0.7;
-            cursor: not-allowed;
             transform: none;
         }
 
-        .btn-submit .spinner {
+        .spinner {
             display: none;
             width: 18px;
             height: 18px;
             border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: var(--white);
+            border-top-color: white;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            animation: spin 0.7s linear infinite;
         }
 
         .btn-submit.loading .spinner {
@@ -447,10 +412,9 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Alert messages */
         .alert {
             padding: 12px 16px;
-            border-radius: var(--radius-sm);
+            border-radius: 12px;
             font-size: 13px;
             margin-bottom: 20px;
             display: none;
@@ -463,91 +427,81 @@
         }
 
         .alert-error {
-            background: var(--error-bg);
-            color: var(--error);
-            border: 1px solid rgba(220, 38, 38, 0.2);
+            background: #FEF2F2;
+            color: #b91c1c;
+            border-left: 4px solid #dc2626;
         }
 
         .alert-success {
-            background: var(--success-bg);
-            color: var(--success);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            background: #ecfdf5;
+            color: #0b5e42;
+            border-left: 4px solid #10b981;
         }
 
-        /* Register link */
         .form-footer {
             text-align: center;
             margin-top: 24px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
             font-size: 13px;
-            color: var(--text-muted);
+            color: #6c757d;
         }
 
         .form-footer a {
-            color: var(--primary);
+            color: #1A4A8A;
+            font-weight: 700;
             text-decoration: none;
-            font-weight: 600;
         }
 
-        .form-footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Help section */
         .help-section {
-            margin-top: 32px;
-            padding: 20px;
-            background: var(--bg);
-            border-radius: var(--radius-sm);
+            margin-top: 30px;
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 18px;
         }
 
         .help-title {
-            font-size: 13px;
             font-weight: 700;
-            color: var(--text);
-            margin-bottom: 12px;
+            font-size: 13px;
             display: flex;
-            align-items: center;
             gap: 8px;
+            margin-bottom: 12px;
         }
 
         .help-links {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .help-link {
             font-size: 13px;
-            color: var(--text-light);
+            color: #334155;
             text-decoration: none;
             display: flex;
-            align-items: center;
             gap: 8px;
-            transition: var(--transition);
-            padding: 4px 0;
+            transition: 0.2s;
+            cursor: pointer;
         }
 
         .help-link:hover {
-            color: var(--primary);
-            padding-left: 4px;
+            color: #1A4A8A;
+            transform: translateX(4px);
         }
 
-        /* Modal */
+        /* Modales */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1100;
             align-items: center;
             justify-content: center;
-            padding: 20px;
         }
 
         .modal-overlay.show {
@@ -555,233 +509,142 @@
         }
 
         .modal {
-            background: var(--white);
-            border-radius: var(--radius);
+            background: white;
+            border-radius: 28px;
             padding: 32px;
-            max-width: 440px;
-            width: 100%;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
-            animation: modalIn 0.3s ease;
+            max-width: 460px;
+            width: 90%;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+            animation: fadeModal 0.25s ease;
         }
 
-        @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+        @keyframes fadeModal {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .modal-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             margin-bottom: 20px;
         }
 
         .modal-title {
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 22px;
+            font-weight: 800;
         }
 
         .modal-close {
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
-            color: var(--text-muted);
-            padding: 4px;
-            line-height: 1;
+            color: #94a3b8;
         }
 
-        .modal-close:hover {
-            color: var(--text);
-        }
-
-        .modal-text {
-            font-size: 14px;
-            color: var(--text-light);
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
+        @media (max-width: 980px) {
             .login-container {
                 flex-direction: column;
-                max-width: 480px;
+                max-width: 520px;
             }
-
             .login-branding {
-                padding: 40px 30px;
-                min-height: auto;
+                padding: 32px;
             }
-
-            .brand-welcome {
-                font-size: 28px;
-            }
-
-            .brand-features {
-                display: none;
-            }
-
             .login-form-section {
-                flex: none;
-                padding: 40px 30px;
+                flex: auto;
+                padding: 36px 28px;
             }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 0;
+            .logo-wrapper {
+                width: 70px;
+                height: 70px;
             }
-
-            .login-container {
-                border-radius: 0;
-                min-height: 100vh;
+            .company-titles h1 {
+                font-size: 20px;
             }
-
-            .login-branding,
-            .login-form-section {
-                padding: 30px 20px;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .login-form-section {
-            animation: fadeInUp 0.6s ease;
         }
     </style>
 </head>
 <body>
+
+    <!-- ========== ENCABEZADO CORPORATIVO CON LOGO ORIGINAL (URL DE GOOGLE DRIVE) ========== -->
+    <div class="corporate-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <div class="logo-wrapper">
+                    <!-- Logo original de Infreserve desde Google Drive -->
+                    <img src="https://lh3.googleusercontent.com/d/1Z87-xtdsYEc521X2buFveZY4iBVHgYHa=s200" 
+                         alt="Logo Infreserve" 
+                         crossorigin="anonymous">
+                </div>
+                <div class="company-titles">
+                    <h1>INFRESERVE</h1>
+                    <div class="company-sub">
+                        <strong>International Freight Services (Panamá) Inc.</strong><br>
+                        Parque Industrial Costa del Este, Panamá | Soluciones Logísticas y Aduaneras
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== LOGIN CARD ========== -->
     <div class="login-container">
-        <!-- Branding Side -->
         <div class="login-branding">
             <div class="brand-header">
-                <div class="brand-logo">
-                    <div class="brand-icon">🌐</div>
-                    <div>
-                        <div class="brand-title">INFRESERVE</div>
-                        <div class="brand-subtitle">InTernational Freight Services</div>
-                    </div>
+                <div class="brand-welcome">
+                    Bienvenido a tu <span>Intranet</span>
                 </div>
-            </div>
-
-            <div class="brand-content">
-                <h1 class="brand-welcome">Bienvenido a tu <span>Intranet</span></h1>
                 <p class="brand-description">
-                    Accede a todos los procesos, herramientas y recursos de Infreserve desde un solo lugar. 
-                    Plataforma centralizada para la gestión operativa y administrativa.
+                    Accede a todos los procesos operativos, reportes técnicos, inspecciones de equipos y documentación de Infreserve desde un entorno seguro.
                 </p>
-
                 <div class="brand-features">
-                    <div class="feature-item">
-                        <div class="feature-icon">⚡</div>
-                        <span>Acceso rápido a procesos operativos</span>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">🔒</div>
-                        <span>Seguridad y autenticación centralizada</span>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">📊</div>
-                        <span>Gestión de documentos y reportes</span>
-                    </div>
+                    <div class="feature-item"><div class="feature-icon">❄️</div><span>Gestión de Mantenimiento HVAC</span></div>
+                    <div class="feature-item"><div class="feature-icon">📦</div><span>Logística y trazabilidad</span></div>
+                    <div class="feature-item"><div class="feature-icon">🔐</div><span>Autenticación Microsoft 365</span></div>
                 </div>
             </div>
-
             <div class="brand-footer">
-                © 2005 - 2026 InfreServe Panama. Todos los derechos reservados.
+                © 2005 - 2026 InfreServe Panama. Todos los derechos reservados. 
+                Plataforma corporativa v3.0
             </div>
         </div>
 
-        <!-- Form Side -->
         <div class="login-form-section">
             <div class="form-header">
                 <h2 class="form-title">Iniciar Sesión</h2>
-                <p class="form-subtitle">Ingresa tus credenciales para acceder</p>
+                <p class="form-subtitle">Ingresa tus credenciales corporativas</p>
             </div>
 
-            <!-- Alert Messages -->
-            <div class="alert alert-error" id="errorAlert">
-                <span>⚠️</span>
-                <span id="errorText">Usuario o contraseña incorrectos</span>
-            </div>
-            <div class="alert alert-success" id="successAlert">
-                <span>✅</span>
-                <span id="successText">Inicio de sesión exitoso</span>
-            </div>
+            <div class="alert alert-error" id="errorAlert"><span>⚠️</span><span id="errorText"></span></div>
+            <div class="alert alert-success" id="successAlert"><span>✅</span><span id="successText"></span></div>
 
-            <!-- Microsoft Login -->
-            <a href="#" class="ms-login-btn" onclick="handleMicrosoftLogin(event)">
-                <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="1" y="1" width="9" height="9" fill="#f25022"/>
-                    <rect x="1" y="11" width="9" height="9" fill="#00a4ef"/>
-                    <rect x="11" y="1" width="9" height="9" fill="#7fba00"/>
-                    <rect x="11" y="11" width="9" height="9" fill="#ffb900"/>
-                </svg>
+            <a href="#" class="ms-login-btn" id="msLoginBtn">
+                <svg viewBox="0 0 21 21" width="20" height="20"><rect x="1" y="1" width="9" height="9" fill="#f25022"/><rect x="1" y="11" width="9" height="9" fill="#00a4ef"/><rect x="11" y="1" width="9" height="9" fill="#7fba00"/><rect x="11" y="11" width="9" height="9" fill="#ffb900"/></svg>
                 Iniciar sesión con Microsoft
             </a>
 
-            <div class="divider">o continúa con</div>
+            <div class="divider">o usa tu cuenta interna</div>
 
-            <!-- Login Form -->
-            <form id="loginForm" onsubmit="handleLogin(event)">
+            <form id="loginForm">
                 <div class="form-group">
-                    <label class="form-label" for="username">Usuario o Correo</label>
+                    <label class="form-label">Usuario o Correo</label>
                     <div class="input-wrapper">
                         <span class="input-icon">👤</span>
-                        <input 
-                            type="text" 
-                            id="username" 
-                            class="form-input" 
-                            placeholder="nombre.apellido@infreserve.com"
-                            autocomplete="username"
-                            required
-                        >
+                        <input type="text" id="username" class="form-input" placeholder="nombre.apellido@infreserve.com" autocomplete="username" required>
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label class="form-label" for="password">Contraseña</label>
+                    <label class="form-label">Contraseña</label>
                     <div class="input-wrapper">
                         <span class="input-icon">🔒</span>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            class="form-input" 
-                            placeholder="••••••••"
-                            autocomplete="current-password"
-                            required
-                        >
-                        <button type="button" class="toggle-password" onclick="togglePassword()" title="Mostrar/Ocultar contraseña">
-                            👁️
-                        </button>
+                        <input type="password" id="password" class="form-input" placeholder="••••••••" autocomplete="current-password" required>
+                        <button type="button" class="toggle-password" id="togglePwdBtn">👁️</button>
                     </div>
                 </div>
-
                 <div class="form-options">
-                    <label class="remember-me">
-                        <input type="checkbox" id="rememberMe" checked>
-                        <span>Recordarme</span>
-                    </label>
-                    <a href="#" class="forgot-link" onclick="showForgotModal(event)">¿Olvidaste tu contraseña?</a>
+                    <label class="remember-me"><input type="checkbox" id="rememberMe" checked> <span>Recordarme</span></label>
+                    <a href="#" class="forgot-link" id="forgotLink">¿Olvidaste tu contraseña?</a>
                 </div>
-
                 <button type="submit" class="btn-submit" id="submitBtn">
                     <span class="btn-text">Ingresar al Sistema</span>
                     <span class="spinner"></span>
@@ -789,208 +652,83 @@
             </form>
 
             <div class="form-footer">
-                ¿No tienes acceso? <a href="#" onclick="showRequestModal(event)">Solicitar cuenta</a>
+                ¿Sin acceso? <a href="#" id="requestAccountLink">Solicitar cuenta</a>
             </div>
 
             <div class="help-section">
-                <div class="help-title">
-                    <span>❓</span>
-                    <span>¿Necesitas ayuda?</span>
-                </div>
+                <div class="help-title"><span>📞</span> ¿Necesitas ayuda?</div>
                 <div class="help-links">
-                    <a href="#" class="help-link" onclick="showHelpModal(event)">
-                        <span>📧</span> Contactar al administrador
-                    </a>
-                    <a href="#" class="help-link" onclick="showHelpModal(event)">
-                        <span>📞</span> Soporte técnico: ext. 2000
-                    </a>
-                    <a href="#" class="help-link" onclick="showHelpModal(event)">
-                        <span>📖</span> Guía de usuario
-                    </a>
+                    <a href="#" class="help-link" id="helpSupportLink">📧 soporte@infreserve.com</a>
+                    <a href="#" class="help-link" id="helpExtLink">📱 Extensión 2000 - Mesa de ayuda TI</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Forgot Password Modal -->
-    <div class="modal-overlay" id="forgotModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">Recuperar Contraseña</h3>
-                <button class="modal-close" onclick="closeModal('forgotModal')">&times;</button>
-            </div>
-            <p class="modal-text">
-                Ingresa tu correo electrónico corporativo y te enviaremos un enlace para restablecer tu contraseña.
-            </p>
-            <form onsubmit="handleForgot(event)">
-                <div class="form-group">
-                    <div class="input-wrapper">
-                        <span class="input-icon">📧</span>
-                        <input type="email" class="form-input" placeholder="tu.correo@infreserve.com" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn-submit">
-                    <span class="btn-text">Enviar Enlace</span>
-                </button>
-            </form>
-        </div>
-    </div>
+    <!-- MODALES -->
+    <div class="modal-overlay" id="forgotModal"><div class="modal"><div class="modal-header"><h3 class="modal-title">Recuperar contraseña</h3><button class="modal-close" onclick="closeModal('forgotModal')">&times;</button></div><p class="modal-text">Ingresa tu correo corporativo y recibirás instrucciones.</p><form id="forgotForm"><div class="form-group"><div class="input-wrapper"><span class="input-icon">📧</span><input type="email" class="form-input" id="resetEmail" placeholder="tu.nombre@infreserve.com" required></div></div><button type="submit" class="btn-submit">Enviar enlace</button></form></div></div>
 
-    <!-- Request Account Modal -->
-    <div class="modal-overlay" id="requestModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">Solicitar Cuenta</h3>
-                <button class="modal-close" onclick="closeModal('requestModal')">&times;</button>
-            </div>
-            <p class="modal-text">
-                Completa el siguiente formulario para solicitar acceso a la intranet. El administrador revisará tu solicitud.
-            </p>
-            <form onsubmit="handleRequest(event)">
-                <div class="form-group">
-                    <div class="input-wrapper">
-                        <span class="input-icon">👤</span>
-                        <input type="text" class="form-input" placeholder="Nombre completo" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-wrapper">
-                        <span class="input-icon">📧</span>
-                        <input type="email" class="form-input" placeholder="Correo corporativo" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-wrapper">
-                        <span class="input-icon">🏢</span>
-                        <input type="text" class="form-input" placeholder="Departamento" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn-submit">
-                    <span class="btn-text">Enviar Solicitud</span>
-                </button>
-            </form>
-        </div>
-    </div>
+    <div class="modal-overlay" id="requestModal"><div class="modal"><div class="modal-header"><h3 class="modal-title">Solicitar cuenta</h3><button class="modal-close" onclick="closeModal('requestModal')">&times;</button></div><p class="modal-text">Complete el formulario para acceso a la intranet.</p><form id="requestForm"><div class="form-group"><input type="text" class="form-input" id="reqFullname" placeholder="Nombre completo" required></div><div class="form-group"><input type="email" class="form-input" id="reqEmail" placeholder="Correo corporativo" required></div><div class="form-group"><input type="text" class="form-input" id="reqDept" placeholder="Departamento" required></div><button type="submit" class="btn-submit">Enviar solicitud</button></form></div></div>
 
-    <!-- Help Modal -->
-    <div class="modal-overlay" id="helpModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">Centro de Ayuda</h3>
-                <button class="modal-close" onclick="closeModal('helpModal')">&times;</button>
-            </div>
-            <p class="modal-text">
-                Para asistencia técnica, contacta al departamento de Tecnología:
-            </p>
-            <div class="help-links" style="margin-bottom: 20px;">
-                <div class="help-link">
-                    <span>📧</span> soporte@infreserve.com
-                </div>
-                <div class="help-link">
-                    <span>📞</span> Extensión: 2000 (Interno)
-                </div>
-                <div class="help-link">
-                    <span>🕐</span> Horario: Lunes a Viernes, 7:00 AM - 6:00 PM
-                </div>
-            </div>
-            <button class="btn-submit" onclick="closeModal('helpModal')">
-                <span class="btn-text">Entendido</span>
-            </button>
-        </div>
-    </div>
+    <div class="modal-overlay" id="helpModal"><div class="modal"><div class="modal-header"><h3 class="modal-title">Centro de Soporte</h3><button class="modal-close" onclick="closeModal('helpModal')">&times;</button></div><p class="modal-text"><strong>📧 Email:</strong> soporte@infreserve.com<br><strong>📞 Interno:</strong> Ext. 2000<br><strong>🕒 Horario:</strong> 7:00 a 18:00 hrs</p><button class="btn-submit" onclick="closeModal('helpModal')">Cerrar</button></div></div>
 
     <script>
-        // Session management
+        // ---------- LÓGICA DE AUTENTICACIÓN Y SESIÓN ----------
         const SESSION_KEY = 'infreserve_session';
         const REMEMBER_KEY = 'infreserve_remember';
 
-        // Check if already logged in
-        function checkSession() {
-            const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
-            if (session) {
-                // Redirect to main page (update URL as needed)
-                // window.location.href = 'intranet.html';
-                console.log('Session active:', JSON.parse(session));
-            }
-        }
-
-        // Load remembered username
-        function loadRemembered() {
-            const remembered = localStorage.getItem(REMEMBER_KEY);
-            if (remembered) {
-                document.getElementById('username').value = remembered;
-                document.getElementById('rememberMe').checked = true;
-            }
-        }
-
-        // Toggle password visibility
-        function togglePassword() {
-            const input = document.getElementById('password');
-            const btn = document.querySelector('.toggle-password');
-
-            if (input.type === 'password') {
-                input.type = 'text';
-                btn.textContent = '🙈';
-            } else {
-                input.type = 'password';
-                btn.textContent = '👁️';
-            }
-        }
-
-        // Show alert
         function showAlert(type, message) {
             const errorAlert = document.getElementById('errorAlert');
             const successAlert = document.getElementById('successAlert');
-
             errorAlert.classList.remove('show');
             successAlert.classList.remove('show');
-
             if (type === 'error') {
-                document.getElementById('errorText').textContent = message;
+                document.getElementById('errorText').innerText = message;
                 errorAlert.classList.add('show');
             } else {
-                document.getElementById('successText').textContent = message;
+                document.getElementById('successText').innerText = message;
                 successAlert.classList.add('show');
             }
-
-            // Auto hide after 5 seconds
             setTimeout(() => {
                 errorAlert.classList.remove('show');
                 successAlert.classList.remove('show');
-            }, 5000);
+            }, 4500);
         }
 
-        // Handle login
+        function simulateAuth(username, password) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    // Credenciales demo: admin , 123456 , o cualquier usuario con @infreserve y mínimo 4 caracteres
+                    if (password === 'admin' || password === '123456' || (username.includes('@infreserve') && password.length >= 4) || password === 'infreserve2026') {
+                        resolve({ success: true });
+                    } else {
+                        reject(new Error('Credenciales inválidas. Prueba "admin" o "123456"'));
+                    }
+                }, 1000);
+            });
+        }
+
         async function handleLogin(e) {
             e.preventDefault();
-
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
             const rememberMe = document.getElementById('rememberMe').checked;
             const submitBtn = document.getElementById('submitBtn');
 
-            // Validation
             if (!username || !password) {
-                showAlert('error', 'Por favor completa todos los campos');
+                showAlert('error', '❌ Complete usuario y contraseña');
                 return;
             }
-
-            // Show loading
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
-
-            // Simulate API call (replace with real authentication)
             try {
                 await simulateAuth(username, password);
-
-                // Store session
                 const sessionData = {
                     username: username,
-                    name: username.split('@')[0].replace('.', ' ').replace(/\b\w/g, l => l.toUpperCase()),
+                    name: username.split('@')[0].replace(/\./g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
                     loginTime: new Date().toISOString(),
-                    token: generateToken()
+                    token: btoa(Math.random().toString(36) + Date.now()).substring(0, 36)
                 };
-
                 if (rememberMe) {
                     localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
                     localStorage.setItem(REMEMBER_KEY, username);
@@ -998,121 +736,74 @@
                     sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
                     localStorage.removeItem(REMEMBER_KEY);
                 }
-
-                showAlert('success', 'Inicio de sesión exitoso. Redirigiendo...');
-
-                // Redirect after 1.5 seconds
+                showAlert('success', '✅ Acceso correcto. Redirigiendo al portal...');
                 setTimeout(() => {
-                    // Update this URL to your main intranet page
+                    // Redirección a la intranet / Sharepoint (ajústala según necesites)
                     window.location.href = 'https://internationalfreightserv711.sharepoint.com/:u:/s/transporte/IQCF9QVUaKmwQp0KZr8_36UdAU_-xJ7zbK56Rep27LzuFWA?e=R6Fd18';
-                }, 1500);
-
-            } catch (error) {
-                showAlert('error', error.message || 'Error de autenticación');
+                }, 1300);
+            } catch (err) {
+                showAlert('error', err.message);
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
             }
         }
 
-        // Simulate authentication (replace with real API)
-        function simulateAuth(username, password) {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    // Demo credentials: admin/admin or any user with password "123456"
-                    if (password === 'admin' || password === '123456' || username.includes('@infreserve')) {
-                        resolve({ success: true });
-                    } else {
-                        reject(new Error('Usuario o contraseña incorrectos'));
-                    }
-                }, 1500); // Simulate network delay
-            });
-        }
-
-        // Generate simple token
-        function generateToken() {
-            return btoa(Math.random().toString(36)).substring(0, 32);
-        }
-
-        // Microsoft login handler
-        function handleMicrosoftLogin(e) {
-            e.preventDefault();
-
-            // For SharePoint/Office 365 integration:
-            // window.location.href = 'https://login.microsoftonline.com/{tenant-id}/oauth2/v2.0/authorize?...';
-
-            // Demo: simulate Microsoft login
-            showAlert('success', 'Redirigiendo a Microsoft...');
-
-            // In production, redirect to Microsoft OAuth endpoint
-            // const msAuthUrl = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=openid profile email`;
-            // window.location.href = msAuthUrl;
-        }
-
-        // Modal functions
-        function showForgotModal(e) {
-            e.preventDefault();
-            document.getElementById('forgotModal').classList.add('show');
-        }
-
-        function showRequestModal(e) {
-            e.preventDefault();
-            document.getElementById('requestModal').classList.add('show');
-        }
-
-        function showHelpModal(e) {
-            if (e) e.preventDefault();
-            document.getElementById('helpModal').classList.add('show');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('show');
-        }
-
-        // Handle forgot password
-        async function handleForgot(e) {
-            e.preventDefault();
-            const email = e.target.querySelector('input[type="email"]').value;
-
-            // Simulate API call
-            await new Promise(r => setTimeout(r, 1000));
-
-            closeModal('forgotModal');
-            showAlert('success', `Se ha enviado un enlace a ${email}`);
-            e.target.reset();
-        }
-
-        // Handle account request
-        async function handleRequest(e) {
-            e.preventDefault();
-
-            // Simulate API call
-            await new Promise(r => setTimeout(r, 1000));
-
-            closeModal('requestModal');
-            showAlert('success', 'Solicitud enviada. Revisaremos tu petición pronto.');
-            e.target.reset();
-        }
-
-        // Close modals on overlay click
-        document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.classList.remove('show');
-                }
-            });
-        });
-
-        // Close modals on Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('show'));
+        function loadRemembered() {
+            const saved = localStorage.getItem(REMEMBER_KEY);
+            if (saved) {
+                document.getElementById('username').value = saved;
+                document.getElementById('rememberMe').checked = true;
             }
-        });
+        }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            checkSession();
+        // Funciones de modales
+        function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+        function showForgot(e) { e.preventDefault(); document.getElementById('forgotModal').classList.add('show'); }
+        function showRequest(e) { e.preventDefault(); document.getElementById('requestModal').classList.add('show'); }
+        function showHelp(e) { e.preventDefault(); document.getElementById('helpModal').classList.add('show'); }
+
+        async function handleForgotSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('resetEmail').value;
+            if (!email) return showAlert('error', 'Correo requerido');
+            await new Promise(r => setTimeout(r, 800));
+            closeModal('forgotModal');
+            showAlert('success', `📩 Enlace de recuperación enviado a ${email}`);
+            e.target.reset();
+        }
+
+        async function handleRequestSubmit(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('reqFullname').value;
+            const email = document.getElementById('reqEmail').value;
+            if (!nombre || !email) return showAlert('error', 'Complete los campos');
+            await new Promise(r => setTimeout(r, 800));
+            closeModal('requestModal');
+            showAlert('success', 'Solicitud enviada. El equipo IT revisará su acceso.');
+            e.target.reset();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
             loadRemembered();
+            const toggleBtn = document.getElementById('togglePwdBtn');
+            const pwdInput = document.getElementById('password');
+            toggleBtn.addEventListener('click', () => {
+                const type = pwdInput.type === 'password' ? 'text' : 'password';
+                pwdInput.type = type;
+                toggleBtn.textContent = type === 'password' ? '👁️' : '🙈';
+            });
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('msLoginBtn').addEventListener('click', (e) => { e.preventDefault(); showAlert('success', '🌐 Redirigiendo a Microsoft 365 (Azure AD)'); });
+            document.getElementById('forgotLink').addEventListener('click', showForgot);
+            document.getElementById('requestAccountLink').addEventListener('click', showRequest);
+            document.getElementById('helpSupportLink').addEventListener('click', showHelp);
+            document.getElementById('helpExtLink').addEventListener('click', showHelp);
+            document.getElementById('forgotForm').addEventListener('submit', handleForgotSubmit);
+            document.getElementById('requestForm').addEventListener('submit', handleRequestSubmit);
+            document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('show'); });
+            });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('show')); });
         });
     </script>
 </body>

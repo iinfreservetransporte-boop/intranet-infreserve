@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - Infreserve</title>
+    <script type="text/javascript" src="https://me.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=EgHCK6Gx0AOXNZTV_RuE1nBYsorR5k5vinIeTtIUNRUvGzwL_h9YYstzney9yWtjdb78Fmhr0Re8cG16pQqhYcATN-wuvd55kgv8qkfuzYzBNSLVpmD2cZKhZ5I1dbWOoVwpXevgpwtZLqWAaqariM9gXxvXg7RDgWfCDz0u9dgTKmjwNco0YMAO5jP1FhzzqwIxJvIQ5R6JnVSc8TTtAwrovlyFaxAqIjWIYXc-V4qoHBhfJ-JlpnbjtIlVrWew2SHGZQOKYkgNuFT90EnedTcYDYBR2VIFNObSjPDtFZ0aVHaJalBpW7MvI8z106_vUIDBQbn8pEDOG0mU4Mm3d5cXlvI7o2SOYUuUy9POBFF89vI1rLZXb64it99HfAp0RDuu9CMQf0h3sG5reIRJgG31iZ95YVsZyUvvYxWMNVjB28RKnskZvBRbBbx_cvJAXK0elRHiRQPqYRXRlQ5ecPr5EKkMlJAoeh3oPHy8g8v8pF9kkUzCiK6niLdV6CkpSsEo4cjNBTgcMpEaYU2FEqTHaTOOQYdsXJHTqeywm6e77Di3ally2-DwgBUt17boemVwr13eIDeSrmPRbCmG9I6z_CCb5ZNW9Yesi-g1S2a7eS1PB7jQ537q7IdyqnkDAh8qgAbtmYpVIDavlZQAoQ" charset="UTF-8"></script><style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f5f6fa; }
+        .header { background: linear-gradient(135deg, #1B3864 0%, #4161A8 100%); color: white; padding: 20px 30px; }
+        .header h1 { font-size: 24px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; }
+        .btn-primary { background: #4161A8; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-danger { background: #dc3545; color: white; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { background: #4161A8; color: white; padding: 12px; text-align: left; font-size: 13px; }
+        td { border-bottom: 1px solid #eee; padding: 12px; font-size: 14px; }
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #333; }
+        .form-input { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; }
+        .modal-content { background: white; border-radius: 16px; padding: 32px; width: 90%; max-width: 500px; }
+        .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .badge-active { background: #d4edda; color: #155724; }
+        .badge-inactive { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Panel de Administracion de Usuarios</h1>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2>Usuarios del Sistema</h2>
+                <button class="btn btn-success" onclick="mostrarModal()">+ Agregar Usuario</button>
+            </div>
+            <table id="tablaUsuarios">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Departamento</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyUsuarios">
+                    <tr><td colspan="6" style="text-align: center; padding: 40px;">Cargando usuarios...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal" id="modalUsuario">
+        <div class="modal-content">
+            <h3 id="modalTitulo" style="margin-bottom: 20px;">Agregar Usuario</h3>
+            <form id="formUsuario">
+                <input type="hidden" id="userId">
+                <div class="form-group">
+                    <label class="form-label">Nombre Completo</label>
+                    <input type="text" id="nombre" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Correo Corporativo</label>
+                    <input type="email" id="email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contrasena</label>
+                    <input type="password" id="password" class="form-input" placeholder="Dejar en blanco para mantener actual">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Rol</label>
+                    <select id="rol" class="form-input">
+                        <option value="Usuario">Usuario</option>
+                        <option value="Compras">Compras</option>
+                        <option value="Despacho">Despacho</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Departamento</label>
+                    <input type="text" id="departamento" class="form-input" value="General">
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" class="btn btn-danger" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURACION: Reemplaza con tu URL de Apps Script desplegado
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
+
+        const session = JSON.parse(localStorage.getItem('infreserve_session') || '{}');
+        if (session.rol !== 'Admin') {
+            alert('Acceso denegado. Solo administradores.');
+            window.location.href = 'login.html';
+        }
+
+        cargarUsuarios();
+
+        async function cargarUsuarios() {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'action=listarUsuarios'
+                });
+                const result = await response.json();
+
+                if (result.exito) {
+                    const tbody = document.getElementById('tbodyUsuarios');
+                    tbody.innerHTML = '';
+
+                    result.usuarios.forEach(function(u) {
+                        const badgeClass = u.estado === 'Activo' ? 'badge-active' : 'badge-inactive';
+                        const row = document.createElement('tr');
+                        row.innerHTML = '<td>' + u.nombre + '</td>' +
+                            '<td>' + u.email + '</td>' +
+                            '<td>' + u.rol + '</td>' +
+                            '<td>' + u.departamento + '</td>' +
+                            '<td><span class="badge ' + badgeClass + '">' + u.estado + '</span></td>' +
+                            '<td>' +
+                            '<button class="btn btn-primary" onclick="editarUsuario('' + u.id + '')" style="padding: 6px 12px; font-size: 12px;">Editar</button> ' +
+                            '<button class="btn btn-danger" onclick="eliminarUsuario('' + u.id + '')" style="padding: 6px 12px; font-size: 12px;">Desactivar</button>' +
+                            '</td>';
+                        tbody.appendChild(row);
+                    });
+                }
+            } catch (err) {
+                console.error('Error cargando usuarios:', err);
+            }
+        }
+
+        function mostrarModal() {
+            document.getElementById('modalUsuario').style.display = 'flex';
+            document.getElementById('modalTitulo').textContent = 'Agregar Usuario';
+            document.getElementById('formUsuario').reset();
+            document.getElementById('userId').value = '';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalUsuario').style.display = 'none';
+        }
+
+        document.getElementById('formUsuario').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const datos = {
+                id: document.getElementById('userId').value,
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                rol: document.getElementById('rol').value,
+                departamento: document.getElementById('departamento').value,
+                estado: 'Activo'
+            };
+
+            const action = datos.id ? 'editarUsuario' : 'crearUsuario';
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'action=' + action + '&datos=' + encodeURIComponent(JSON.stringify(datos))
+                });
+
+                const result = await response.json();
+
+                if (result.exito) {
+                    alert(result.mensaje);
+                    cerrarModal();
+                    cargarUsuarios();
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            } catch (err) {
+                alert('Error de conexion');
+            }
+        });
+
+        async function eliminarUsuario(id) {
+            if (!confirm('Desactivar este usuario?')) return;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'action=eliminarUsuario&id=' + encodeURIComponent(id)
+                });
+
+                const result = await response.json();
+                if (result.exito) {
+                    alert(result.mensaje);
+                    cargarUsuarios();
+                }
+            } catch (err) {
+                alert('Error');
+            }
+        }
+
+        function editarUsuario(id) {
+            mostrarModal();
+            document.getElementById('modalTitulo').textContent = 'Editar Usuario';
+            document.getElementById('userId').value = id;
+        }
+    </script>
+</body>
+</html>

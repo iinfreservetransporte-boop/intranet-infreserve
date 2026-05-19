@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infreserve - Intranet Corporativa</title>
+    <script type="text/javascript" src="https://me.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=-QG4fxjBcSIMoPqC7u846YYMB3plXLfolWyiTu0cH8hNJrnaVOghzRFIPT9LWvYv4ITEJ2exz38s1dL2oBFWtzK2eCCIEAbgtNjR_eqctms05I-HWIN0qMuHLCsoTNHQ4admCwFV-9RDUSRXx0SskiivAee52qBoniKRmwf6bkQJJ3nZ3Ac3jjzwyTj2TJgVSmdWnM4V7azFk7XvAJ3MPLe0f0tEr7lDjQFclw60RmVKp10iC2staqk6tlm-sj7hgYx2ojSHBSqSZ4PS6tPaQYINaBb_ljciEfs-maOp4-3qVYpffSDY4GKG9yOx4zZS1aiHqT1ksPXBcaILoyeVyLiVeLOzw-b8iuS7gV4rY3aoRPV2EJWStr0wMs32DEMg6NRUabTIZ-85goPFOjvekNERwKr1g-GxNkl2YFc5R6PaLDCoey7TvSpK6gBLZShBbeVtfExc2AW-sJppxKr0PdkluAMH2Q8_ZlDOMPmlRjkVo_0ayF7_rFjkV5D3-F7zxFsAQfs5yF_RRaLMiH86Jnp6LZ_klCmhxzcIuIVUOjbXsbaMgOmZjtoerlxLcD0h7wv_oQ6JoxdwE5w2Db3-5VJdPgUpN5ubuoSIRCqdHs2s38SYh4UOMB04ZQNId0GUMFjwDV4-ypHYWNtxAIspmw" charset="UTF-8"></script><style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0B2B5E 0%, #1A4A8A 50%, #2C6EAF 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .login-container {
+            display: flex;
+            width: 100%;
+            max-width: 1100px;
+            min-height: 580px;
+            background: #FFFFFF;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            overflow: hidden;
+        }
+        .login-branding {
+            flex: 1;
+            background: linear-gradient(145deg, #0B2B5E 0%, #1A4A8A 100%);
+            padding: 48px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: white;
+        }
+        .login-form-section {
+            flex: 0 0 480px;
+            padding: 50px 42px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .form-title { font-size: 28px; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+        .form-subtitle { font-size: 14px; color: #6c757d; margin-bottom: 24px; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: #1e293b; }
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .form-input:focus { border-color: #1A4A8A; outline: none; box-shadow: 0 0 0 3px rgba(26, 74, 138, 0.15); }
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(100deg, #0B2B5E, #1A4A8A);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(11, 43, 94, 0.3); }
+        .alert {
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .alert-error { background: #FEF2F2; color: #b91c1c; border-left: 4px solid #dc2626; }
+        .alert-success { background: #ecfdf5; color: #0b5e42; border-left: 4px solid #10b981; }
+        .brand-welcome { font-size: 36px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+        .brand-welcome span { color: #86C440; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-branding">
+            <div>
+                <div class="brand-welcome">Bienvenido a tu <span>Intranet</span></div>
+                <p style="font-size: 15px; line-height: 1.6; opacity: 0.9;">
+                    Accede a todos los procesos operativos de Infreserve desde un entorno seguro.
+                </p>
+            </div>
+            <div style="font-size: 12px; opacity: 0.7;">
+                &copy; 2005 - 2026 InfreServe Panama. Todos los derechos reservados.
+            </div>
+        </div>
+        <div class="login-form-section">
+            <div class="form-title">Iniciar Sesion</div>
+            <div class="form-subtitle">Ingresa tus credenciales corporativas</div>
+
+            <div class="alert alert-error" id="errorAlert"></div>
+            <div class="alert alert-success" id="successAlert"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Correo Corporativo</label>
+                    <input type="email" id="email" class="form-input" placeholder="nombre@infreserve.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contrasena</label>
+                    <input type="password" id="password" class="form-input" placeholder="********" required>
+                </div>
+                <button type="submit" class="btn-submit" id="submitBtn">Ingresar al Sistema</button>
+            </form>
+
+            <div style="text-align: center; margin-top: 20px; font-size: 13px; color: #6c757d;">
+                Sin acceso? <a href="#" style="color: #1A4A8A; font-weight: 700; text-decoration: none;">Solicitar cuenta</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURACION: Reemplaza con tu URL de Apps Script desplegado
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
+
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('submitBtn');
+
+            btn.textContent = 'Verificando...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'action=autenticar&email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password)
+                });
+
+                const result = await response.json();
+
+                if (result.exito) {
+                    localStorage.setItem('infreserve_session', JSON.stringify({
+                        id: result.id,
+                        email: result.email,
+                        nombre: result.nombre,
+                        rol: result.rol,
+                        token: result.token,
+                        loginTime: new Date().toISOString()
+                    }));
+
+                    window.location.href = 'https://iinfreservetransporte-boop.github.io/intranet-infreserve/infreserve_intranet_moderna.html';
+                } else {
+                    showAlert('error', result.error);
+                }
+
+            } catch (err) {
+                showAlert('error', 'Error de conexion: ' + err.message);
+            }
+
+            btn.textContent = 'Ingresar al Sistema';
+            btn.disabled = false;
+        });
+
+        function showAlert(type, message) {
+            const alert = document.getElementById(type === 'error' ? 'errorAlert' : 'successAlert');
+            alert.textContent = message;
+            alert.style.display = 'block';
+            setTimeout(function() { alert.style.display = 'none'; }, 4500);
+        }
+    </script>
+</body>
+</html>

@@ -28,6 +28,7 @@
         .badge-inactive { background: #f8d7da; color: #721c24; }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
     <div class="header">
@@ -213,5 +214,50 @@
             document.getElementById('userId').value = id;
         }
     </script>
+
+
+<!-- ============================================ -->
+<!-- CIERRE DE SESION PARA ADMIN DE USUARIOS -->
+<!-- ============================================ -->
+<script>
+// Funcion para cerrar sesion desde el admin de usuarios
+function cerrarSesion() {
+    // Limpiar localStorage
+    localStorage.removeItem('infreserve_session');
+    localStorage.removeItem('infreserve_user');
+    localStorage.removeItem('infreserve_rol');
+
+    // Enviar mensaje a la ventana padre (intranet de GitHub) para que maneje la redireccion
+    if (window.parent && window.parent !== window) {
+        window.parent.postMessage('cerrarSesion', '*');
+        console.log('Mensaje de cierre enviado a padre');
+    } else {
+        // Si no hay padre, redirigir directamente
+        window.location.href = 'https://script.google.com/macros/s/AKfycbyAtPM9VQcfawhVgK-FtH5k0ndifG7XkS3oYDE0ztuK_gKl6I24b03dfWBcTdXLqZ4/exec';
+    }
+}
+
+// Agregar boton de cerrar sesion en el header al cargar
+document.addEventListener('DOMContentLoaded', function() {
+    var header = document.querySelector('.header');
+    if (header && !document.getElementById('btnCerrarSesion')) {
+        var btnLogout = document.createElement('button');
+        btnLogout.id = 'btnCerrarSesion';
+        btnLogout.className = 'btn';
+        btnLogout.style.cssText = 'background:#dc3545;color:white;margin-left:20px;';
+        btnLogout.innerHTML = 'Cerrar Sesion';
+        btnLogout.onclick = cerrarSesion;
+
+        // Insertar en el header
+        var h1 = header.querySelector('h1');
+        if (h1) {
+            h1.style.display = 'inline-block';
+            h1.parentNode.insertBefore(btnLogout, h1.nextSibling);
+        } else {
+            header.appendChild(btnLogout);
+        }
+    }
+});
+</script>
 </body>
 </html>

@@ -686,6 +686,7 @@
         }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
 
@@ -1160,5 +1161,50 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+
+
+<!-- ============================================ -->
+<!-- MANEJO DE CIERRE DE SESION - INFRESERVE -->
+<!-- ============================================ -->
+<script>
+// Funcion para cerrar sesion desde la intranet misma
+function handleLogout(e) {
+    if (e) e.preventDefault();
+
+    // Limpiar sesion de localStorage
+    localStorage.removeItem('infreserve_session');
+    localStorage.removeItem('infreserve_user');
+    localStorage.removeItem('infreserve_rol');
+
+    // Si hay un iframe de Apps Script activo, enviar mensaje para que tambien cierre
+    var iframe = document.querySelector('iframe[src*="script.google.com"]');
+    if (iframe && iframe.contentWindow) {
+        try {
+            iframe.contentWindow.postMessage('cerrarSesion', '*');
+        } catch(err) {
+            console.log('No se pudo enviar mensaje al iframe');
+        }
+    }
+
+    // Redirigir al login de Apps Script
+    window.location.href = 'https://script.google.com/macros/s/AKfycbyAtPM9VQcfawhVgK-FtH5k0ndifG7XkS3oYDE0ztuK_gKl6I24b03dfWBcTdXLqZ4/exec';
+}
+
+// Listener para recibir mensajes del iframe de Apps Script
+window.addEventListener('message', function(event) {
+    // Verificar que viene de Google Apps Script
+    if (event.origin === 'https://script.google.com' || event.origin === 'https://script.googleusercontent.com') {
+        if (event.data === 'cerrarSesion' || event.data === 'logout') {
+            // Limpiar sesion local
+            localStorage.removeItem('infreserve_session');
+            localStorage.removeItem('infreserve_user');
+            localStorage.removeItem('infreserve_rol');
+
+            // Redirigir al login de Apps Script
+            window.location.href = 'https://script.google.com/macros/s/AKfycbyAtPM9VQcfawhVgK-FtH5k0ndifG7XkS3oYDE0ztuK_gKl6I24b03dfWBcTdXLqZ4/exec';
+        }
+    }
+});
+</script>
 </body>
 </html>

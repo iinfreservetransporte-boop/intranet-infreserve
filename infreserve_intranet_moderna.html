@@ -686,6 +686,7 @@
         }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
 
@@ -1006,52 +1007,48 @@ function handleLogout(e) {
         // Limpiar todo el almacenamiento de sesión
         localStorage.removeItem(SESSION_KEY);
         sessionStorage.removeItem(SESSION_KEY);
-
-        // Limpiar cualquier otro dato relacionado
         localStorage.removeItem('infreserve_user');
         sessionStorage.removeItem('infreserve_user');
+        localStorage.removeItem('infreserve_login_time');
+        sessionStorage.removeItem('infreserve_login_time');
 
         console.log('Sesión cerrada. Redirigiendo...');
 
-        // Múltiples métodos de redirección para máxima compatibilidad
-        var redirectDone = false;
+        // Redirigir a logout.html para limpieza completa
+        var logoutUrl = LOGIN_URL + '/logout.html';
 
-        // Método 1: window.top.location (para iframes)
+        var redirectDone = false;
         try {
             if (window.top && window.top.location) {
-                window.top.location.href = LOGIN_URL;
+                window.top.location.href = logoutUrl;
                 redirectDone = true;
             }
         } catch(err) { console.log('Método 1 falló:', err); }
 
-        // Método 2: window.location.replace (no guarda en historial)
         if (!redirectDone) {
             try {
-                window.location.replace(LOGIN_URL);
+                window.location.replace(logoutUrl);
                 redirectDone = true;
             } catch(err) { console.log('Método 2 falló:', err); }
         }
 
-        // Método 3: window.location.href (estándar)
         if (!redirectDone) {
             try {
-                window.location.href = LOGIN_URL;
+                window.location.href = logoutUrl;
                 redirectDone = true;
             } catch(err) { console.log('Método 3 falló:', err); }
         }
 
-        // Método 4: Asignación directa
         if (!redirectDone) {
             try {
-                window.location = LOGIN_URL;
+                window.location = logoutUrl;
                 redirectDone = true;
             } catch(err) { console.log('Método 4 falló:', err); }
         }
 
-        // Método 5: window.open (último recurso)
         if (!redirectDone) {
             try {
-                window.open(LOGIN_URL, '_self');
+                window.open(logoutUrl, '_self');
             } catch(err) { console.log('Método 5 falló:', err); }
         }
     }
@@ -1112,6 +1109,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Verificar sesión
     checkSession();
 
+    // Registrar tiempo de login para control de sesión
+    if (getUserData()) {
+        localStorage.setItem('infreserve_login_time', new Date().toISOString());
+    }
+
     // Mobile nav toggle
     const navToggle = document.querySelector('.nav-toggle');
     const nav = document.querySelector('.nav');
@@ -1156,6 +1158,20 @@ document.addEventListener('DOMContentLoaded', function() {
         card.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0)';
         });
+    });
+
+    // Listener postMessage para cerrar sesión desde iframes (Apps Script)
+    window.addEventListener('message', function(event) {
+        // Verificar origen seguro - ajusta según tu dominio de Apps Script
+        var allowedOrigins = [
+            'https://script.google.com',
+            'https://script.googleusercontent.com'
+        ];
+
+        if (event.data && event.data.action === 'cerrarSesion') {
+            console.log('Recibido postMessage: cerrarSesion desde iframe');
+            handleLogout();
+        }
     });
 });
 </script>

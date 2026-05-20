@@ -3,623 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infreserve - Sesion Cerrada</title>
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌐%3C/text%3E%3C/svg%3E">
-    <script type="text/javascript" src="https://me.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=5FWnGQuL262NepR0UpCPUwG8xrnDj7rmDpu_Bh0rrjT6Zv1Ar4StAIyfh69rMvoNpgr7y5sKJ38UDSGKz5Fby2ZtHpy29ZSjcaqe1WGA26DT2ZRNJ6pm-9FPvIA25yWbI7U8IhireH8T-qn7SDxCptK9WNRljwU1Up92ZzOrrfKWyMlvqyyfFXa3cWlRYsxc_b9_p-ububKsGEZLojhK9fBpagKhx_--dqfdUxTQU01KvVzX1Pt3Ki9O_HWytWr3qrBYH2v-v3zju33tVCW7nnX1GiH4bmYUuNchMRDjFtE7_4SABBi4Dlv1mlGJ8Al5grbb316E4ixv-h_x-8_jWgtsqkjI7SQRtxmJo4j7Hjepr1O8oEUCBuERx0H9sp3_r-AUt3s9IQDfKNPLm2QNlkf3vdcMd4N868uzeRliSbG5-67TR_ATgfoRhWBJxJTrBquEyMwMCzpHqcjCdAdriW-FyIykuUtEzW4Hj7sMmHee1lBfv-s3daXOSocxKdIwC80LsVRx1d7IDw8aq2bpE2qmDvG666Zvyhbl9TzoNVOTTHSoUlCPOZ9mdKFG6IBSfcvexGj7YjucXUfmQb7z7pfnE0WR6Yv5xSZdIyZfXeGjnpvpVuSPdY7-952eHteDKZ7h6Ex3dm_qapy0ggvb-g" charset="UTF-8"></script><style>
-        :root {
-            --primary: #4161A8;
-            --primary-dark: #2E4A7A;
-            --primary-light: #5A7BC4;
-            --secondary: #86C440;
-            --secondary-dark: #6BA332;
-            --accent: #FF6E00;
-            --dark: #1B3864;
-            --text: #333333;
-            --text-light: #666666;
-            --text-muted: #999999;
-            --bg: #F0F2F5;
-            --white: #FFFFFF;
-            --border: #DBD9D9;
-            --error: #DC2626;
-            --error-bg: #FEF2F2;
-            --success: #10B981;
-            --success-bg: #ECFDF5;
-            --shadow: rgba(0,0,0,0.08);
-            --shadow-lg: rgba(0,0,0,0.15);
-            --radius: 16px;
-            --radius-sm: 10px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+    <title>Cerrando Sesión - Infreserve</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0B2B5E 0%, #1A4A8A 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
         }
-
-        /* Background decoration */
-        body::before {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: rgba(134, 196, 64, 0.1);
-            border-radius: 50%;
-            top: -200px;
-            right: -200px;
-            animation: float 20s ease-in-out infinite;
-        }
-
-        body::after {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 50%;
-            bottom: -100px;
-            left: -100px;
-            animation: float 25s ease-in-out infinite reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.05); }
-            66% { transform: translate(-20px, 20px) scale(0.95); }
-        }
-
-        /* Container */
         .logout-container {
-            display: flex;
-            width: 100%;
-            max-width: 1100px;
-            min-height: 600px;
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
-            overflow: hidden;
-            position: relative;
-            z-index: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 420px;
+            width: 90%;
         }
-
-        /* Left side - Branding */
-        .logout-branding {
-            flex: 1;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
-            padding: 60px 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            color: var(--white);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logout-branding::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        .brand-header {
-            position: relative;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .brand-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.15);
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .brand-title {
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-subtitle {
-            font-size: 14px;
-            opacity: 0.8;
-            margin-top: 4px;
-        }
-
-        .brand-content {
-            position: relative;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .brand-welcome {
-            font-size: 42px;
-            font-weight: 800;
-            line-height: 1.2;
+        .logout-icon {
+            font-size: 64px;
             margin-bottom: 20px;
         }
-
-        .brand-welcome span {
-            color: var(--secondary);
-        }
-
-        .brand-description {
-            font-size: 16px;
-            line-height: 1.7;
-            opacity: 0.85;
-            max-width: 400px;
-        }
-
-        .brand-features {
-            margin-top: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-        }
-
-        .feature-icon {
-            width: 36px;
-            height: 36px;
-            background: rgba(134, 196, 64, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .brand-footer {
-            position: relative;
-            font-size: 13px;
-            opacity: 0.6;
-            margin-top: auto;
-            padding-top: 40px;
-        }
-
-        /* Right side - Logout Message */
-        .logout-message-section {
-            flex: 0 0 480px;
-            padding: 60px 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: var(--white);
-            text-align: center;
-        }
-
-        .logout-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--success-bg) 0%, #D1FAE5 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            margin-bottom: 32px;
-            animation: scaleIn 0.5s ease;
-        }
-
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
         .logout-title {
-            font-size: 28px;
+            color: #0B2B5E;
+            font-size: 24px;
             font-weight: 700;
-            color: var(--text);
             margin-bottom: 12px;
         }
-
-        .logout-subtitle {
-            font-size: 15px;
-            color: var(--text-light);
-            margin-bottom: 40px;
-            line-height: 1.6;
-            max-width: 360px;
+        .logout-text {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.5;
         }
-
-        .session-info {
-            background: var(--bg);
-            border-radius: var(--radius-sm);
-            padding: 16px 20px;
-            margin-bottom: 32px;
-            width: 100%;
-            max-width: 360px;
-        }
-
-        .session-info-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            color: var(--text-light);
-            margin-bottom: 8px;
-        }
-
-        .session-info-row:last-child {
-            margin-bottom: 0;
-            padding-top: 8px;
-            border-top: 1px solid var(--border);
-        }
-
-        .session-info-label {
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        /* Buttons */
-        .btn-primary {
-            width: 100%;
-            max-width: 360px;
-            padding: 14px 24px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: var(--white);
+        .btn-login {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #0B2B5E 0%, #1A4A8A 100%);
+            color: white;
             border: none;
-            border-radius: var(--radius-sm);
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            margin-bottom: 12px;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(65, 97, 168, 0.4);
-        }
-
-        .btn-secondary {
-            width: 100%;
-            max-width: 360px;
-            padding: 14px 24px;
-            background: var(--white);
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            border-radius: var(--radius-sm);
-            font-size: 15px;
+            border-radius: 12px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
             text-decoration: none;
+            transition: all 0.2s;
         }
-
-        .btn-secondary:hover {
-            background: var(--primary);
-            color: var(--white);
+        .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(65, 97, 168, 0.2);
+            box-shadow: 0 8px 20px rgba(11, 43, 94, 0.3);
         }
-
-        .logout-footer {
-            margin-top: 40px;
-            font-size: 12px;
-            color: var(--text-muted);
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #0B2B5E;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
         }
-
-        .logout-footer a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .logout-footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Countdown */
-        .countdown {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 16px;
-        }
-
-        .countdown span {
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logout-message-section {
-            animation: fadeInUp 0.6s ease;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .logout-container {
-                flex-direction: column;
-                max-width: 480px;
-            }
-
-            .logout-branding {
-                padding: 40px 30px;
-                min-height: auto;
-            }
-
-            .brand-welcome {
-                font-size: 28px;
-            }
-
-            .brand-features {
-                display: none;
-            }
-
-            .logout-message-section {
-                flex: none;
-                padding: 40px 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 0;
-            }
-
-            .logout-container {
-                border-radius: 0;
-                min-height: 100vh;
-            }
-
-            .logout-branding,
-            .logout-message-section {
-                padding: 30px 20px;
-            }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <div class="logout-container">
-        <!-- Branding Side -->
-        <div class="logout-branding">
-            <div class="brand-header">
-                <div class="brand-logo">
-                    <div class="brand-icon">🌐</div>
-                    <div>
-                        <div class="brand-title">INFRESERVE</div>
-                        <div class="brand-subtitle">InTernational Freight Services</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="brand-content">
-                <h1 class="brand-welcome">Hasta <span>pronto</span></h1>
-                <p class="brand-description">
-                    Gracias por usar la Intranet de Infreserve. Tu sesion ha sido cerrada de forma segura.
-                </p>
-
-                <div class="brand-features">
-                    <div class="feature-item">
-                        <div class="feature-icon">🔒</div>
-                        <span>Sesion cerrada de forma segura</span>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">🛡️</div>
-                        <span>Datos protegidos y encriptados</span>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">📊</div>
-                        <span>Acceso rapido cuando regreses</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="brand-footer">
-                © 2005 - 2026 InfreServe Panama. Todos los derechos reservados.
-            </div>
-        </div>
-
-        <!-- Logout Message Side -->
-        <div class="logout-message-section">
-            <div class="logout-icon">✅</div>
-
-            <h2 class="logout-title">Sesion Cerrada</h2>
-            <p class="logout-subtitle">
-                Has cerrado sesion correctamente. Tu informacion esta segura y protegida.
-            </p>
-
-            <div class="session-info" id="sessionInfo">
-                <div class="session-info-row">
-                    <span>Usuario:</span>
-                    <span class="session-info-label" id="userName">-</span>
-                </div>
-                <div class="session-info-row">
-                    <span>Hora de cierre:</span>
-                    <span class="session-info-label" id="logoutTime">-</span>
-                </div>
-                <div class="session-info-row">
-                    <span>Duracion de la sesion:</span>
-                    <span class="session-info-label" id="sessionDuration">-</span>
-                </div>
-            </div>
-
-            <a href="login.html" class="btn-primary">
-                <span>🔐</span>
-                <span>Iniciar Sesion Nuevamente</span>
-            </a>
-
-            <a href="infreserve_intranet_moderna.html" class="btn-secondary">
-                <span>🏠</span>
-                <span>Volver a la Intranet</span>
-            </a>
-
-            <div class="countdown" id="countdown">
-                Redirigiendo al login en <span id="countdownValue">10</span> segundos...
-            </div>
-
-            <div class="logout-footer">
-                ¿Necesitas ayuda? <a href="#" onclick="showHelp(); return false;">Contactar soporte</a>
-            </div>
-        </div>
+        <div class="spinner" id="spinner"></div>
+        <div class="logout-icon" id="icon" style="display:none">👋</div>
+        <h1 class="logout-title" id="title">Cerrando sesión...</h1>
+        <p class="logout-text" id="text">Estamos limpiando tu sesión de forma segura.</p>
+        <a href="https://iinfreservetransporte-boop.github.io/intranet-infreserve/login_page.html" class="btn-login" id="btn" style="display:none">
+            Volver al Login
+        </a>
     </div>
 
     <script>
-        const SESSION_KEY = 'infreserve_session';
-        const REMEMBER_KEY = 'infreserve_remember';
-        const LOGIN_TIME_KEY = 'infreserve_login_time';
+        (function() {
+            // Limpiar TODO el almacenamiento relacionado con la sesión
+            var keysToRemove = [
+                'infreserve_session',
+                'infreserve_user',
+                'infreserve_login_time',
+                'infreserve_token',
+                'infreserve_rol',
+                'infreserve_departamento'
+            ];
 
-        function formatDate(date) {
-            return date.toLocaleString('es-PA', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: true
-            });
-        }
-
-        function formatDuration(ms) {
-            const seconds = Math.floor(ms / 1000);
-            const minutes = Math.floor(seconds / 60);
-            const hours = Math.floor(minutes / 60);
-
-            if (hours > 0) {
-                return `${hours}h ${minutes % 60}m ${seconds % 60}s`;
-            } else if (minutes > 0) {
-                return `${minutes}m ${seconds % 60}s`;
-            } else {
-                return `${seconds}s`;
-            }
-        }
-
-        function clearAllSessionData() {
-            localStorage.removeItem(SESSION_KEY);
-            localStorage.removeItem(REMEMBER_KEY);
-            localStorage.removeItem(LOGIN_TIME_KEY);
-            sessionStorage.removeItem(SESSION_KEY);
-
-            const keysToRemove = [];
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key && key.startsWith('infreserve_')) {
-                    keysToRemove.push(key);
-                }
-            }
-            keysToRemove.forEach(key => localStorage.removeItem(key));
-        }
-
-        function showSessionInfo() {
-            const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
-            const loginTime = localStorage.getItem(LOGIN_TIME_KEY);
-            const now = new Date();
-
-            if (session) {
+            keysToRemove.forEach(function(key) {
                 try {
-                    const data = JSON.parse(session);
-                    document.getElementById('userName').textContent = data.name || data.username || 'Usuario';
-                } catch (e) {
-                    document.getElementById('userName').textContent = 'Usuario';
+                    localStorage.removeItem(key);
+                    sessionStorage.removeItem(key);
+                } catch(e) {
+                    console.log('Error limpiando ' + key + ':', e);
                 }
-            }
+            });
 
-            document.getElementById('logoutTime').textContent = formatDate(now);
-
-            if (loginTime) {
-                const duration = now - new Date(loginTime);
-                document.getElementById('sessionDuration').textContent = formatDuration(duration);
-            } else {
-                document.getElementById('sessionDuration').textContent = 'No disponible';
-            }
-        }
-
-        function startCountdown() {
-            let seconds = 10;
-            const countdownEl = document.getElementById('countdownValue');
-            const countdownContainer = document.getElementById('countdown');
-
-            const interval = setInterval(() => {
-                seconds--;
-                countdownEl.textContent = seconds;
-
-                if (seconds <= 0) {
-                    clearInterval(interval);
-                    window.location.href = 'login.html';
+            // Limpiar cookies relacionadas (si existen)
+            document.cookie.split(';').forEach(function(cookie) {
+                var parts = cookie.split('=');
+                var name = parts[0].trim();
+                if (name.indexOf('infreserve') !== -1 || name.indexOf('session') !== -1) {
+                    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
                 }
-            }, 1000);
+            });
 
-            document.addEventListener('click', () => {
-                clearInterval(interval);
-                countdownContainer.style.display = 'none';
-            }, { once: true });
-        }
+            console.log('Sesión limpiada completamente desde logout.html');
 
-        function showHelp() {
-            alert('Para asistencia tecnica:
+            // Mostrar estado final después de 1.5 segundos
+            setTimeout(function() {
+                document.getElementById('spinner').style.display = 'none';
+                document.getElementById('icon').style.display = 'block';
+                document.getElementById('title').textContent = 'Sesión cerrada';
+                document.getElementById('text').textContent = 'Tu sesión ha sido cerrada de forma segura. Puedes volver al login cuando lo desees.';
+                document.getElementById('btn').style.display = 'inline-block';
+            }, 1500);
 
-📧 soporte@infreserve.com
-📞 Extension: 2000
-🕐 Lunes a Viernes, 7:00 AM - 6:00 PM');
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            showSessionInfo();
-            clearAllSessionData();
-            startCountdown();
-        });
+            // Redirección automática opcional después de 5 segundos
+            // Descomenta la siguiente línea si quieres redirección automática:
+            // setTimeout(function() { window.location.href = 'https://iinfreservetransporte-boop.github.io/intranet-infreserve/login_page.html'; }, 5000);
+        })();
     </script>
 </body>
 </html>

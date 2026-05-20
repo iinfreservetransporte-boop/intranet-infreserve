@@ -1003,10 +1003,15 @@
         function handleLogout(e) {
             e.preventDefault();
             if (confirm('¿Está seguro que desea cerrar sesión?')) {
-                // Aquí puedes agregar la lógica de logout para SharePoint
+                // Limpiar toda la sesión
+                localStorage.removeItem(SESSION_KEY);
+                sessionStorage.removeItem(SESSION_KEY);
+
+                // Mostrar mensaje y redirigir al login
                 alert('Sesión cerrada correctamente');
-                // window.location.href = 'https://iinfreservetransporte-boop.github.io/intranet-infreserve/';
+                window.location.href = 'https://script.google.com/macros/s/AKfycbwX960Dq1OnWQDidp37WSNzjovzZPue3bcHh0OqK7om5Qq-3fB0G19LhIsKEWiZeUye/exec';
             }
+        }
         }
 
         // Smooth scroll for anchor links

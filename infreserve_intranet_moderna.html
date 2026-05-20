@@ -1007,10 +1007,43 @@
                 localStorage.removeItem(SESSION_KEY);
                 sessionStorage.removeItem(SESSION_KEY);
 
-                // Redirigir inmediatamente al login (sin alert que bloquea)
-                // Usar replace en lugar de href para evitar problemas con cambio de dominio
+                // URL del login
                 var loginUrl = 'https://script.google.com/macros/s/AKfycbwX960Dq1OnWQDidp37WSNzjovzZPue3bcHh0OqK7om5Qq-3fB0G19LhIsKEWiZeUye/exec';
-                window.location.replace(loginUrl);
+
+                // Método 1: Intentar redirección directa
+                try {
+                    window.top.location.href = loginUrl;
+                    return;
+                } catch(err) {
+                    console.log('Método 1 falló:', err);
+                }
+
+                // Método 2: location.replace
+                try {
+                    window.top.location.replace(loginUrl);
+                    return;
+                } catch(err) {
+                    console.log('Método 2 falló:', err);
+                }
+
+                // Método 3: location.assign
+                try {
+                    window.top.location.assign(loginUrl);
+                    return;
+                } catch(err) {
+                    console.log('Método 3 falló:', err);
+                }
+
+                // Método 4: Forzar recarga con nueva URL
+                try {
+                    window.location = loginUrl;
+                    return;
+                } catch(err) {
+                    console.log('Método 4 falló:', err);
+                }
+
+                // Método 5: Como último recurso, abrir en misma ventana
+                window.open(loginUrl, '_self');
             }
         }
         }

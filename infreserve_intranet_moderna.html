@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infreserve - Intranet</title>
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌐%3C/text%3E%3C/svg%3E">
-    <script type="text/javascript" src="https://me.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=6q-gZK5GcgyrVJLWyxNo8cw8vb6X463MYGeM6nWf7PRTRZhJDRl-WdIemwfraRHemF-eerAi3WM9Pg1D73sImSHUw_E4WhlQs6h0wNY76rqB6GVBifUuMfrUjFn_eOy7fpDg874aPfbjbmYYQtl0UgHy_0QVgIBfj7yTzjXkVwxq6TIm3Qrc_112OPXiKGzF6i5tcLOs6_Ri7wU-yzKmceNhgK7jljs3npsNjDUARMj6jCFvQZ6pL0wJUA_pdQZyWnf7ilG6xYoc_QXN3nHsKlas19loNKm7Mk0O_KvlppCYGs95ta9EqnPaxdgiWsgK9W1P6jSyxITQGRF4ryNDoTw8_zEG_IbPbOcnxZfC6pyKif37EfZdkAisUFvsM25fckbYIMcG61izHh_g1QMWaKs6ykOjimnhEe0ifGVQeUXbiQxc_tc6xFOjXPBHg06Szy_8KlVtiprxji21721FVfcuNr-ujAp2FTTp97LYZUo5CYacomHO_ijkbBt6NTwEol4KF1cZK1nDDcDA2YxlPbTtM_hsM37RBmw7dOmuX7wGZehWbxVUHbwn9SwZ_hjCgNa2By58xXu6IpGOGtN20vWCsaDj_fFNsTMMN7BlzucGW87LB0SCgOeAFFn8XtdaTgs8hOs0-7oRlKwyywrfCNhLorDTbmVN8kJQfx7uVZl7I0WwlL_Kh9c-MeU5dlQb" charset="UTF-8"></script><style>
+    <script type="text/javascript" src="https://me.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=6q-gZK5GcgyrVJLWyxNo8cw8vb6X463MYGeM6nWf7PRTRZhJDRl-WdIemwfraRHemF-eerAi3WM9Pg1D73sImSHUw_E4WhlQs6h0wNY76rqB6GVBifUuMfrUjFn_eOy7fpDg874aPfbjbmYYQtl0UgHy_0QVgIBfj7yTzjXkVwxq6TIm3Qrc_112OPXiKGzF6i5tcLOs6_Ri7wU-yzKmceNhgK7jljs3npsNjDUARMj6jCFvQZ6pL0wJUA_pdQZyWnf7ilG6xYoc_QXN3nHsKlas19loNKm7Mk0O_KvlppCYGs95ta9EqnPaxdgiWsgK9W1P6jSyxITQGRF4ryNDoTw8_zEG_IbPbOcnxZfC6pyKif37EfZdkAisUFvsM25fckbYIMcG61izHh_g1QMWaKs6ykOjimnhEe0ifGVQeUXbiQxc_tc6xFOjXPBHg06Szy_8KlVtiprxji21721FVfcuNr-ujAp2FTTp97LYZUo5CYacomHO_ijkbBt6NTwEol4KF1cZK1nDDcDA2YxlPbTtM_hsM37RBmw7dOmuX7wGZehWbxVUHbwn9SwZ_hjCgNa2By58xXu6IpGOGtN20vWCsaDj_fFNsTMMN7BlzucGW87LB0SCgOeAFFn8XtdaTgs8hOs0-7oRlKwyywrfCNhLorDTbmVN8kJQfx7uVZl7I0WwlL_Kh9c-MeU5dlQb" charset="UTF-8"></script>
+<style>
         :root {
             --primary: #4161A8;
             --primary-dark: #2E4A7A;
@@ -685,10 +686,9 @@
         }
     </style>
 <base target="_blank">
-<base target="_blank">
-<base target="_blank">
 </head>
 <body>
+
     <!-- HEADER -->
     <header class="header">
         <div class="header-top">
@@ -951,279 +951,214 @@
         </div>
     </footer>
 
-    <script>
-        // Current date display
-        function updateDate() {
-            const now = new Date();
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            };
-            const dateStr = now.toLocaleDateString('es-ES', options);
-            const timeStr = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-            document.getElementById('currentDate').textContent = dateStr + ' | ' + timeStr;
-        }
-        updateDate();
-        setInterval(updateDate, 60000);
-
-        // Mobile navigation toggle
-        function toggleNav() {
-            const nav = document.getElementById('mainNav');
-            nav.classList.toggle('open');
-        }
-
-        // Mobile dropdown toggle
-        function toggleDropdown(btn) {
-            const navItem = btn.parentElement;
-            const isOpen = navItem.classList.contains('open');
-
-            // Close all other dropdowns
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('open');
-            });
-
-            // Toggle current
-            if (!isOpen) {
-                navItem.classList.add('open');
-            }
-        }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            const header = document.querySelector('.header');
-            const nav = document.getElementById('mainNav');
-            if (!header.contains(e.target) && nav.classList.contains('open')) {
-                nav.classList.remove('open');
-            }
-        });
-
-        // Logout handler
-        function handleLogout(e) {
-            e.preventDefault();
-            if (confirm('¿Está seguro que desea cerrar sesión?')) {
-                // Limpiar toda la sesión
-                localStorage.removeItem(SESSION_KEY);
-                sessionStorage.removeItem(SESSION_KEY);
-
-                // URL del login
-                var loginUrl = 'https://script.google.com/macros/s/AKfycbwX960Dq1OnWQDidp37WSNzjovzZPue3bcHh0OqK7om5Qq-3fB0G19LhIsKEWiZeUye/exec';
-
-                // Método 1: Intentar redirección directa
-                try {
-                    window.top.location.href = loginUrl;
-                    return;
-                } catch(err) {
-                    console.log('Método 1 falló:', err);
-                }
-
-                // Método 2: location.replace
-                try {
-                    window.top.location.replace(loginUrl);
-                    return;
-                } catch(err) {
-                    console.log('Método 2 falló:', err);
-                }
-
-                // Método 3: location.assign
-                try {
-                    window.top.location.assign(loginUrl);
-                    return;
-                } catch(err) {
-                    console.log('Método 3 falló:', err);
-                }
-
-                // Método 4: Forzar recarga con nueva URL
-                try {
-                    window.location = loginUrl;
-                    return;
-                } catch(err) {
-                    console.log('Método 4 falló:', err);
-                }
-
-                // Método 5: Como último recurso, abrir en misma ventana
-                window.open(loginUrl, '_self');
-            }
-        }
-        }
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }
-            });
-        });
-
-        // Add hover effect for section cards
-        document.querySelectorAll('.section-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-4px)';
-            });
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        });
-    </script>
+    
 
     <!-- AUTHENTICATION SYSTEM -->
-    <script>
-        const SESSION_KEY = 'infreserve_session';
+    
 
-        // Check authentication on page load
-        function checkAuth() {
-            // 1. Primero revisar si hay token en URL (viene del login de Apps Script)
-            const urlParams = new URLSearchParams(window.location.search);
-            const urlToken = urlParams.get('token');
+<script>
+// ========== CONFIGURACIÓN DE SESIÓN ==========
+const SESSION_KEY = 'infreserve_session';
+const LOGIN_URL = 'https://iinfreservetransporte-boop.github.io/intranet-infreserve';
 
-            if (urlToken) {
-                try {
-                    // Decodificar y guardar en localStorage
-                    const decodedToken = decodeURIComponent(urlToken);
-                    // Validar que sea JSON válido
-                    JSON.parse(decodedToken);
-                    localStorage.setItem(SESSION_KEY, decodedToken);
-                    // Limpiar URL para que no quede el token visible
-                    window.history.replaceState({}, document.title, window.location.pathname);
-                } catch (e) {
-                    console.error('Token inválido en URL:', e);
-                }
+// ========== UTILIDADES ==========
+function getUrlParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+function getUserData() {
+    try {
+        const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
+        if (session) {
+            return JSON.parse(session);
+        }
+    } catch (e) {
+        console.error('Error parsing session:', e);
+    }
+    return null;
+}
+
+// ========== FECHA Y HORA ==========
+function updateDate() {
+    const now = new Date();
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+    };
+    const dateStr = now.toLocaleDateString('es-ES', options);
+    const timeStr = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+    const dateEl = document.getElementById('currentDate');
+    if (dateEl) {
+        dateEl.innerHTML = `${dateStr}<br>${timeStr}`;
+    }
+}
+
+// ========== CIERRE DE SESIÓN (CORREGIDO) ==========
+function handleLogout(e) {
+    if (e && e.preventDefault) {
+        e.preventDefault();
+    }
+
+    if (confirm('¿Está seguro que desea cerrar sesión?')) {
+        // Limpiar todo el almacenamiento de sesión
+        localStorage.removeItem(SESSION_KEY);
+        sessionStorage.removeItem(SESSION_KEY);
+
+        // Limpiar cualquier otro dato relacionado
+        localStorage.removeItem('infreserve_user');
+        sessionStorage.removeItem('infreserve_user');
+
+        console.log('Sesión cerrada. Redirigiendo...');
+
+        // Múltiples métodos de redirección para máxima compatibilidad
+        var redirectDone = false;
+
+        // Método 1: window.top.location (para iframes)
+        try {
+            if (window.top && window.top.location) {
+                window.top.location.href = LOGIN_URL;
+                redirectDone = true;
             }
+        } catch(err) { console.log('Método 1 falló:', err); }
 
-            // 2. Revisar localStorage/sessionStorage como antes
-            const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
-
-            if (!session) {
-                // Not logged in - redirect to login
-                window.location.href = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
-                return false;
-            }
-
+        // Método 2: window.location.replace (no guarda en historial)
+        if (!redirectDone) {
             try {
-                const userData = JSON.parse(session);
-                updateUserInfo(userData);
-                return true;
-            } catch (e) {
-                // Invalid session - clear and redirect
-                localStorage.removeItem(SESSION_KEY);
-                sessionStorage.removeItem(SESSION_KEY);
-                window.location.href = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
-                return false;
-            }
+                window.location.replace(LOGIN_URL);
+                redirectDone = true;
+            } catch(err) { console.log('Método 2 falló:', err); }
         }
 
+        // Método 3: window.location.href (estándar)
+        if (!redirectDone) {
             try {
-                const userData = JSON.parse(session);
-                updateUserInfo(userData);
-                return true;
-            } catch (e) {
-                // Invalid session - clear and redirect
-                localStorage.removeItem(SESSION_KEY);
-                sessionStorage.removeItem(SESSION_KEY);
-                window.location.href = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
-                return false;
-            }
+                window.location.href = LOGIN_URL;
+                redirectDone = true;
+            } catch(err) { console.log('Método 3 falló:', err); }
         }
 
-        // Update user info in header
-        function updateUserInfo(userData) {
-            // Update avatar with initials
-            const avatar = document.querySelector('.user-avatar');
-            if (avatar && userData.name) {
-                const initials = userData.name
-                    .split(' ')
-                    .map(n => n[0])
-                    .join('')
-                    .substring(0, 2)
-                    .toUpperCase();
-                avatar.textContent = initials;
-            }
+        // Método 4: Asignación directa
+        if (!redirectDone) {
+            try {
+                window.location = LOGIN_URL;
+                redirectDone = true;
+            } catch(err) { console.log('Método 4 falló:', err); }
+        }
 
-            // Update welcome text
-            const welcomeText = document.querySelector('.welcome-title');
-            if (welcomeText && userData.name) {
-                welcomeText.textContent = `Bienvenido, ${userData.name}`;
-            }
+        // Método 5: window.open (último recurso)
+        if (!redirectDone) {
+            try {
+                window.open(LOGIN_URL, '_self');
+            } catch(err) { console.log('Método 5 falló:', err); }
+        }
+    }
 
-            // Update user name in header
+    return false;
+}
+
+// ========== VERIFICACIÓN DE SESIÓN ==========
+function checkSession() {
+    const userData = getUserData();
+    const token = getUrlParam('token');
+
+    // Si hay token en URL, guardar sesión
+    if (token) {
+        try {
+            const decoded = JSON.parse(decodeURIComponent(token));
+            const sessionData = {
+                id: decoded.id,
+                email: decoded.email,
+                name: decoded.nombre || decoded.name,
+                role: decoded.rol || decoded.role,
+                timestamp: new Date().getTime()
+            };
+            localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+            sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+
+            // Actualizar UI
             const userNameSpan = document.querySelector('.user-info span');
-            if (userNameSpan && userData.name) {
-                userNameSpan.innerHTML = `Bienvenido, <strong>${userData.name}</strong>`;
+            const userAvatar = document.querySelector('.user-avatar');
+            if (userNameSpan && sessionData.name) {
+                userNameSpan.innerHTML = `Bienvenido, <strong>${sessionData.name}</strong>`;
             }
-        }
-
-        // Logout function
-        function handleLogout(e) {
-            e.preventDefault();
-
-            if (confirm('¿Está seguro que desea cerrar sesión?')) {
-                // Clear all session data
-                localStorage.removeItem(SESSION_KEY);
-                sessionStorage.removeItem(SESSION_KEY);
-
-                // Show logout message (optional)
-                alert('Sesión cerrada correctamente');
-
-                // Redirect to login
-                window.location.href = 'https://iinfreservetransporte-boop.github.io/intranet-infreserve';
+            if (userAvatar && sessionData.name) {
+                userAvatar.textContent = sessionData.name.split(' ').map(n => n[0]).join('').toUpperCase();
             }
+            return true;
+        } catch (e) {
+            console.error('Error processing token:', e);
         }
+    }
 
-        // Session timeout check (30 minutes)
-        function checkSessionTimeout() {
-            const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
-            if (!session) return;
+    // Si no hay sesión válida y no estamos en la página de login
+    if (!userData && !window.location.href.includes('login')) {
+        console.log('No hay sesión activa');
+        // Opcional: redirigir al login
+        // window.location.href = LOGIN_URL;
+    }
 
-            try {
-                const userData = JSON.parse(session);
-                const loginTime = new Date(userData.loginTime);
-                const now = new Date();
-                const diffMinutes = (now - loginTime) / 1000 / 60;
+    return false;
+}
 
-                // Auto logout after 30 minutes of inactivity
-                if (diffMinutes > 30) {
-                    localStorage.removeItem(SESSION_KEY);
-                    sessionStorage.removeItem(SESSION_KEY);
-                    alert('Tu sesión ha expirado. Por favor inicia sesión nuevamente.');
-                    window.location.href = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
-                }
-            } catch (e) {
-                console.error('Session check error:', e);
-            }
-        }
+// ========== INICIALIZACIÓN ==========
+document.addEventListener('DOMContentLoaded', function() {
+    // Actualizar fecha
+    updateDate();
+    setInterval(updateDate, 60000); // Actualizar cada minuto
 
-        // Initialize auth on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            checkAuth();
+    // Verificar sesión
+    checkSession();
 
-            // Check session timeout every minute
-            setInterval(checkSessionTimeout, 60000);
-
-            // Update activity timestamp on user interaction
-            ['click', 'keypress', 'scroll', 'mousemove'].forEach(event => {
-                document.addEventListener(event, function() {
-                    const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
-                    if (session) {
-                        try {
-                            const userData = JSON.parse(session);
-                            userData.lastActivity = new Date().toISOString();
-                            if (localStorage.getItem(SESSION_KEY)) {
-                                localStorage.setItem(SESSION_KEY, JSON.stringify(userData));
-                            } else {
-                                sessionStorage.setItem(SESSION_KEY, JSON.stringify(userData));
-                            }
-                        } catch (e) {}
-                    }
-                }, { passive: true });
-            });
+    // Mobile nav toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.nav');
+    if (navToggle && nav) {
+        navToggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
         });
-    </script>
+    }
+
+    // Mobile dropdown toggle
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                const dropdown = this.querySelector('.dropdown');
+                if (dropdown) {
+                    e.preventDefault();
+                    this.classList.toggle('open');
+                }
+            }
+        });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#') {
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
+    // Hover effects for section cards
+    document.querySelectorAll('.section-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-4px)';
+        });
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+});
+</script>
+
 </body>
 </html>

@@ -685,6 +685,7 @@
         }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
     <!-- HEADER -->
@@ -1042,7 +1043,7 @@
 
             if (!session) {
                 // Not logged in - redirect to login
-                window.location.href = 'infreserve_login.html';
+                window.location.href = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
                 return false;
             }
 
@@ -1054,7 +1055,7 @@
                 // Invalid session - clear and redirect
                 localStorage.removeItem(SESSION_KEY);
                 sessionStorage.removeItem(SESSION_KEY);
-                window.location.href = 'infreserve_login.html';
+                window.location.href = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
                 return false;
             }
         }
@@ -1119,7 +1120,7 @@
                     localStorage.removeItem(SESSION_KEY);
                     sessionStorage.removeItem(SESSION_KEY);
                     alert('Tu sesión ha expirado. Por favor inicia sesión nuevamente.');
-                    window.location.href = 'infreserve_login.html';
+                    window.location.href = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
                 }
             } catch (e) {
                 console.error('Session check error:', e);

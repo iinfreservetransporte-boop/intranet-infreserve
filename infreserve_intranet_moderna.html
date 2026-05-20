@@ -686,6 +686,7 @@
     </style>
 <base target="_blank">
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
     <!-- HEADER -->
@@ -1039,6 +1040,25 @@
 
         // Check authentication on page load
         function checkAuth() {
+            // 1. Primero revisar si hay token en URL (viene del login de Apps Script)
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlToken = urlParams.get('token');
+
+            if (urlToken) {
+                try {
+                    // Decodificar y guardar en localStorage
+                    const decodedToken = decodeURIComponent(urlToken);
+                    // Validar que sea JSON válido
+                    JSON.parse(decodedToken);
+                    localStorage.setItem(SESSION_KEY, decodedToken);
+                    // Limpiar URL para que no quede el token visible
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                } catch (e) {
+                    console.error('Token inválido en URL:', e);
+                }
+            }
+
+            // 2. Revisar localStorage/sessionStorage como antes
             const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
 
             if (!session) {
@@ -1046,6 +1066,19 @@
                 window.location.href = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
                 return false;
             }
+
+            try {
+                const userData = JSON.parse(session);
+                updateUserInfo(userData);
+                return true;
+            } catch (e) {
+                // Invalid session - clear and redirect
+                localStorage.removeItem(SESSION_KEY);
+                sessionStorage.removeItem(SESSION_KEY);
+                window.location.href = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
+                return false;
+            }
+        }
 
             try {
                 const userData = JSON.parse(session);

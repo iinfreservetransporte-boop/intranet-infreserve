@@ -631,7 +631,7 @@
                     <ul class="dropdown">
                         <li class="dropdown-header">Control de Listas</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarClientes(event)"><span class="icon">👥</span> Clientes</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarActualizacionDatos(event)"><span class="icon">✏️</span> Actualización de Datos</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarActualizacionDatos(event)"><span class="icon">✏️</span> Actualización de Datos del Cliente</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarDepartamentos(event)"><span class="icon">🏢</span> Departamentos</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarTransporte(event)"><span class="icon">🚛</span> Transporte</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarProveedores(event)"><span class="icon">🤝</span> Proveedores</a></li>
@@ -703,7 +703,7 @@
             <a href="#" class="quick-link" onclick="cargarCotizaciones(event)">📊 Cotizaciones</a>
             <a href="#" class="quick-link" onclick="cargarSolicitudUtiles(event)">🧹 Útiles y Limpieza</a>
             <a href="#" class="quick-link" onclick="cargarClientes(event)">👥 Clientes</a>
-            <a href="#" class="quick-link" onclick="cargarActualizacionDatos(event)">✏️ Actualización Datos</a>
+            <a href="#" class="quick-link" onclick="cargarActualizacionDatos(event)">✏️ Actualización Datos del Cliente</a>
             <a href="#" class="quick-link" onclick="cargarCheques(event)">💳 Cheques</a>
         </div>
 
@@ -800,10 +800,10 @@
             cargarContenido(OPERACIONES_URL, 'Dashboard de Operaciones', true);
         }
 
-        // Nueva función para Actualización de Datos
+        // Función para Actualización de Datos del Cliente
         function cargarActualizacionDatos(event) {
             if (event) event.preventDefault();
-            cargarContenido(ACTUALIZACION_DATOS_URL, 'Actualización de Datos', true);
+            cargarContenido(ACTUALIZACION_DATOS_URL, 'Actualización de Datos del Cliente', true);
         }
 
         function cargarClientes(event) {

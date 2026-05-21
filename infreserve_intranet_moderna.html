@@ -958,9 +958,10 @@
     
 
 <script>
-// ========== CONFIGURACIÓN DE SESIÓN ==========
+// ========== CONFIGURACIÓN ==========
 const SESSION_KEY = 'infreserve_session';
-const LOGIN_URL = 'https://iinfreservetransporte-boop.github.io/intranet-infreserve';
+// ⚠️ CAMBIA ESTA URL POR LA DE TU APPS SCRIPT (termina en /exec)
+const LOGIN_URL = 'https://script.google.com/macros/s/TU_ID_DEL_SCRIPT/exec';
 
 // ========== UTILIDADES ==========
 function getUrlParam(param) {
@@ -980,152 +981,134 @@ function getUserData() {
     return null;
 }
 
+// ========== VERIFICACIÓN DE TOKEN CON BACKEND ==========
+function verificarTokenEnBackend(token, userId) {
+    return new Promise((resolve, reject) => {
+        google.script.run
+            .withSuccessHandler(resolve)
+            .withFailureHandler(reject)
+            .verificarToken(token, userId);
+    });
+}
+
+// ========== VALIDAR SESIÓN AL CARGAR ==========
+async function validarSesion() {
+    const userData = getUserData();
+    const urlToken = getUrlParam('token');
+
+    // Caso 1: hay token en URL (recién logueado)
+    if (urlToken) {
+        try {
+            const decoded = JSON.parse(decodeURIComponent(urlToken));
+            if (decoded.token && decoded.id) {
+                const resultado = await verificarTokenEnBackend(decoded.token, decoded.id);
+                if (resultado && resultado.exito && resultado.valido === true) {
+                    const sessionData = {
+                        id: decoded.id,
+                        email: decoded.email,
+                        nombre: decoded.nombre,
+                        rol: decoded.rol,
+                        departamento: decoded.departamento,
+                        token: decoded.token,
+                        loginTime: new Date().toISOString()
+                    };
+                    localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+                    actualizarUI(sessionData);
+                    // Limpiar URL
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    return true;
+                } else {
+                    console.warn('Token inválido o expirado');
+                    alert('Sesión inválida. Será redirigido al login.');
+                    redirigirLogin();
+                    return false;
+                }
+            }
+        } catch (e) {
+            console.error('Error procesando token:', e);
+            redirigirLogin();
+            return false;
+        }
+    }
+
+    // Caso 2: sesión guardada en localStorage
+    if (userData && userData.token && userData.id) {
+        try {
+            const resultado = await verificarTokenEnBackend(userData.token, userData.id);
+            if (resultado && resultado.exito && resultado.valido === true) {
+                actualizarUI(userData);
+                return true;
+            } else {
+                console.warn('Token almacenado inválido');
+                localStorage.removeItem(SESSION_KEY);
+                redirigirLogin();
+                return false;
+            }
+        } catch (err) {
+            console.error('Error verificando token:', err);
+            redirigirLogin();
+            return false;
+        }
+    }
+
+    redirigirLogin();
+    return false;
+}
+
+function actualizarUI(userData) {
+    const userNameSpan = document.querySelector('.user-info span');
+    const userAvatar = document.querySelector('.user-avatar');
+    if (userNameSpan && userData.nombre) {
+        userNameSpan.innerHTML = `Bienvenido, <strong>${userData.nombre}</strong>`;
+    }
+    if (userAvatar && userData.nombre) {
+        const iniciales = userData.nombre.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        userAvatar.textContent = iniciales;
+    }
+    console.log('Sesión activa para:', userData.nombre, 'Rol:', userData.rol);
+}
+
+function redirigirLogin() {
+    setTimeout(() => {
+        window.location.href = LOGIN_URL;
+    }, 500);
+}
+
+// ========== CIERRE DE SESIÓN ==========
+function handleLogout(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (confirm('¿Está seguro que desea cerrar sesión?')) {
+        localStorage.removeItem(SESSION_KEY);
+        sessionStorage.removeItem(SESSION_KEY);
+        window.location.href = LOGIN_URL;
+    }
+    return false;
+}
+
 // ========== FECHA Y HORA ==========
 function updateDate() {
     const now = new Date();
-    const options = { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-    };
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const dateStr = now.toLocaleDateString('es-ES', options);
     const timeStr = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
     const dateEl = document.getElementById('currentDate');
-    if (dateEl) {
-        dateEl.innerHTML = `${dateStr}<br>${timeStr}`;
-    }
-}
-
-// ========== CIERRE DE SESIÓN (CORREGIDO) ==========
-function handleLogout(e) {
-    if (e && e.preventDefault) {
-        e.preventDefault();
-    }
-
-    if (confirm('¿Está seguro que desea cerrar sesión?')) {
-        // Limpiar TODO el almacenamiento de sesión
-        var keysToRemove = [
-            'infreserve_session',
-            'infreserve_user', 
-            'infreserve_login_time',
-            'infreserve_token',
-            'infreserve_rol',
-            'infreserve_departamento'
-        ];
-
-        keysToRemove.forEach(function(key) {
-            try {
-                localStorage.removeItem(key);
-                sessionStorage.removeItem(key);
-            } catch(err) {}
-        });
-
-        console.log('Sesión cerrada. Redirigiendo a login...');
-
-        // Redirigir directamente a login.html
-        var loginUrl = 'https://iinfreservetransporte-boop.github.io/intranet-infreserve/login.html';
-
-        var redirectDone = false;
-        try {
-            if (window.top && window.top.location) {
-                window.top.location.href = loginUrl;
-                redirectDone = true;
-            }
-        } catch(err) {}
-
-        if (!redirectDone) {
-            try {
-                window.location.replace(loginUrl);
-                redirectDone = true;
-            } catch(err) {}
-        }
-
-        if (!redirectDone) {
-            try {
-                window.location.href = loginUrl;
-                redirectDone = true;
-            } catch(err) {}
-        }
-
-        if (!redirectDone) {
-            try {
-                window.location = loginUrl;
-            } catch(err) {}
-        }
-    }
-
-    return false;
-}
-
-// ========== VERIFICACIÓN DE SESIÓN ==========
-function checkSession() {
-    const userData = getUserData();
-    const token = getUrlParam('token');
-
-    // Si hay token en URL, guardar sesión
-    if (token) {
-        try {
-            const decoded = JSON.parse(decodeURIComponent(token));
-            const sessionData = {
-                id: decoded.id,
-                email: decoded.email,
-                name: decoded.nombre || decoded.name,
-                role: decoded.rol || decoded.role,
-                timestamp: new Date().getTime()
-            };
-            localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
-            sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
-
-            // Actualizar UI
-            const userNameSpan = document.querySelector('.user-info span');
-            const userAvatar = document.querySelector('.user-avatar');
-            if (userNameSpan && sessionData.name) {
-                userNameSpan.innerHTML = `Bienvenido, <strong>${sessionData.name}</strong>`;
-            }
-            if (userAvatar && sessionData.name) {
-                userAvatar.textContent = sessionData.name.split(' ').map(n => n[0]).join('').toUpperCase();
-            }
-            return true;
-        } catch (e) {
-            console.error('Error processing token:', e);
-        }
-    }
-
-    // Si no hay sesión válida y no estamos en la página de login
-    if (!userData && !window.location.href.includes('login')) {
-        console.log('No hay sesión activa');
-        // Opcional: redirigir al login
-        // window.location.href = LOGIN_URL;
-    }
-
-    return false;
+    if (dateEl) dateEl.innerHTML = `${dateStr}<br>${timeStr}`;
 }
 
 // ========== INICIALIZACIÓN ==========
-document.addEventListener('DOMContentLoaded', function() {
-    // Actualizar fecha
+document.addEventListener('DOMContentLoaded', async function() {
     updateDate();
-    setInterval(updateDate, 60000); // Actualizar cada minuto
-
-    // Verificar sesión
-    checkSession();
-
-    // Registrar tiempo de login para control de sesión
-    if (getUserData()) {
-        localStorage.setItem('infreserve_login_time', new Date().toISOString());
-    }
+    setInterval(updateDate, 60000);
+    await validarSesion();
 
     // Mobile nav toggle
     const navToggle = document.querySelector('.nav-toggle');
     const nav = document.querySelector('.nav');
     if (navToggle && nav) {
-        navToggle.addEventListener('click', function() {
-            nav.classList.toggle('open');
-        });
+        navToggle.addEventListener('click', () => nav.classList.toggle('open'));
     }
 
-    // Mobile dropdown toggle
+    // Dropdowns en móvil
     document.querySelectorAll('.nav-item').forEach(item => {
         item.addEventListener('click', function(e) {
             if (window.innerWidth <= 768) {
@@ -1138,7 +1121,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Smooth scroll for anchor links
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
@@ -1152,26 +1135,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Hover effects for section cards
+    // Hover effects
     document.querySelectorAll('.section-card').forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-4px)';
-        });
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
+        card.addEventListener('mouseenter', () => card.style.transform = 'translateY(-4px)');
+        card.addEventListener('mouseleave', () => card.style.transform = 'translateY(0)');
     });
 
-    // Listener postMessage para cerrar sesión desde iframes (Apps Script)
+    // PostMessage para cerrar sesión desde iframes
     window.addEventListener('message', function(event) {
-        // Verificar origen seguro - ajusta según tu dominio de Apps Script
-        var allowedOrigins = [
-            'https://script.google.com',
-            'https://script.googleusercontent.com'
-        ];
-
         if (event.data && event.data.action === 'cerrarSesion') {
-            console.log('Recibido postMessage: cerrarSesion desde iframe');
             handleLogout();
         }
     });

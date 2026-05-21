@@ -1004,52 +1004,54 @@ function handleLogout(e) {
     }
 
     if (confirm('¿Está seguro que desea cerrar sesión?')) {
-        // Limpiar todo el almacenamiento de sesión
-        localStorage.removeItem(SESSION_KEY);
-        sessionStorage.removeItem(SESSION_KEY);
-        localStorage.removeItem('infreserve_user');
-        sessionStorage.removeItem('infreserve_user');
-        localStorage.removeItem('infreserve_login_time');
-        sessionStorage.removeItem('infreserve_login_time');
+        // Limpiar TODO el almacenamiento de sesión
+        var keysToRemove = [
+            'infreserve_session',
+            'infreserve_user', 
+            'infreserve_login_time',
+            'infreserve_token',
+            'infreserve_rol',
+            'infreserve_departamento'
+        ];
 
-        console.log('Sesión cerrada. Redirigiendo...');
+        keysToRemove.forEach(function(key) {
+            try {
+                localStorage.removeItem(key);
+                sessionStorage.removeItem(key);
+            } catch(err) {}
+        });
 
-        // Redirigir a logout.html para limpieza completa
-        var logoutUrl = LOGIN_URL + '/logout.html';
+        console.log('Sesión cerrada. Redirigiendo a login...');
+
+        // Redirigir directamente a login.html
+        var loginUrl = 'https://iinfreservetransporte-boop.github.io/intranet-infreserve/login.html';
 
         var redirectDone = false;
         try {
             if (window.top && window.top.location) {
-                window.top.location.href = logoutUrl;
+                window.top.location.href = loginUrl;
                 redirectDone = true;
             }
-        } catch(err) { console.log('Método 1 falló:', err); }
+        } catch(err) {}
 
         if (!redirectDone) {
             try {
-                window.location.replace(logoutUrl);
+                window.location.replace(loginUrl);
                 redirectDone = true;
-            } catch(err) { console.log('Método 2 falló:', err); }
+            } catch(err) {}
         }
 
         if (!redirectDone) {
             try {
-                window.location.href = logoutUrl;
+                window.location.href = loginUrl;
                 redirectDone = true;
-            } catch(err) { console.log('Método 3 falló:', err); }
+            } catch(err) {}
         }
 
         if (!redirectDone) {
             try {
-                window.location = logoutUrl;
-                redirectDone = true;
-            } catch(err) { console.log('Método 4 falló:', err); }
-        }
-
-        if (!redirectDone) {
-            try {
-                window.open(logoutUrl, '_self');
-            } catch(err) { console.log('Método 5 falló:', err); }
+                window.location = loginUrl;
+            } catch(err) {}
         }
     }
 

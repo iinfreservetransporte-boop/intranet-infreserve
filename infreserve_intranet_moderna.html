@@ -785,10 +785,10 @@
             cargarOperaciones(event);
         }
 
-        // Función para redirigir a URL externa (no iframe)
+        // Función para redirigir a URL externa (nueva pestaña) para seguridad
         function abrirControlTemperatura(event) {
             if (event) event.preventDefault();
-            window.location.href = TEMPERATURA_URL;
+            window.open(TEMPERATURA_URL, '_blank', 'noopener,noreferrer');
         }
 
         // ========== FUNCIONES PARA CADA MÓDULO ==========

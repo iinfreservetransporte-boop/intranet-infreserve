@@ -608,7 +608,7 @@
         <nav class="nav" id="mainNav">
             <ul class="nav-list">
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="mostrarInicio(event)">
+                    <a href="#" class="nav-link" onclick="cargarOperaciones(event)">
                         <span class="icon">🏠</span> Inicio
                     </a>
                 </li>
@@ -621,7 +621,6 @@
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudPago(event)"><span class="icon">💰</span> Solicitud de Pago</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCertificacion(event)"><span class="icon">📦</span> Certificación de Carga</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCotizaciones(event)"><span class="icon">📊</span> Cotización y Presupuestos</a></li>
-                        <!-- NUEVO ÍTEM AGREGADO -->
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudUtiles(event)"><span class="icon">🧹</span> Solicitud de Útiles y Artículos de Limpieza</a></li>
                     </ul>
                 </li>
@@ -708,10 +707,7 @@
 
         <!-- Dynamic Content Area -->
         <div id="dynamicContent" class="dynamic-content">
-            <div class="content-header">
-                <div class="content-title">Bienvenido</div>
-            </div>
-            <p style="text-align: center; color: #999; padding: 40px;">Seleccione una opción del menú para ver su contenido.</p>
+            <!-- Se cargará el dashboard de Operaciones al iniciar -->
         </div>
     </main>
 
@@ -742,6 +738,7 @@
         // URLs de los formularios
         const COTIZACIONES_URL = 'https://script.google.com/macros/s/AKfycbylSpZ5ee7zyPvPDvddC3s6RfDK13IhBdU3XHYfLKsd_YMwfGdUr4mlk1LX_U9TAciOPQ/exec';
         const SOLICITUD_UTILES_URL = 'https://script.google.com/macros/s/AKfycbz6ZvaBC17xAJIYO4012s7Ug4Sub6H64P7psykFXzoFEs40gHNKRdu_2s5srxAYhDuRaA/exec';
+        const OPERACIONES_URL = 'https://script.google.com/macros/s/AKfycbzm_p1ebt3_p6040fCXIwIFfamKVDtTFxxlLZbffVO-3_Tmh3d-WlVvwkWbz-a8neBk/exec';
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
@@ -752,7 +749,7 @@
                 container.innerHTML = `
                     <div class="content-header">
                         <div class="content-title">${titulo}</div>
-                        <button class="btn-back-home" onclick="mostrarInicio(event)">← Volver al inicio</button>
+                        <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver al Dashboard</button>
                     </div>
                     <div class="loading-message">Cargando contenido... Espere un momento.</div>
                     <iframe src="${url}" title="${titulo}" style="display:none;" onload="this.style.display='block'; this.previousElementSibling.style.display='none';"></iframe>
@@ -761,25 +758,17 @@
                 container.innerHTML = `
                     <div class="content-header">
                         <div class="content-title">${titulo}</div>
-                        <button class="btn-back-home" onclick="mostrarInicio(event)">← Volver al inicio</button>
+                        <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver al Dashboard</button>
                     </div>
                     <div>${url}</div>
                 `;
             }
         }
 
-        // Mostrar pantalla de inicio
+        // Mostrar el dashboard de Operaciones (ahora es la pantalla de inicio)
         function mostrarInicio(event) {
             if (event) event.preventDefault();
-            const container = document.getElementById('dynamicContent');
-            if (container) {
-                container.innerHTML = `
-                    <div class="content-header">
-                        <div class="content-title">Bienvenido</div>
-                    </div>
-                    <p style="text-align: center; color: #999; padding: 40px;">Seleccione una opción del menú para ver su contenido.</p>
-                `;
-            }
+            cargarOperaciones(event);
         }
 
         // ========== FUNCIONES PARA CADA MÓDULO ==========
@@ -798,10 +787,14 @@
             cargarContenido(COTIZACIONES_URL, 'Cotización y Presupuestos', true);
         }
 
-        // NUEVA FUNCIÓN para Solicitud de Útiles y Artículos de Limpieza
         function cargarSolicitudUtiles(event) {
             if (event) event.preventDefault();
             cargarContenido(SOLICITUD_UTILES_URL, 'Solicitud de Útiles y Artículos de Limpieza', true);
+        }
+
+        function cargarOperaciones(event) {
+            if (event) event.preventDefault();
+            cargarContenido(OPERACIONES_URL, 'Dashboard de Operaciones', true);
         }
 
         function cargarClientes(event) {
@@ -842,11 +835,6 @@
         function cargarCheques(event) {
             if (event) event.preventDefault();
             cargarContenido('#', 'Impresión de Cheques (próximamente)', false);
-        }
-
-        function cargarOperaciones(event) {
-            if (event) event.preventDefault();
-            cargarContenido('#', 'Operaciones (próximamente)', false);
         }
 
         function cargarGesHumana(event) {
@@ -917,6 +905,8 @@
                         localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
                         actualizarUI(sessionData);
                         window.history.replaceState({}, document.title, window.location.pathname);
+                        // Cargar el dashboard después de validar sesión
+                        cargarOperaciones();
                         return true;
                     }
                 } catch (e) {
@@ -928,6 +918,8 @@
 
             if (userData && userData.token && userData.id) {
                 actualizarUI(userData);
+                // Cargar el dashboard después de validar sesión
+                cargarOperaciones();
                 return true;
             }
 

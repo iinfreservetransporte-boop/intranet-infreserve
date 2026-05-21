@@ -1,263 +1,368 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Admin - Infreserve</title>
-    <script type="text/javascript" src="https://me.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=EgHCK6Gx0AOXNZTV_RuE1nBYsorR5k5vinIeTtIUNRUvGzwL_h9YYstzney9yWtjdb78Fmhr0Re8cG16pQqhYcATN-wuvd55kgv8qkfuzYzBNSLVpmD2cZKhZ5I1dbWOoVwpXevgpwtZLqWAaqariM9gXxvXg7RDgWfCDz0u9dgTKmjwNco0YMAO5jP1FhzzqwIxJvIQ5R6JnVSc8TTtAwrovlyFaxAqIjWIYXc-V4qoHBhfJ-JlpnbjtIlVrWew2SHGZQOKYkgNuFT90EnedTcYDYBR2VIFNObSjPDtFZ0aVHaJalBpW7MvI8z106_vUIDBQbn8pEDOG0mU4Mm3d5cXlvI7o2SOYUuUy9POBFF89vI1rLZXb64it99HfAp0RDuu9CMQf0h3sG5reIRJgG31iZ95YVsZyUvvYxWMNVjB28RKnskZvBRbBbx_cvJAXK0elRHiRQPqYRXRlQ5ecPr5EKkMlJAoeh3oPHy8g8v8pF9kkUzCiK6niLdV6CkpSsEo4cjNBTgcMpEaYU2FEqTHaTOOQYdsXJHTqeywm6e77Di3ally2-DwgBUt17boemVwr13eIDeSrmPRbCmG9I6z_CCb5ZNW9Yesi-g1S2a7eS1PB7jQ537q7IdyqnkDAh8qgAbtmYpVIDavlZQAoQ" charset="UTF-8"></script><style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f5f6fa; }
-        .header { background: linear-gradient(135deg, #1B3864 0%, #4161A8 100%); color: white; padding: 20px 30px; }
-        .header h1 { font-size: 24px; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
-        .card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; }
-        .btn-primary { background: #4161A8; color: white; }
-        .btn-success { background: #28a745; color: white; }
-        .btn-danger { background: #dc3545; color: white; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th { background: #4161A8; color: white; padding: 12px; text-align: left; font-size: 13px; }
-        td { border-bottom: 1px solid #eee; padding: 12px; font-size: 14px; }
-        .form-group { margin-bottom: 16px; }
-        .form-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #333; }
-        .form-input { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; }
-        .modal-content { background: white; border-radius: 16px; padding: 32px; width: 90%; max-width: 500px; }
-        .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-        .badge-active { background: #d4edda; color: #155724; }
-        .badge-inactive { background: #f8d7da; color: #721c24; }
-    </style>
-<base target="_blank">
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin - Infreserve</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Segoe UI, system-ui, sans-serif; background: #f8fafc; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+    .header { background: linear-gradient(135deg, #0B2B5E 0%, #1A4A8A 100%); color: white; padding: 24px; border-radius: 16px; margin-bottom: 24px; }
+    .header h1 { font-size: 24px; font-weight: 700; }
+    .card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 24px; }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .card-title { font-size: 20px; font-weight: 700; color: #1e293b; }
+    .btn { padding: 10px 20px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .btn-success { background: linear-gradient(135deg, #0B2B5E 0%, #1A4A8A 100%); color: white; }
+    .btn-primary { background: #1A4A8A; color: white; }
+    .btn-danger { background: #dc3545; color: white; }
+    .btn-success2 { background: #28a745; color: white; }
+    table { width: 100%; border-collapse: collapse; }
+    th { background: #1A4A8A; color: white; padding: 12px; text-align: left; font-weight: 600; }
+    td { padding: 12px; border-bottom: 1px solid #e2e8f0; }
+    tr:hover { background: #f8fafc; }
+    .estado-activo { background: #d1fae5; color: #065f46; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display: inline-block; }
+    .estado-inactivo { background: #fee2e2; color: #991b1b; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display: inline-block; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000; }
+    .modal-content { background: white; border-radius: 16px; padding: 32px; width: 90%; max-width: 500px; }
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #374151; }
+    .form-input { width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 14px; }
+    .alert { padding: 12px 16px; border-radius: 10px; margin: 10px 0; font-size: 14px; }
+    .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+    .alert-success { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+    .alert-info { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+    #mensajeContainer { margin-bottom: 15px; }
+  </style>
 <base target="_blank">
 </head>
 <body>
+  <div class="container">
     <div class="header">
-        <h1>Panel de Administracion de Usuarios</h1>
+      <h1>Panel de Administracion de Usuarios</h1>
+      <p style="opacity: 0.9; margin-top: 8px;">Gestion de accesos y permisos del sistema</p>
+      <button class="btn" onclick="cerrarSesion()" style="background:#666;color:white;margin-top:15px">Cerrar Sesion</button>
     </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Usuarios del Sistema</div>
+        <button class="btn btn-success" onclick="mostrarModal()">+ Agregar Usuario</button>
+      </div>
+      <div id="mensajeContainer"></div>
+      <button class="btn" onclick="cargarUsuarios()" style="background:#666;color:white;margin-bottom:15px">Actualizar Lista</button>
+      <table>
+        <thead><tr><th>Nombre</th><th>Email</th><th>Rol</th><th>Departamento</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <tbody id="tbodyUsuarios"><tr><td colspan="6" style="text-align:center;color:#999;padding:20px">Haz clic en Actualizar Lista para cargar usuarios</td></tr></tbody>
+      </table>
+    </div>
+  </div>
 
-    <div class="container">
-        <div class="card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2>Usuarios del Sistema</h2>
-                <button class="btn btn-success" onclick="mostrarModal()">+ Agregar Usuario</button>
-            </div>
-            <table id="tablaUsuarios">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Rol</th>
-                        <th>Departamento</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tbodyUsuarios">
-                    <tr><td colspan="6" style="text-align: center; padding: 40px;">Cargando usuarios...</td></tr>
-                </tbody>
-            </table>
+  <div class="modal" id="modalUsuario">
+    <div class="modal-content">
+      <h3 id="modalTitulo" style="margin-bottom: 20px;">Agregar Usuario</h3>
+      <div>
+        <input type="hidden" id="userId">
+        <div class="form-group"><label class="form-label">Nombre Completo</label><input type="text" id="nombre" class="form-input"></div>
+        <div class="form-group"><label class="form-label">Correo Corporativo</label><input type="email" id="email" class="form-input"></div>
+        <div class="form-group"><label class="form-label">Contrasena</label><input type="password" id="password" class="form-input" placeholder="Dejar en blanco para mantener actual"></div>
+        <div class="form-group">
+          <label class="form-label">Rol</label>
+          <select id="rol" class="form-input">
+            <option value="Usuario">Usuario</option>
+            <option value="Compras">Compras</option>
+            <option value="Despacho">Despacho</option>
+            <option value="Admin">Admin</option>
+          </select>
         </div>
-    </div>
-
-    <div class="modal" id="modalUsuario">
-        <div class="modal-content">
-            <h3 id="modalTitulo" style="margin-bottom: 20px;">Agregar Usuario</h3>
-            <form id="formUsuario">
-                <input type="hidden" id="userId">
-                <div class="form-group">
-                    <label class="form-label">Nombre Completo</label>
-                    <input type="text" id="nombre" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Correo Corporativo</label>
-                    <input type="email" id="email" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Contrasena</label>
-                    <input type="password" id="password" class="form-input" placeholder="Dejar en blanco para mantener actual">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Rol</label>
-                    <select id="rol" class="form-input">
-                        <option value="Usuario">Usuario</option>
-                        <option value="Compras">Compras</option>
-                        <option value="Despacho">Despacho</option>
-                        <option value="Admin">Admin</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Departamento</label>
-                    <input type="text" id="departamento" class="form-input" value="General">
-                </div>
-                <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                    <button type="button" class="btn btn-danger" onclick="cerrarModal()">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-            </form>
+        <div class="form-group"><label class="form-label">Departamento</label><input type="text" id="departamento" class="form-input" value="General"></div>
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+          <button type="button" class="btn btn-danger" onclick="cerrarModal()">Cancelar</button>
+          <button type="button" class="btn btn-success" onclick="guardarUsuario()">Guardar</button>
         </div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        // CONFIGURACION: Reemplaza con tu URL de Apps Script desplegado
-        const API_URL = 'https://script.google.com/macros/s/AKfycbxAqPMExGftt7NfJIj8ld2RxyC2wlM14RUhHj-ySomgnXvDYGWZdJoAWyFCh7SZxX03/exec';
+  <script>
+    var LOGIN_URL = window.location.href.split("?")[0] + "?page=login";
+    var session = JSON.parse(localStorage.getItem("infreserve_session") || "{}");
+    
+    if (!session.id) { window.top.location.href = LOGIN_URL; }
+    if (session.rol !== "Admin") { alert("Acceso denegado. Solo administradores."); window.top.location.href = LOGIN_URL; }
 
-        const session = JSON.parse(localStorage.getItem('infreserve_session') || '{}');
-        if (session.rol !== 'Admin') {
-            alert('Acceso denegado. Solo administradores.');
-            window.location.href = 'login.html';
-        }
-
-        cargarUsuarios();
-
-        async function cargarUsuarios() {
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: 'action=listarUsuarios'
-                });
-                const result = await response.json();
-
-                if (result.exito) {
-                    const tbody = document.getElementById('tbodyUsuarios');
-                    tbody.innerHTML = '';
-
-                    result.usuarios.forEach(function(u) {
-                        const badgeClass = u.estado === 'Activo' ? 'badge-active' : 'badge-inactive';
-                        const row = document.createElement('tr');
-                        row.innerHTML = '<td>' + u.nombre + '</td>' +
-                            '<td>' + u.email + '</td>' +
-                            '<td>' + u.rol + '</td>' +
-                            '<td>' + u.departamento + '</td>' +
-                            '<td><span class="badge ' + badgeClass + '">' + u.estado + '</span></td>' +
-                            '<td>' +
-                            '<button class="btn btn-primary" onclick="editarUsuario('" + u.id + "')" style="padding: 6px 12px; font-size: 12px;">Editar</button> ' +
-                            '<button class="btn btn-danger" onclick="eliminarUsuario('" + u.id + "')" style="padding: 6px 12px; font-size: 12px;">Desactivar</button>' +
-                            '</td>';
-                        tbody.appendChild(row);
-                    });
-                }
-            } catch (err) {
-                console.error('Error cargando usuarios:', err);
-            }
-        }
-
-        function mostrarModal() {
-            document.getElementById('modalUsuario').style.display = 'flex';
-            document.getElementById('modalTitulo').textContent = 'Agregar Usuario';
-            document.getElementById('formUsuario').reset();
-            document.getElementById('userId').value = '';
-        }
-
-        function cerrarModal() {
-            document.getElementById('modalUsuario').style.display = 'none';
-        }
-
-        document.getElementById('formUsuario').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const datos = {
-                id: document.getElementById('userId').value,
-                nombre: document.getElementById('nombre').value,
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value,
-                rol: document.getElementById('rol').value,
-                departamento: document.getElementById('departamento').value,
-                estado: 'Activo'
-            };
-
-            const action = datos.id ? 'editarUsuario' : 'crearUsuario';
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: 'action=' + action + '&datos=' + encodeURIComponent(JSON.stringify(datos))
-                });
-
-                const result = await response.json();
-
-                if (result.exito) {
-                    alert(result.mensaje);
-                    cerrarModal();
-                    cargarUsuarios();
-                } else {
-                    alert('Error: ' + result.error);
-                }
-            } catch (err) {
-                alert('Error de conexion');
-            }
-        });
-
-        async function eliminarUsuario(id) {
-            if (!confirm('Desactivar este usuario?')) return;
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: 'action=eliminarUsuario&id=' + encodeURIComponent(id)
-                });
-
-                const result = await response.json();
-                if (result.exito) {
-                    alert(result.mensaje);
-                    cargarUsuarios();
-                }
-            } catch (err) {
-                alert('Error');
-            }
-        }
-
-        function editarUsuario(id) {
-            mostrarModal();
-            document.getElementById('modalTitulo').textContent = 'Editar Usuario';
-            document.getElementById('userId').value = id;
-        }
-    </script>
-
-
-<!-- ============================================ -->
-<!-- CIERRE DE SESION PARA ADMIN DE USUARIOS -->
-<!-- ============================================ -->
-<script>
-// Funcion para cerrar sesion desde el admin de usuarios
-function cerrarSesion() {
-    // Limpiar localStorage
-    localStorage.removeItem('infreserve_session');
-    localStorage.removeItem('infreserve_user');
-    localStorage.removeItem('infreserve_rol');
-
-    // Enviar mensaje a la ventana padre (intranet de GitHub) para que maneje la redireccion
-    if (window.parent && window.parent !== window) {
-        window.parent.postMessage('cerrarSesion', '*');
-        console.log('Mensaje de cierre enviado a padre');
-    } else {
-        // Si no hay padre, redirigir directamente
-        window.location.href = 'https://script.google.com/macros/s/AKfycbyAtPM9VQcfawhVgK-FtH5k0ndifG7XkS3oYDE0ztuK_gKl6I24b03dfWBcTdXLqZ4/exec';
+    function mostrarAlerta(texto, tipo) {
+      var container = document.getElementById("mensajeContainer");
+      var div = document.createElement("div");
+      div.className = "alert alert-" + tipo;
+      div.textContent = texto;
+      container.appendChild(div);
+      setTimeout(function() {
+        if (div.parentNode) div.parentNode.removeChild(div);
+      }, 5000);
     }
+
+    function limpiarTabla() {
+      var tbody = document.getElementById("tbodyUsuarios");
+      while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+      }
+    }
+
+    function cargarUsuarios() {
+      mostrarAlerta("Cargando usuarios...", "info");
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          console.log("listarUsuarios respuesta:", result);
+          limpiarTabla();
+          var tbody = document.getElementById("tbodyUsuarios");
+          
+          if (result === null || result === undefined) {
+            var tr = document.createElement("tr");
+            var td = document.createElement("td");
+            td.colSpan = 6;
+            td.style.textAlign = "center";
+            td.style.color = "red";
+            td.style.padding = "20px";
+            td.textContent = "Error: El servidor retorno null. Verifica que la hoja Usuarios exista en el spreadsheet.";
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+            mostrarAlerta("Error: El servidor retorno null", "error");
+            return;
+          }
+          
+          if (!result.exito) {
+            var tr = document.createElement("tr");
+            var td = document.createElement("td");
+            td.colSpan = 6;
+            td.style.textAlign = "center";
+            td.style.color = "red";
+            td.style.padding = "20px";
+            td.textContent = "Error del servidor: " + (result.error || "Desconocido");
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+            mostrarAlerta("Error: " + (result.error || "Desconocido"), "error");
+            return;
+          }
+          
+          if (!result.usuarios || result.usuarios.length === 0) {
+            var tr = document.createElement("tr");
+            var td = document.createElement("td");
+            td.colSpan = 6;
+            td.style.textAlign = "center";
+            td.style.color = "#999";
+            td.style.padding = "20px";
+            td.textContent = "No hay usuarios registrados";
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+            mostrarAlerta("No hay usuarios registrados", "info");
+            return;
+          }
+          
+          for (var i = 0; i < result.usuarios.length; i++) {
+            var u = result.usuarios[i];
+            var tr = document.createElement("tr");
+            
+            var td1 = document.createElement("td");
+            td1.textContent = u.nombre || "";
+            tr.appendChild(td1);
+            
+            var td2 = document.createElement("td");
+            td2.textContent = u.email || "";
+            tr.appendChild(td2);
+            
+            var td3 = document.createElement("td");
+            td3.textContent = u.rol || "";
+            tr.appendChild(td3);
+            
+            var td4 = document.createElement("td");
+            td4.textContent = u.departamento || "";
+            tr.appendChild(td4);
+            
+            var td5 = document.createElement("td");
+            var span = document.createElement("span");
+            if (u.estado === "Activo") {
+              span.className = "estado-activo";
+              span.textContent = "Activo";
+            } else {
+              span.className = "estado-inactivo";
+              span.textContent = "Inactivo";
+            }
+            td5.appendChild(span);
+            tr.appendChild(td5);
+            
+            var td6 = document.createElement("td");
+            
+            var btnEditar = document.createElement("button");
+            btnEditar.className = "btn btn-primary";
+            btnEditar.style.padding = "6px 12px";
+            btnEditar.style.fontSize = "12px";
+            btnEditar.textContent = "Editar";
+            btnEditar.onclick = (function(id) {
+              return function() { editarUsuario(id); };
+            })(u.id);
+            td6.appendChild(btnEditar);
+            
+            var btnToggle = document.createElement("button");
+            btnToggle.style.padding = "6px 12px";
+            btnToggle.style.fontSize = "12px";
+            btnToggle.style.marginLeft = "5px";
+            if (u.estado === "Activo") {
+              btnToggle.className = "btn btn-danger";
+              btnToggle.textContent = "Desactivar";
+              btnToggle.onclick = (function(id) {
+                return function() { eliminarUsuario(id); };
+              })(u.id);
+            } else {
+              btnToggle.className = "btn btn-success2";
+              btnToggle.textContent = "Activar";
+              btnToggle.onclick = (function(id) {
+                return function() { activarUsuario(id); };
+              })(u.id);
+            }
+            td6.appendChild(btnToggle);
+            
+            tr.appendChild(td6);
+            tbody.appendChild(tr);
+          }
+          
+          mostrarAlerta("Usuarios cargados: " + result.usuarios.length, "success");
+        })
+        .withFailureHandler(function(error) {
+          console.error("Error listarUsuarios:", error);
+          limpiarTabla();
+          var tbody = document.getElementById("tbodyUsuarios");
+          var tr = document.createElement("tr");
+          var td = document.createElement("td");
+          td.colSpan = 6;
+          td.style.textAlign = "center";
+          td.style.color = "red";
+          td.style.padding = "20px";
+          td.textContent = "Error de comunicacion: " + error.message;
+          tr.appendChild(td);
+          tbody.appendChild(tr);
+          mostrarAlerta("Error de comunicacion: " + error.message, "error");
+        })
+        .listarUsuarios();
+    }
+
+    function mostrarModal() {
+      document.getElementById("modalUsuario").style.display = "flex";
+      document.getElementById("modalTitulo").textContent = "Agregar Usuario";
+      document.getElementById("userId").value = "";
+      document.getElementById("nombre").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("password").value = "";
+      document.getElementById("rol").value = "Usuario";
+      document.getElementById("departamento").value = "General";
+    }
+
+    function cerrarModal() {
+      document.getElementById("modalUsuario").style.display = "none";
+    }
+
+    function editarUsuario(id) {
+      mostrarModal();
+      document.getElementById("modalTitulo").textContent = "Editar Usuario";
+      google.script.run
+        .withSuccessHandler(function(result) {
+          console.log("buscarUsuario respuesta:", result);
+          if (result && result.exito) {
+            var u = result.usuario;
+            document.getElementById("userId").value = u.id;
+            document.getElementById("nombre").value = u.nombre;
+            document.getElementById("email").value = u.email;
+            document.getElementById("rol").value = u.rol;
+            document.getElementById("departamento").value = u.departamento;
+          } else {
+            mostrarAlerta(result ? result.error : "Error al buscar usuario", "error");
+          }
+        })
+        .withFailureHandler(function(error) {
+          mostrarAlerta("Error: " + error.message, "error");
+        })
+        .buscarUsuario(id);
+    }
+
+    function eliminarUsuario(id) {
+      if (!confirm("Esta seguro de desactivar este usuario?")) return;
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result && result.exito) { 
+            mostrarAlerta(result.mensaje, "success"); 
+            cargarUsuarios(); 
+          } else { 
+            mostrarAlerta(result ? result.error : "Error", "error"); 
+          }
+        })
+        .withFailureHandler(function(error) {
+          mostrarAlerta("Error: " + error.message, "error");
+        })
+        .eliminarUsuario(id);
+    }
+
+    function activarUsuario(id) {
+      if (!confirm("Esta seguro de activar este usuario?")) return;
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result && result.exito) { 
+            mostrarAlerta(result.mensaje, "success"); 
+            cargarUsuarios(); 
+          } else { 
+            mostrarAlerta(result ? result.error : "Error", "error"); 
+          }
+        })
+        .withFailureHandler(function(error) {
+          mostrarAlerta("Error: " + error.message, "error");
+        })
+        .activarUsuario(id);
+    }
+
+    function guardarUsuario() {
+      var datos = {
+        id: document.getElementById("userId").value,
+        nombre: document.getElementById("nombre").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        rol: document.getElementById("rol").value,
+        departamento: document.getElementById("departamento").value
+      };
+      
+      if (!datos.nombre || !datos.email) {
+        mostrarAlerta("Nombre y email son obligatorios", "error");
+        return;
+      }
+      
+      var action = datos.id ? "editarUsuario" : "crearUsuario";
+      
+      if (action === "crearUsuario" && !datos.password) {
+        mostrarAlerta("La contrasena es obligatoria para nuevos usuarios", "error");
+        return;
+      }
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          console.log(action + " respuesta:", result);
+          if (result && result.exito) {
+            mostrarAlerta(result.mensaje, "success");
+            cerrarModal();
+            cargarUsuarios();
+          } else {
+            mostrarAlerta(result ? result.error : "Error desconocido", "error");
+          }
+        })
+        .withFailureHandler(function(error) {
+          mostrarAlerta("Error: " + error.message, "error");
+        })
+        .guardarUsuario(datos, action);
+    }
+
+    function cerrarSesion() {
+  localStorage.removeItem("infreserve_session");
+  window.location.href = "https://script.google.com/macros/s/AKfycbyAtPM9VQcfawhVgK-FtH5k0ndifG7XkS3oYDE0ztuK_gKl6I24b03dfWBcTdXLqZ4/exec";
 }
-
-// Agregar boton de cerrar sesion en el header al cargar
-document.addEventListener('DOMContentLoaded', function() {
-    var header = document.querySelector('.header');
-    if (header && !document.getElementById('btnCerrarSesion')) {
-        var btnLogout = document.createElement('button');
-        btnLogout.id = 'btnCerrarSesion';
-        btnLogout.className = 'btn';
-        btnLogout.style.cssText = 'background:#dc3545;color:white;margin-left:20px;';
-        btnLogout.innerHTML = 'Cerrar Sesion';
-        btnLogout.onclick = cerrarSesion;
-
-        // Insertar en el header
-        var h1 = header.querySelector('h1');
-        if (h1) {
-            h1.style.display = 'inline-block';
-            h1.parentNode.insertBefore(btnLogout, h1.nextSibling);
-        } else {
-            header.appendChild(btnLogout);
-        }
-    }
-});
-</script>
+  </script>
 </body>
 </html>

@@ -662,10 +662,15 @@
                         <span class="icon">🔒</span> Seguridad
                     </a>
                 </li>
+                <!-- ===== TRÁFICO CON DROPDOWN (NUEVO) ===== -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="cargarTrafico(event)">
+                    <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">🚦</span> Tráfico
-                    </a>
+                    </button>
+                    <ul class="dropdown">
+                        <li class="dropdown-header">Gestión de Tráfico</li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarSolicitudSellos(event)"><span class="icon">🍾</span> Solicitud de Sellos Tipo Botella</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="cargarComercial(event)">
@@ -704,6 +709,7 @@
             <a href="#" class="quick-link" onclick="cargarSolicitudUtiles(event)">🧹 Útiles y Limpieza</a>
             <a href="#" class="quick-link" onclick="cargarClientes(event)">👥 Clientes</a>
             <a href="#" class="quick-link" onclick="cargarActualizacionDatos(event)">✏️ Actualización Datos del Cliente</a>
+            <a href="#" class="quick-link" onclick="cargarSolicitudSellos(event)">🍾 Solicitud Sellos</a>
             <a href="#" class="quick-link" onclick="cargarCheques(event)">💳 Cheques</a>
         </div>
 
@@ -742,6 +748,7 @@
         const SOLICITUD_UTILES_URL = 'https://script.google.com/macros/s/AKfycbz6ZvaBC17xAJIYO4012s7Ug4Sub6H64P7psykFXzoFEs40gHNKRdu_2s5srxAYhDuRaA/exec';
         const OPERACIONES_URL = 'https://script.google.com/macros/s/AKfycbzm_p1ebt3_p6040fCXIwIFfamKVDtTFxxlLZbffVO-3_Tmh3d-WlVvwkWbz-a8neBk/exec';
         const ACTUALIZACION_DATOS_URL = 'https://script.google.com/macros/s/AKfycbwd-iWxH0z5IygwIpTue-nPbhC2JUgf3Nm1P9Ur2_-MAdutgxAUs7HiXXiZCu6CpOKZ0g/exec';
+        const SOLICITUD_SELLOS_URL = 'https://script.google.com/macros/s/AKfycbx5CXi4wEEoc12-UAvmaTG4wkWadJ1cLoA1vU6jNbcGDV3JAIGlr11lKO4S5EGwsHSM/exec';
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
@@ -800,10 +807,15 @@
             cargarContenido(OPERACIONES_URL, 'Dashboard de Operaciones', true);
         }
 
-        // Función para Actualización de Datos del Cliente
         function cargarActualizacionDatos(event) {
             if (event) event.preventDefault();
             cargarContenido(ACTUALIZACION_DATOS_URL, 'Actualización de Datos del Cliente', true);
+        }
+
+        // Nueva función para Solicitud de Sellos Tipo Botella
+        function cargarSolicitudSellos(event) {
+            if (event) event.preventDefault();
+            cargarContenido(SOLICITUD_SELLOS_URL, 'Solicitud de Sellos Tipo Botella', true);
         }
 
         function cargarClientes(event) {
@@ -861,6 +873,8 @@
             cargarContenido('#', 'Seguridad (próximamente)', false);
         }
 
+        // Nota: La función cargarTrafico ya no se usa porque Tráfico ahora tiene dropdown,
+        // pero la dejamos para compatibilidad (aunque no se llama). Puedes eliminarla si quieres.
         function cargarTrafico(event) {
             if (event) event.preventDefault();
             cargarContenido('#', 'Tráfico (próximamente)', false);

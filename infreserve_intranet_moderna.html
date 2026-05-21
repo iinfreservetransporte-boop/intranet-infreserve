@@ -39,6 +39,7 @@
             min-height: 100vh;
         }
 
+        /* ===== HEADER ===== */
         .header {
             background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
             color: var(--white);
@@ -110,7 +111,7 @@
             gap: 12px;
         }
 
-        .logo-wrapper {
+        .logo-icon {
             width: 90px;
             height: 90px;
             background: transparent;
@@ -118,13 +119,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-        }
-
-        .logo-wrapper img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            overflow: visible;
         }
 
         .logo-text {
@@ -140,6 +135,7 @@
             margin-top: -2px;
         }
 
+        /* ===== NAVIGATION ===== */
         .nav-toggle {
             display: none;
             background: none;
@@ -257,6 +253,7 @@
             color: var(--text-light);
         }
 
+        /* ===== MAIN CONTENT ===== */
         .main {
             max-width: 1400px;
             margin: 0 auto;
@@ -307,6 +304,7 @@
             font-size: 12px;
         }
 
+        /* ===== SECTIONS GRID ===== */
         .sections-title {
             font-size: 20px;
             font-weight: 700;
@@ -454,6 +452,7 @@
             opacity: 1;
         }
 
+        /* ===== QUICK LINKS BAR ===== */
         .quick-bar {
             background: var(--white);
             border-radius: var(--radius);
@@ -494,6 +493,7 @@
             transform: translateY(-2px);
         }
 
+        /* ===== FOOTER ===== */
         .footer {
             background: var(--dark);
             color: rgba(255,255,255,0.7);
@@ -539,36 +539,45 @@
             color: var(--secondary);
         }
 
+        /* ===== MOBILE RESPONSIVE ===== */
         @media (max-width: 768px) {
             .header-top {
                 padding: 8px 16px;
                 font-size: 12px;
             }
+
             .header-main {
                 padding: 12px 16px;
             }
+
             .logo-text {
                 font-size: 20px;
             }
+
             .nav-toggle {
                 display: block;
             }
+
             .nav {
                 padding: 0;
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.4s ease;
             }
+
             .nav.open {
                 max-height: 100vh;
             }
+
             .nav-list {
                 flex-direction: column;
             }
+
             .nav-link {
                 padding: 16px 20px;
                 border-bottom: 1px solid rgba(255,255,255,0.1);
             }
+
             .dropdown {
                 position: static;
                 opacity: 1;
@@ -581,45 +590,56 @@
                 overflow: hidden;
                 transition: max-height 0.3s ease;
             }
+
             .nav-item.open .dropdown {
                 max-height: 500px;
             }
+
             .dropdown-link {
                 color: rgba(255,255,255,0.8);
                 padding-left: 40px;
             }
+
             .dropdown-link:hover {
                 background: rgba(255,255,255,0.05);
                 color: var(--white);
                 border-left-color: var(--secondary);
             }
+
             .main {
                 padding: 20px 16px;
             }
+
             .welcome-section {
                 padding: 24px;
             }
+
             .welcome-title {
                 font-size: 24px;
             }
+
             .welcome-date {
                 position: static;
                 text-align: left;
                 margin-top: 12px;
             }
+
             .sections-grid {
                 grid-template-columns: 1fr;
                 gap: 16px;
             }
+
             .quick-bar {
                 padding: 16px;
             }
+
             .footer-inner {
                 flex-direction: column;
                 text-align: center;
             }
         }
 
+        /* ===== ANIMATIONS ===== */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -646,16 +666,20 @@
         .section-card:nth-child(9) { animation-delay: 0.45s; }
         .section-card:nth-child(10) { animation-delay: 0.5s; }
 
+        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: var(--bg);
         }
+
         ::-webkit-scrollbar-thumb {
             background: var(--border);
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: var(--text-light);
         }
@@ -663,6 +687,7 @@
 </head>
 <body>
 
+    <!-- HEADER -->
     <header class="header">
         <div class="header-top">
             <div class="user-info">
@@ -675,10 +700,11 @@
         </div>
         <div class="header-main">
             <div class="logo">
+                <!-- Logo corregido: usando URL de Google Drive (original) -->
                 <div class="logo-wrapper">
                     <img src="https://lh3.googleusercontent.com/d/1Z87-xtdsYEc521X2buFveZY4iBVHgYHa=s200" 
                          alt="Logo Infreserve" 
-                         crossorigin="anonymous">
+                         style="width: 90px; height: 90px; object-fit: contain; display: block;">
                 </div>
                 <div>
                     <div class="logo-text">INFRESERVE</div>
@@ -766,13 +792,16 @@
         </nav>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="main">
+        <!-- Welcome Section -->
         <section class="welcome-section">
             <div class="welcome-date" id="currentDate"></div>
             <h1 class="welcome-title">Bienvenidos a nuestra Intranet</h1>
             <p class="welcome-text">Accede a todos los procesos, herramientas y recursos de Infreserve desde un solo lugar. Plataforma centralizada para la gestión operativa y administrativa.</p>
         </section>
 
+        <!-- Quick Links -->
         <div class="quick-bar">
             <span class="quick-label">Acceso Rápido:</span>
             <a href="#" class="quick-link">💰 Solicitud de Pago</a>
@@ -782,8 +811,10 @@
             <a href="#" class="quick-link">💳 Cheques</a>
         </div>
 
+        <!-- Sections Grid -->
         <h2 class="sections-title"><span class="icon">🗂️</span> Áreas de Trabajo</h2>
         <div class="sections-grid">
+            <!-- Procesos -->
             <article class="section-card processes">
                 <div class="section-icon">📋</div>
                 <h3 class="section-name">Procesos</h3>
@@ -794,6 +825,8 @@
                     <a href="#" class="section-link">Cotización y Presupuestos <span class="arrow">→</span></a>
                 </div>
             </article>
+
+            <!-- Administración -->
             <article class="section-card admin">
                 <div class="section-icon">⚙️</div>
                 <h3 class="section-name">Administración</h3>
@@ -805,6 +838,8 @@
                     <a href="#" class="section-link">Impresión de Cheques <span class="arrow">→</span></a>
                 </div>
             </article>
+
+            <!-- Operaciones -->
             <article class="section-card operations">
                 <div class="section-icon">🚢</div>
                 <h3 class="section-name">Operaciones</h3>
@@ -814,6 +849,8 @@
                     <a href="#" class="section-link">Seguimiento de Cargas <span class="arrow">→</span></a>
                 </div>
             </article>
+
+            <!-- Gestión Humana -->
             <article class="section-card hr">
                 <div class="section-icon">👤</div>
                 <h3 class="section-name">Gestión Humana</h3>
@@ -824,6 +861,8 @@
                     <a href="#" class="section-link">Beneficios <span class="arrow">→</span></a>
                 </div>
             </article>
+
+            <!-- Tecnología -->
             <article class="section-card tech">
                 <div class="section-icon">💻</div>
                 <h3 class="section-name">Tecnología</h3>
@@ -834,6 +873,8 @@
                     <a href="#" class="section-link">Redes <span class="arrow">→</span></a>
                 </div>
             </article>
+
+            <!-- Seguridad -->
             <article class="section-card security">
                 <div class="section-icon">🔒</div>
                 <h3 class="section-name">Seguridad</h3>
@@ -844,6 +885,8 @@
                     <a href="#" class="section-link">Accesos <span class="arrow">→</span></a>
                 </div>
             </article>
+
+            <!-- Tráfico -->
             <article class="section-card traffic">
                 <div class="section-icon">🚦</div>
                 <h3 class="section-name">Tráfico</h3>
@@ -854,6 +897,8 @@
                     <a href="#" class="section-link">Estadísticas <span class="arrow">→</span></a>
                 </div>
             </article>
+
+            <!-- Comercial -->
             <article class="section-card commercial">
                 <div class="section-icon">📈</div>
                 <h3 class="section-name">Comercial</h3>
@@ -864,6 +909,8 @@
                     <a href="#" class="section-link">Reportes <span class="arrow">→</span></a>
                 </div>
             </article>
+
+            <!-- Gerencia General -->
             <article class="section-card management">
                 <div class="section-icon">👔</div>
                 <h3 class="section-name">Gerencia General</h3>
@@ -874,6 +921,8 @@
                     <a href="#" class="section-link">KPIs <span class="arrow">→</span></a>
                 </div>
             </article>
+
+            <!-- Gestión de Control -->
             <article class="section-card control">
                 <div class="section-icon">📊</div>
                 <h3 class="section-name">Gestión de Control</h3>
@@ -887,6 +936,7 @@
         </div>
     </main>
 
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-logo">
@@ -907,8 +957,8 @@
     <script>
         // ========== CONFIGURACIÓN ==========
         const SESSION_KEY = 'infreserve_session';
-        // ⚠️ CAMBIA ESTA URL POR LA DE TU APPS SCRIPT
-        const LOGIN_URL = 'https://script.google.com/macros/s/AKfycbyCETAlBIAWysjn-og6sEF0T423-3TTVFtE-Kc3tLy7vAT5xUpjk2A-c7-RhcwLyWsw/exec';
+        // ⚠️ CAMBIA ESTA URL POR LA DE TU APPS SCRIPT (termina en /exec)
+        const LOGIN_URL = 'https://script.google.com/macros/s/TU_ID_DEL_SCRIPT/exec';
 
         // ========== UTILIDADES ==========
         function getUrlParam(param) {
@@ -919,9 +969,57 @@
         function getUserData() {
             try {
                 const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
-                if (session) return JSON.parse(session);
-            } catch(e) { console.error('Error parsing session:', e); }
+                if (session) {
+                    return JSON.parse(session);
+                }
+            } catch (e) {
+                console.error('Error parsing session:', e);
+            }
             return null;
+        }
+
+        // ========== VALIDAR SESIÓN (sin llamada a backend) ==========
+        function validarSesion() {
+            const userData = getUserData();
+            const urlToken = getUrlParam('token');
+
+            // Si hay token en URL (recién logueado desde login_page.html)
+            if (urlToken) {
+                try {
+                    const decoded = JSON.parse(decodeURIComponent(urlToken));
+                    if (decoded.token && decoded.id) {
+                        // Guardar sesión en localStorage
+                        const sessionData = {
+                            id: decoded.id,
+                            email: decoded.email,
+                            nombre: decoded.nombre,
+                            rol: decoded.rol,
+                            departamento: decoded.departamento,
+                            token: decoded.token,
+                            loginTime: new Date().toISOString()
+                        };
+                        localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+                        actualizarUI(sessionData);
+                        // Limpiar URL (eliminar el token visible)
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                        return true;
+                    }
+                } catch (e) {
+                    console.error('Error procesando token:', e);
+                    redirigirLogin();
+                    return false;
+                }
+            }
+
+            // Si hay sesión guardada en localStorage
+            if (userData && userData.token && userData.id) {
+                actualizarUI(userData);
+                return true;
+            }
+
+            // Sin sesión
+            redirigirLogin();
+            return false;
         }
 
         function actualizarUI(userData) {
@@ -934,85 +1032,29 @@
                 const iniciales = userData.nombre.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
                 userAvatar.textContent = iniciales;
             }
+            console.log('Sesión activa para:', userData.nombre, 'Rol:', userData.rol);
         }
 
         function redirigirLogin() {
-            setTimeout(() => { window.location.href = LOGIN_URL; }, 500);
-        }
-
-        // ========== VERIFICACIÓN DE TOKEN ==========
-        function verificarTokenEnBackend(token, userId) {
-            return new Promise((resolve, reject) => {
-                google.script.run
-                    .withSuccessHandler(resolve)
-                    .withFailureHandler(reject)
-                    .verificarToken(token, userId);
-            });
-        }
-
-        async function validarSesion() {
-            const userData = getUserData();
-            const urlToken = getUrlParam('token');
-
-            if (urlToken) {
-                try {
-                    const decoded = JSON.parse(decodeURIComponent(urlToken));
-                    if (decoded.token && decoded.id) {
-                        const resultado = await verificarTokenEnBackend(decoded.token, decoded.id);
-                        if (resultado && resultado.exito && resultado.valido === true) {
-                            const sessionData = {
-                                id: decoded.id,
-                                email: decoded.email,
-                                nombre: decoded.nombre,
-                                rol: decoded.rol,
-                                departamento: decoded.departamento,
-                                token: decoded.token,
-                                loginTime: new Date().toISOString()
-                            };
-                            localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
-                            actualizarUI(sessionData);
-                            window.history.replaceState({}, document.title, window.location.pathname);
-                            return true;
-                        } else {
-                            console.warn('Token inválido');
-                            alert('Sesión inválida. Será redirigido al login.');
-                            redirigirLogin();
-                            return false;
-                        }
-                    }
-                } catch(e) { console.error(e); redirigirLogin(); return false; }
-            }
-
-            if (userData && userData.token && userData.id) {
-                try {
-                    const resultado = await verificarTokenEnBackend(userData.token, userData.id);
-                    if (resultado && resultado.exito && resultado.valido === true) {
-                        actualizarUI(userData);
-                        return true;
-                    } else {
-                        localStorage.removeItem(SESSION_KEY);
-                        redirigirLogin();
-                        return false;
-                    }
-                } catch(err) { console.error(err); redirigirLogin(); return false; }
-            }
-
-            redirigirLogin();
-            return false;
+            setTimeout(() => {
+                window.location.href = LOGIN_URL;
+            }, 500);
         }
 
         // ========== CIERRE DE SESIÓN ==========
         function handleLogout(e) {
             if (e && e.preventDefault) e.preventDefault();
             if (confirm('¿Está seguro que desea cerrar sesión?')) {
+                // Limpiar almacenamiento local
                 localStorage.removeItem(SESSION_KEY);
                 sessionStorage.removeItem(SESSION_KEY);
+                // Redirigir al login de Apps Script
                 window.location.href = LOGIN_URL;
             }
             return false;
         }
 
-        // ========== FECHA ==========
+        // ========== FECHA Y HORA ==========
         function updateDate() {
             const now = new Date();
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -1022,18 +1064,33 @@
             if (dateEl) dateEl.innerHTML = `${dateStr}<br>${timeStr}`;
         }
 
+        // ========== FUNCIONES PARA MENÚ MÓVIL ==========
+        function toggleNav() {
+            const nav = document.getElementById('mainNav');
+            if (nav) nav.classList.toggle('open');
+        }
+
+        function toggleDropdown(btn) {
+            if (window.innerWidth <= 768) {
+                const parent = btn.closest('.nav-item');
+                if (parent) parent.classList.toggle('open');
+            }
+        }
+
         // ========== INICIALIZACIÓN ==========
-        document.addEventListener('DOMContentLoaded', async function() {
+        document.addEventListener('DOMContentLoaded', function() {
             updateDate();
             setInterval(updateDate, 60000);
-            await validarSesion();
+            validarSesion();
 
+            // Mobile nav toggle
             const navToggle = document.querySelector('.nav-toggle');
             const nav = document.querySelector('.nav');
             if (navToggle && nav) {
-                navToggle.addEventListener('click', () => nav.classList.toggle('open'));
+                navToggle.addEventListener('click', toggleNav);
             }
 
+            // Dropdowns en móvil
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', function(e) {
                     if (window.innerWidth <= 768) {
@@ -1046,6 +1103,7 @@
                 });
             });
 
+            // Smooth scroll
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');
@@ -1059,29 +1117,19 @@
                 });
             });
 
+            // Hover effects
             document.querySelectorAll('.section-card').forEach(card => {
                 card.addEventListener('mouseenter', () => card.style.transform = 'translateY(-4px)');
                 card.addEventListener('mouseleave', () => card.style.transform = 'translateY(0)');
             });
 
+            // PostMessage para cerrar sesión desde iframes (Apps Script)
             window.addEventListener('message', function(event) {
                 if (event.data && event.data.action === 'cerrarSesion') {
                     handleLogout();
                 }
             });
         });
-
-        function toggleNav() {
-            const nav = document.getElementById('mainNav');
-            if (nav) nav.classList.toggle('open');
-        }
-
-        function toggleDropdown(btn) {
-            if (window.innerWidth <= 768) {
-                const parent = btn.closest('.nav-item');
-                if (parent) parent.classList.toggle('open');
-            }
-        }
     </script>
 </body>
 </html>

@@ -6,6 +6,7 @@
     <title>Infreserve - Intranet</title>
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌐%3C/text%3E%3C/svg%3E">
     <style>
+        /* ===== ESTILOS (MANTENIDOS IGUALES) ===== */
         :root {
             --primary: #4161A8;
             --primary-dark: #2E4A7A;
@@ -617,10 +618,11 @@
                     </button>
                     <ul class="dropdown">
                         <li class="dropdown-header">Gestión Operativa</li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarCotizaciones(event)"><span class="icon">💰</span> Solicitud de Pago</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarSolicitudPago(event)"><span class="icon">💰</span> Solicitud de Pago</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCertificacion(event)"><span class="icon">📦</span> Certificación de Carga</a></li>
-                        <!-- IMPORTANTE: Este es el enlace que carga el Apps Script de cotizaciones -->
                         <li><a href="#" class="dropdown-link" onclick="cargarCotizaciones(event)"><span class="icon">📊</span> Cotización y Presupuestos</a></li>
+                        <!-- NUEVO ÍTEM AGREGADO -->
+                        <li><a href="#" class="dropdown-link" onclick="cargarSolicitudUtiles(event)"><span class="icon">🧹</span> Solicitud de Útiles y Artículos de Limpieza</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -696,9 +698,10 @@
         <!-- Quick Links -->
         <div class="quick-bar">
             <span class="quick-label">Acceso Rápido:</span>
-            <a href="#" class="quick-link" onclick="cargarCotizaciones(event)">💰 Solicitud de Pago</a>
+            <a href="#" class="quick-link" onclick="cargarSolicitudPago(event)">💰 Solicitud de Pago</a>
             <a href="#" class="quick-link" onclick="cargarCertificacion(event)">📦 Certificación de Carga</a>
             <a href="#" class="quick-link" onclick="cargarCotizaciones(event)">📊 Cotizaciones</a>
+            <a href="#" class="quick-link" onclick="cargarSolicitudUtiles(event)">🧹 Útiles y Limpieza</a>
             <a href="#" class="quick-link" onclick="cargarClientes(event)">👥 Clientes</a>
             <a href="#" class="quick-link" onclick="cargarCheques(event)">💳 Cheques</a>
         </div>
@@ -733,11 +736,12 @@
     <script>
         // ========== CONFIGURACIÓN ==========
         const SESSION_KEY = 'infreserve_session';
-        // ⚠️ CAMBIA ESTA URL POR LA DE TU APPS SCRIPT (termina en /exec)
+        // URL del login (ya configurada)
         const LOGIN_URL = 'https://script.google.com/macros/s/AKfycbzACIInlUQ-4Z8JuVleQNCB2OLrBbXg8uNyVA6zLkinoDO1pQg7hIZfsxd4Q5ieFz8v/exec';
         
-        // ⚠️ URL DEL APPS SCRIPT DE COTIZACIONES (cambiar por la real)
-        const COTIZACIONES_URL = 'https://script.google.com/macros/s/AKfycbylSpZ5ee7zyPvPDvddC3s6RfDK13IhBdU3XHYfLKsd_YMwfGdUr4mlk1LX_U9TAciOPQ/exec';  // <-- REEMPLAZAR
+        // URLs de los formularios
+        const COTIZACIONES_URL = 'https://script.google.com/macros/s/AKfycbylSpZ5ee7zyPvPDvddC3s6RfDK13IhBdU3XHYfLKsd_YMwfGdUr4mlk1LX_U9TAciOPQ/exec';
+        const SOLICITUD_UTILES_URL = 'https://script.google.com/macros/s/AKfycbz6ZvaBC17xAJIYO4012s7Ug4Sub6H64P7psykFXzoFEs40gHNKRdu_2s5srxAYhDuRaA/exec';
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
@@ -754,7 +758,6 @@
                     <iframe src="${url}" title="${titulo}" style="display:none;" onload="this.style.display='block'; this.previousElementSibling.style.display='none';"></iframe>
                 `;
             } else {
-                // Para contenido estático (no iframe)
                 container.innerHTML = `
                     <div class="content-header">
                         <div class="content-title">${titulo}</div>
@@ -765,7 +768,7 @@
             }
         }
 
-        // Mostrar pantalla de inicio (mensaje inicial)
+        // Mostrar pantalla de inicio
         function mostrarInicio(event) {
             if (event) event.preventDefault();
             const container = document.getElementById('dynamicContent');
@@ -780,14 +783,25 @@
         }
 
         // ========== FUNCIONES PARA CADA MÓDULO ==========
-        function cargarCotizaciones(event) {
+        function cargarSolicitudPago(event) {
             if (event) event.preventDefault();
-            cargarContenido(COTIZACIONES_URL, 'Cotización y Presupuestos', true);
+            cargarContenido('#', 'Solicitud de Pago (próximamente)', false);
         }
 
         function cargarCertificacion(event) {
             if (event) event.preventDefault();
             cargarContenido('#', 'Certificación de Carga (próximamente)', false);
+        }
+
+        function cargarCotizaciones(event) {
+            if (event) event.preventDefault();
+            cargarContenido(COTIZACIONES_URL, 'Cotización y Presupuestos', true);
+        }
+
+        // NUEVA FUNCIÓN para Solicitud de Útiles y Artículos de Limpieza
+        function cargarSolicitudUtiles(event) {
+            if (event) event.preventDefault();
+            cargarContenido(SOLICITUD_UTILES_URL, 'Solicitud de Útiles y Artículos de Limpieza', true);
         }
 
         function cargarClientes(event) {
@@ -870,7 +884,7 @@
             cargarContenido('#', 'Gestión de Control (próximamente)', false);
         }
 
-        // ========== FUNCIONES DE SESIÓN Y UTILIDADES (igual que antes) ==========
+        // ========== FUNCIONES DE SESIÓN Y UTILIDADES ==========
         function getUserData() {
             try {
                 const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);

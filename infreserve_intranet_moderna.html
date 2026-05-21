@@ -631,6 +631,7 @@
                     <ul class="dropdown">
                         <li class="dropdown-header">Control de Listas</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarClientes(event)"><span class="icon">👥</span> Clientes</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarActualizacionDatos(event)"><span class="icon">✏️</span> Actualización de Datos</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarDepartamentos(event)"><span class="icon">🏢</span> Departamentos</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarTransporte(event)"><span class="icon">🚛</span> Transporte</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarProveedores(event)"><span class="icon">🤝</span> Proveedores</a></li>
@@ -702,6 +703,7 @@
             <a href="#" class="quick-link" onclick="cargarCotizaciones(event)">📊 Cotizaciones</a>
             <a href="#" class="quick-link" onclick="cargarSolicitudUtiles(event)">🧹 Útiles y Limpieza</a>
             <a href="#" class="quick-link" onclick="cargarClientes(event)">👥 Clientes</a>
+            <a href="#" class="quick-link" onclick="cargarActualizacionDatos(event)">✏️ Actualización Datos</a>
             <a href="#" class="quick-link" onclick="cargarCheques(event)">💳 Cheques</a>
         </div>
 
@@ -739,6 +741,7 @@
         const COTIZACIONES_URL = 'https://script.google.com/macros/s/AKfycbylSpZ5ee7zyPvPDvddC3s6RfDK13IhBdU3XHYfLKsd_YMwfGdUr4mlk1LX_U9TAciOPQ/exec';
         const SOLICITUD_UTILES_URL = 'https://script.google.com/macros/s/AKfycbz6ZvaBC17xAJIYO4012s7Ug4Sub6H64P7psykFXzoFEs40gHNKRdu_2s5srxAYhDuRaA/exec';
         const OPERACIONES_URL = 'https://script.google.com/macros/s/AKfycbzm_p1ebt3_p6040fCXIwIFfamKVDtTFxxlLZbffVO-3_Tmh3d-WlVvwkWbz-a8neBk/exec';
+        const ACTUALIZACION_DATOS_URL = 'https://script.google.com/macros/s/AKfycbwd-iWxH0z5IygwIpTue-nPbhC2JUgf3Nm1P9Ur2_-MAdutgxAUs7HiXXiZCu6CpOKZ0g/exec';
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
@@ -795,6 +798,12 @@
         function cargarOperaciones(event) {
             if (event) event.preventDefault();
             cargarContenido(OPERACIONES_URL, 'Dashboard de Operaciones', true);
+        }
+
+        // Nueva función para Actualización de Datos
+        function cargarActualizacionDatos(event) {
+            if (event) event.preventDefault();
+            cargarContenido(ACTUALIZACION_DATOS_URL, 'Actualización de Datos', true);
         }
 
         function cargarClientes(event) {

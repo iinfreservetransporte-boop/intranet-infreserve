@@ -353,14 +353,60 @@
             transform: translateY(-2px);
         }
 
-        /* ===== DYNAMIC CONTENT AREA (vacía para cargar módulos) ===== */
+        /* ===== DYNAMIC CONTENT AREA ===== */
         .dynamic-content {
-            min-height: 400px;
+            min-height: 500px;
             background: var(--white);
             border-radius: var(--radius);
             padding: 24px;
             box-shadow: 0 2px 12px var(--shadow);
             margin-top: 0;
+            transition: var(--transition);
+        }
+
+        .dynamic-content iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: #fff;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .content-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .btn-back-home {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-back-home:hover {
+            background: var(--secondary);
+            color: var(--white);
+            border-color: var(--secondary);
+        }
+
+        .loading-message {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-light);
         }
 
         /* ===== FOOTER ===== */
@@ -502,6 +548,10 @@
                 padding: 16px;
             }
 
+            .dynamic-content iframe {
+                height: 400px;
+            }
+
             .footer-inner {
                 flex-direction: column;
                 text-align: center;
@@ -557,7 +607,7 @@
         <nav class="nav" id="mainNav">
             <ul class="nav-list">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link" onclick="mostrarInicio(event)">
                         <span class="icon">🏠</span> Inicio
                     </a>
                 </li>
@@ -567,9 +617,10 @@
                     </button>
                     <ul class="dropdown">
                         <li class="dropdown-header">Gestión Operativa</li>
-                        <li><a href="#" class="dropdown-link"><span class="icon">💰</span> Solicitud de Pago</a></li>
-                        <li><a href="#" class="dropdown-link"><span class="icon">📦</span> Certificación de Carga</a></li>
-                        <li><a href="#" class="dropdown-link"><span class="icon">📊</span> Cotización y Presupuestos</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarCotizaciones(event)"><span class="icon">💰</span> Solicitud de Pago</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarCertificacion(event)"><span class="icon">📦</span> Certificación de Carga</a></li>
+                        <!-- IMPORTANTE: Este es el enlace que carga el Apps Script de cotizaciones -->
+                        <li><a href="#" class="dropdown-link" onclick="cargarCotizaciones(event)"><span class="icon">📊</span> Cotización y Presupuestos</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -578,54 +629,54 @@
                     </button>
                     <ul class="dropdown">
                         <li class="dropdown-header">Control de Listas</li>
-                        <li><a href="#" class="dropdown-link"><span class="icon">👥</span> Clientes</a></li>
-                        <li><a href="#" class="dropdown-link"><span class="icon">🏢</span> Departamentos</a></li>
-                        <li><a href="#" class="dropdown-link"><span class="icon">🚛</span> Transporte</a></li>
-                        <li><a href="#" class="dropdown-link"><span class="icon">🤝</span> Proveedores</a></li>
-                        <li><a href="#" class="dropdown-link"><span class="icon">📑</span> CxCP</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarClientes(event)"><span class="icon">👥</span> Clientes</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarDepartamentos(event)"><span class="icon">🏢</span> Departamentos</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarTransporte(event)"><span class="icon">🚛</span> Transporte</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarProveedores(event)"><span class="icon">🤝</span> Proveedores</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarCxCP(event)"><span class="icon">📑</span> CxCP</a></li>
                         <li class="dropdown-divider"></li>
-                        <li><a href="#" class="dropdown-link"><span class="icon">📄</span> Procedimientos</a></li>
-                        <li><a href="#" class="dropdown-link"><span class="icon">📝</span> Formularios</a></li>
-                        <li><a href="#" class="dropdown-link"><span class="icon">💳</span> Impresión de Cheques</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarProcedimientos(event)"><span class="icon">📄</span> Procedimientos</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarFormularios(event)"><span class="icon">📝</span> Formularios</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarCheques(event)"><span class="icon">💳</span> Impresión de Cheques</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link" onclick="cargarOperaciones(event)">
                         <span class="icon">🚢</span> Operaciones
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link" onclick="cargarGesHumana(event)">
                         <span class="icon">👤</span> Ges. Humana
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link" onclick="cargarTecnologia(event)">
                         <span class="icon">💻</span> Tecnología
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link" onclick="cargarSeguridad(event)">
                         <span class="icon">🔒</span> Seguridad
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link" onclick="cargarTrafico(event)">
                         <span class="icon">🚦</span> Tráfico
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link" onclick="cargarComercial(event)">
                         <span class="icon">📈</span> Comercial
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link" onclick="cargarGerencia(event)">
                         <span class="icon">👔</span> Ger. General
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link" onclick="cargarControl(event)">
                         <span class="icon">📊</span> Ges. Control
                     </a>
                 </li>
@@ -645,16 +696,18 @@
         <!-- Quick Links -->
         <div class="quick-bar">
             <span class="quick-label">Acceso Rápido:</span>
-            <a href="#" class="quick-link">💰 Solicitud de Pago</a>
-            <a href="#" class="quick-link">📦 Certificación de Carga</a>
-            <a href="#" class="quick-link">📊 Cotizaciones</a>
-            <a href="#" class="quick-link">👥 Clientes</a>
-            <a href="#" class="quick-link">💳 Cheques</a>
+            <a href="#" class="quick-link" onclick="cargarCotizaciones(event)">💰 Solicitud de Pago</a>
+            <a href="#" class="quick-link" onclick="cargarCertificacion(event)">📦 Certificación de Carga</a>
+            <a href="#" class="quick-link" onclick="cargarCotizaciones(event)">📊 Cotizaciones</a>
+            <a href="#" class="quick-link" onclick="cargarClientes(event)">👥 Clientes</a>
+            <a href="#" class="quick-link" onclick="cargarCheques(event)">💳 Cheques</a>
         </div>
 
-        <!-- Dynamic Content Area (vacío para cargar módulos) -->
+        <!-- Dynamic Content Area -->
         <div id="dynamicContent" class="dynamic-content">
-            <!-- Aquí se cargará dinámicamente el contenido de cada módulo cuando se haga clic en el menú -->
+            <div class="content-header">
+                <div class="content-title">Bienvenido</div>
+            </div>
             <p style="text-align: center; color: #999; padding: 40px;">Seleccione una opción del menú para ver su contenido.</p>
         </div>
     </main>
@@ -682,13 +735,142 @@
         const SESSION_KEY = 'infreserve_session';
         // ⚠️ CAMBIA ESTA URL POR LA DE TU APPS SCRIPT (termina en /exec)
         const LOGIN_URL = 'https://script.google.com/macros/s/AKfycbzACIInlUQ-4Z8JuVleQNCB2OLrBbXg8uNyVA6zLkinoDO1pQg7hIZfsxd4Q5ieFz8v/exec';
+        
+        // ⚠️ URL DEL APPS SCRIPT DE COTIZACIONES (cambiar por la real)
+        const COTIZACIONES_URL = 'https://script.google.com/macros/s/AKfycbylSpZ5ee7zyPvPDvddC3s6RfDK13IhBdU3XHYfLKsd_YMwfGdUr4mlk1LX_U9TAciOPQ/exec';  // <-- REEMPLAZAR
 
-        // ========== UTILIDADES ==========
-        function getUrlParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
+        // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
+        function cargarContenido(url, titulo, esIframe = true) {
+            const container = document.getElementById('dynamicContent');
+            if (!container) return;
+
+            if (esIframe) {
+                container.innerHTML = `
+                    <div class="content-header">
+                        <div class="content-title">${titulo}</div>
+                        <button class="btn-back-home" onclick="mostrarInicio(event)">← Volver al inicio</button>
+                    </div>
+                    <div class="loading-message">Cargando contenido... Espere un momento.</div>
+                    <iframe src="${url}" title="${titulo}" style="display:none;" onload="this.style.display='block'; this.previousElementSibling.style.display='none';"></iframe>
+                `;
+            } else {
+                // Para contenido estático (no iframe)
+                container.innerHTML = `
+                    <div class="content-header">
+                        <div class="content-title">${titulo}</div>
+                        <button class="btn-back-home" onclick="mostrarInicio(event)">← Volver al inicio</button>
+                    </div>
+                    <div>${url}</div>
+                `;
+            }
         }
 
+        // Mostrar pantalla de inicio (mensaje inicial)
+        function mostrarInicio(event) {
+            if (event) event.preventDefault();
+            const container = document.getElementById('dynamicContent');
+            if (container) {
+                container.innerHTML = `
+                    <div class="content-header">
+                        <div class="content-title">Bienvenido</div>
+                    </div>
+                    <p style="text-align: center; color: #999; padding: 40px;">Seleccione una opción del menú para ver su contenido.</p>
+                `;
+            }
+        }
+
+        // ========== FUNCIONES PARA CADA MÓDULO ==========
+        function cargarCotizaciones(event) {
+            if (event) event.preventDefault();
+            cargarContenido(COTIZACIONES_URL, 'Cotización y Presupuestos', true);
+        }
+
+        function cargarCertificacion(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Certificación de Carga (próximamente)', false);
+        }
+
+        function cargarClientes(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Gestión de Clientes (próximamente)', false);
+        }
+
+        function cargarDepartamentos(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Departamentos (próximamente)', false);
+        }
+
+        function cargarTransporte(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Transporte (próximamente)', false);
+        }
+
+        function cargarProveedores(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Proveedores (próximamente)', false);
+        }
+
+        function cargarCxCP(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'CxCP (próximamente)', false);
+        }
+
+        function cargarProcedimientos(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Procedimientos (próximamente)', false);
+        }
+
+        function cargarFormularios(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Formularios (próximamente)', false);
+        }
+
+        function cargarCheques(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Impresión de Cheques (próximamente)', false);
+        }
+
+        function cargarOperaciones(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Operaciones (próximamente)', false);
+        }
+
+        function cargarGesHumana(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Gestión Humana (próximamente)', false);
+        }
+
+        function cargarTecnologia(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Tecnología (próximamente)', false);
+        }
+
+        function cargarSeguridad(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Seguridad (próximamente)', false);
+        }
+
+        function cargarTrafico(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Tráfico (próximamente)', false);
+        }
+
+        function cargarComercial(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Comercial (próximamente)', false);
+        }
+
+        function cargarGerencia(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Gerencia General (próximamente)', false);
+        }
+
+        function cargarControl(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Gestión de Control (próximamente)', false);
+        }
+
+        // ========== FUNCIONES DE SESIÓN Y UTILIDADES (igual que antes) ==========
         function getUserData() {
             try {
                 const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
@@ -701,7 +883,6 @@
             return null;
         }
 
-        // ========== VALIDAR SESIÓN ==========
         function validarSesion() {
             const userData = getUserData();
             const urlToken = getUrlParam('token');
@@ -759,7 +940,6 @@
             }, 500);
         }
 
-        // ========== CIERRE DE SESIÓN ==========
         function handleLogout(e) {
             if (e && e.preventDefault) e.preventDefault();
             if (confirm('¿Está seguro que desea cerrar sesión?')) {
@@ -770,7 +950,6 @@
             return false;
         }
 
-        // ========== FECHA Y HORA ==========
         function updateDate() {
             const now = new Date();
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -780,7 +959,11 @@
             if (dateEl) dateEl.innerHTML = `${dateStr}<br>${timeStr}`;
         }
 
-        // ========== FUNCIONES PARA MENÚ MÓVIL ==========
+        function getUrlParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
         function toggleNav() {
             const nav = document.getElementById('mainNav');
             if (nav) nav.classList.toggle('open');
@@ -799,14 +982,12 @@
             setInterval(updateDate, 60000);
             validarSesion();
 
-            // Mobile nav toggle
             const navToggle = document.querySelector('.nav-toggle');
             const nav = document.querySelector('.nav');
             if (navToggle && nav) {
                 navToggle.addEventListener('click', toggleNav);
             }
 
-            // Dropdowns en móvil
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', function(e) {
                     if (window.innerWidth <= 768) {
@@ -819,21 +1000,6 @@
                 });
             });
 
-            // Smooth scroll
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href !== '#') {
-                        const target = document.querySelector(href);
-                        if (target) {
-                            e.preventDefault();
-                            target.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }
-                });
-            });
-
-            // PostMessage para cerrar sesión desde iframes
             window.addEventListener('message', function(event) {
                 if (event.data && event.data.action === 'cerrarSesion') {
                     handleLogout();

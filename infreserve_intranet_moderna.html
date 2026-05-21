@@ -111,15 +111,23 @@
             gap: 12px;
         }
 
-        .logo-icon {
+        .logo-wrapper {
             width: 90px;
             height: 90px;
-            background: transparent;
-            border-radius: 0;
+            background: #f8fafc;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: visible;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .logo-wrapper img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
         }
 
         .logo-text {
@@ -304,154 +312,6 @@
             font-size: 12px;
         }
 
-        /* ===== SECTIONS GRID ===== */
-        .sections-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .sections-title .icon {
-            font-size: 24px;
-        }
-
-        .sections-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-
-        .section-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 24px;
-            box-shadow: 0 2px 12px var(--shadow);
-            transition: var(--transition);
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        .section-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px var(--shadow-hover);
-        }
-
-        .section-card:hover::before {
-            width: 6px;
-            background: var(--secondary);
-        }
-
-        .section-card.processes::before { background: #4161A8; }
-        .section-card.admin::before { background: #673428; }
-        .section-card.operations::before { background: #FF6E00; }
-        .section-card.hr::before { background: #8B5CF6; }
-        .section-card.tech::before { background: #06B6D4; }
-        .section-card.security::before { background: #DC2626; }
-        .section-card.traffic::before { background: #F59E0B; }
-        .section-card.commercial::before { background: #10B981; }
-        .section-card.management::before { background: #6366F1; }
-        .section-card.control::before { background: #EC4899; }
-
-        .section-card.processes:hover::before { background: #4161A8; }
-        .section-card.admin:hover::before { background: #8B4513; }
-        .section-card.operations:hover::before { background: #FF8533; }
-        .section-card.hr:hover::before { background: #A78BFA; }
-        .section-card.tech:hover::before { background: #22D3EE; }
-        .section-card.security:hover::before { background: #EF4444; }
-        .section-card.traffic:hover::before { background: #FBBF24; }
-        .section-card.commercial:hover::before { background: #34D399; }
-        .section-card.management:hover::before { background: #818CF8; }
-        .section-card.control:hover::before { background: #F472B6; }
-
-        .section-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 16px;
-            background: var(--bg);
-        }
-
-        .section-card.processes .section-icon { background: #EEF2FF; }
-        .section-card.admin .section-icon { background: #FDF2F8; }
-        .section-card.operations .section-icon { background: #FFF7ED; }
-        .section-card.hr .section-icon { background: #F5F3FF; }
-        .section-card.tech .section-icon { background: #ECFEFF; }
-        .section-card.security .section-icon { background: #FEF2F2; }
-        .section-card.traffic .section-icon { background: #FFFBEB; }
-        .section-card.commercial .section-icon { background: #ECFDF5; }
-        .section-card.management .section-icon { background: #EEF2FF; }
-        .section-card.control .section-icon { background: #FDF2F8; }
-
-        .section-name {
-            font-size: 17px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text);
-        }
-
-        .section-desc {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-bottom: 16px;
-            line-height: 1.5;
-        }
-
-        .section-links {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .section-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 14px;
-            background: var(--bg);
-            border-radius: var(--radius-sm);
-            color: var(--text);
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .section-link:hover {
-            background: var(--primary);
-            color: var(--white);
-            transform: translateX(4px);
-        }
-
-        .section-link .arrow {
-            margin-left: auto;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .section-link:hover .arrow {
-            opacity: 1;
-        }
-
         /* ===== QUICK LINKS BAR ===== */
         .quick-bar {
             background: var(--white);
@@ -491,6 +351,16 @@
             background: var(--secondary);
             color: var(--white);
             transform: translateY(-2px);
+        }
+
+        /* ===== DYNAMIC CONTENT AREA (vacía para cargar módulos) ===== */
+        .dynamic-content {
+            min-height: 400px;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: 0 2px 12px var(--shadow);
+            margin-top: 0;
         }
 
         /* ===== FOOTER ===== */
@@ -624,12 +494,11 @@
                 margin-top: 12px;
             }
 
-            .sections-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
+            .quick-bar {
+                padding: 16px;
             }
 
-            .quick-bar {
+            .dynamic-content {
                 padding: 16px;
             }
 
@@ -638,33 +507,6 @@
                 text-align: center;
             }
         }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section-card {
-            animation: fadeInUp 0.5s ease forwards;
-        }
-
-        .section-card:nth-child(1) { animation-delay: 0.05s; }
-        .section-card:nth-child(2) { animation-delay: 0.1s; }
-        .section-card:nth-child(3) { animation-delay: 0.15s; }
-        .section-card:nth-child(4) { animation-delay: 0.2s; }
-        .section-card:nth-child(5) { animation-delay: 0.25s; }
-        .section-card:nth-child(6) { animation-delay: 0.3s; }
-        .section-card:nth-child(7) { animation-delay: 0.35s; }
-        .section-card:nth-child(8) { animation-delay: 0.4s; }
-        .section-card:nth-child(9) { animation-delay: 0.45s; }
-        .section-card:nth-child(10) { animation-delay: 0.5s; }
 
         /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar {
@@ -700,11 +542,10 @@
         </div>
         <div class="header-main">
             <div class="logo">
-                <!-- Logo corregido: usando URL de Google Drive (original) -->
                 <div class="logo-wrapper">
                     <img src="https://lh3.googleusercontent.com/d/1Z87-xtdsYEc521X2buFveZY4iBVHgYHa=s200" 
                          alt="Logo Infreserve" 
-                         style="width: 90px; height: 90px; object-fit: contain; display: block;">
+                         crossorigin="anonymous">
                 </div>
                 <div>
                     <div class="logo-text">INFRESERVE</div>
@@ -811,128 +652,10 @@
             <a href="#" class="quick-link">💳 Cheques</a>
         </div>
 
-        <!-- Sections Grid -->
-        <h2 class="sections-title"><span class="icon">🗂️</span> Áreas de Trabajo</h2>
-        <div class="sections-grid">
-            <!-- Procesos -->
-            <article class="section-card processes">
-                <div class="section-icon">📋</div>
-                <h3 class="section-name">Procesos</h3>
-                <p class="section-desc">Gestión de solicitudes, certificaciones y presupuestos operativos.</p>
-                <div class="section-links">
-                    <a href="#" class="section-link">Solicitud de Pago <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Certificación de Carga <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Cotización y Presupuestos <span class="arrow">→</span></a>
-                </div>
-            </article>
-
-            <!-- Administración -->
-            <article class="section-card admin">
-                <div class="section-icon">⚙️</div>
-                <h3 class="section-name">Administración</h3>
-                <p class="section-desc">Control de listas, procedimientos, formularios y finanzas.</p>
-                <div class="section-links">
-                    <a href="#" class="section-link">Clientes <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Departamentos <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Proveedores <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Impresión de Cheques <span class="arrow">→</span></a>
-                </div>
-            </article>
-
-            <!-- Operaciones -->
-            <article class="section-card operations">
-                <div class="section-icon">🚢</div>
-                <h3 class="section-name">Operaciones</h3>
-                <p class="section-desc">Coordinación de operaciones logísticas y de transporte internacional.</p>
-                <div class="section-links">
-                    <a href="#" class="section-link">Gestión de Operaciones <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Seguimiento de Cargas <span class="arrow">→</span></a>
-                </div>
-            </article>
-
-            <!-- Gestión Humana -->
-            <article class="section-card hr">
-                <div class="section-icon">👤</div>
-                <h3 class="section-name">Gestión Humana</h3>
-                <p class="section-desc">Recursos humanos, talento, nómina y bienestar del colaborador.</p>
-                <div class="section-links">
-                    <a href="#" class="section-link">Personal <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Nómina <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Beneficios <span class="arrow">→</span></a>
-                </div>
-            </article>
-
-            <!-- Tecnología -->
-            <article class="section-card tech">
-                <div class="section-icon">💻</div>
-                <h3 class="section-name">Tecnología</h3>
-                <p class="section-desc">Soporte técnico, infraestructura y sistemas de información.</p>
-                <div class="section-links">
-                    <a href="#" class="section-link">Soporte TI <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Sistemas <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Redes <span class="arrow">→</span></a>
-                </div>
-            </article>
-
-            <!-- Seguridad -->
-            <article class="section-card security">
-                <div class="section-icon">🔒</div>
-                <h3 class="section-name">Seguridad</h3>
-                <p class="section-desc">Seguridad física, patrimonial y de la información corporativa.</p>
-                <div class="section-links">
-                    <a href="#" class="section-link">Protocolos <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Incidentes <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Accesos <span class="arrow">→</span></a>
-                </div>
-            </article>
-
-            <!-- Tráfico -->
-            <article class="section-card traffic">
-                <div class="section-icon">🚦</div>
-                <h3 class="section-name">Tráfico</h3>
-                <p class="section-desc">Control de tráfico de mercancías y documentación aduanera.</p>
-                <div class="section-links">
-                    <a href="#" class="section-link">Aduanas <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Documentación <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Estadísticas <span class="arrow">→</span></a>
-                </div>
-            </article>
-
-            <!-- Comercial -->
-            <article class="section-card commercial">
-                <div class="section-icon">📈</div>
-                <h3 class="section-name">Comercial</h3>
-                <p class="section-desc">Ventas, atención al cliente y desarrollo de negocios.</p>
-                <div class="section-links">
-                    <a href="#" class="section-link">Clientes <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Oportunidades <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Reportes <span class="arrow">→</span></a>
-                </div>
-            </article>
-
-            <!-- Gerencia General -->
-            <article class="section-card management">
-                <div class="section-icon">👔</div>
-                <h3 class="section-name">Gerencia General</h3>
-                <p class="section-desc">Dirección estratégica, reportes ejecutivos y toma de decisiones.</p>
-                <div class="section-links">
-                    <a href="#" class="section-link">Dashboard <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Reportes <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">KPIs <span class="arrow">→</span></a>
-                </div>
-            </article>
-
-            <!-- Gestión de Control -->
-            <article class="section-card control">
-                <div class="section-icon">📊</div>
-                <h3 class="section-name">Gestión de Control</h3>
-                <p class="section-desc">Control de gestión, calidad y auditorías internas.</p>
-                <div class="section-links">
-                    <a href="#" class="section-link">Calidad <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Auditorías <span class="arrow">→</span></a>
-                    <a href="#" class="section-link">Indicadores <span class="arrow">→</span></a>
-                </div>
-            </article>
+        <!-- Dynamic Content Area (vacío para cargar módulos) -->
+        <div id="dynamicContent" class="dynamic-content">
+            <!-- Aquí se cargará dinámicamente el contenido de cada módulo cuando se haga clic en el menú -->
+            <p style="text-align: center; color: #999; padding: 40px;">Seleccione una opción del menú para ver su contenido.</p>
         </div>
     </main>
 
@@ -958,7 +681,7 @@
         // ========== CONFIGURACIÓN ==========
         const SESSION_KEY = 'infreserve_session';
         // ⚠️ CAMBIA ESTA URL POR LA DE TU APPS SCRIPT (termina en /exec)
-        const LOGIN_URL = 'https://script.google.com/macros/s/AKfycbzACIInlUQ-4Z8JuVleQNCB2OLrBbXg8uNyVA6zLkinoDO1pQg7hIZfsxd4Q5ieFz8v/exec';
+        const LOGIN_URL = 'https://script.google.com/macros/s/TU_ID_DEL_SCRIPT/exec';
 
         // ========== UTILIDADES ==========
         function getUrlParam(param) {
@@ -978,17 +701,15 @@
             return null;
         }
 
-        // ========== VALIDAR SESIÓN (sin llamada a backend) ==========
+        // ========== VALIDAR SESIÓN ==========
         function validarSesion() {
             const userData = getUserData();
             const urlToken = getUrlParam('token');
 
-            // Si hay token en URL (recién logueado desde login_page.html)
             if (urlToken) {
                 try {
                     const decoded = JSON.parse(decodeURIComponent(urlToken));
                     if (decoded.token && decoded.id) {
-                        // Guardar sesión en localStorage
                         const sessionData = {
                             id: decoded.id,
                             email: decoded.email,
@@ -1000,7 +721,6 @@
                         };
                         localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
                         actualizarUI(sessionData);
-                        // Limpiar URL (eliminar el token visible)
                         window.history.replaceState({}, document.title, window.location.pathname);
                         return true;
                     }
@@ -1011,13 +731,11 @@
                 }
             }
 
-            // Si hay sesión guardada en localStorage
             if (userData && userData.token && userData.id) {
                 actualizarUI(userData);
                 return true;
             }
 
-            // Sin sesión
             redirigirLogin();
             return false;
         }
@@ -1045,10 +763,8 @@
         function handleLogout(e) {
             if (e && e.preventDefault) e.preventDefault();
             if (confirm('¿Está seguro que desea cerrar sesión?')) {
-                // Limpiar almacenamiento local
                 localStorage.removeItem(SESSION_KEY);
                 sessionStorage.removeItem(SESSION_KEY);
-                // Redirigir al login de Apps Script
                 window.location.href = LOGIN_URL;
             }
             return false;
@@ -1117,13 +833,7 @@
                 });
             });
 
-            // Hover effects
-            document.querySelectorAll('.section-card').forEach(card => {
-                card.addEventListener('mouseenter', () => card.style.transform = 'translateY(-4px)');
-                card.addEventListener('mouseleave', () => card.style.transform = 'translateY(0)');
-            });
-
-            // PostMessage para cerrar sesión desde iframes (Apps Script)
+            // PostMessage para cerrar sesión desde iframes
             window.addEventListener('message', function(event) {
                 if (event.data && event.data.action === 'cerrarSesion') {
                     handleLogout();

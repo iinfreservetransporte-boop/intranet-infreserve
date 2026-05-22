@@ -667,8 +667,7 @@
                         <li class="dropdown-header">Gestión Operativa</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudPago(event)"><span class="icon">💰</span> Solicitud de Pago</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCertificacion(event)"><span class="icon">📦</span> Certificación de Carga</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarSolicitudUtiles(event)"><span class="icon">🧹</span> Solicitud de Útiles y Artículos de Limpieza</a></li>
-                        <!-- Cotización y Presupuestos eliminado de aquí -->
+                        <!-- Movido Solicitud de Útiles a Administración -->
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -679,6 +678,8 @@
                         <li class="dropdown-header">Control de Listas</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarClientes(event)"><span class="icon">👥</span> Clientes</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarActualizacionDatos(event)"><span class="icon">✏️</span> Actualización de Datos del Cliente</a></li>
+                        <!-- Nuevo ítem agregado aquí -->
+                        <li><a href="#" class="dropdown-link" onclick="cargarSolicitudUtiles(event)"><span class="icon">🧹</span> Solicitud de Útiles y Artículos de Limpieza</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarDepartamentos(event)"><span class="icon">🏢</span> Departamentos</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarTransporte(event)"><span class="icon">🚛</span> Transporte</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarProveedores(event)"><span class="icon">🤝</span> Proveedores</a></li>
@@ -755,7 +756,7 @@
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudPrecintos(event)"><span class="icon">🏷️</span> Solicitud de Precintos tipo Botella</a></li>
                     </ul>
                 </li>
-                <!-- ===== COMERCIAL CON DROPDOWN (NUEVO) ===== -->
+                <!-- ===== COMERCIAL CON DROPDOWN ===== -->
                 <li class="nav-item">
                     <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">📈</span> Comercial

@@ -676,7 +676,6 @@
                     <ul class="dropdown">
                         <li class="dropdown-header">Control de Listas</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarClientes(event)"><span class="icon">👥</span> Clientes</a></li>
-                        <!-- Eliminado Transporte -->
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudUtiles(event)"><span class="icon">🧹</span> Solicitud de Útiles y Artículos de Limpieza</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarDepartamentos(event)"><span class="icon">🏢</span> Departamentos</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarProveedores(event)"><span class="icon">🤝</span> Proveedores</a></li>
@@ -732,10 +731,16 @@
                         <span class="icon">👤</span> Ges. Humana
                     </a>
                 </li>
+                <!-- ===== TECNOLOGÍA CON DROPDOWN (NUEVO) ===== -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="cargarTecnologia(event)">
+                    <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">💻</span> Tecnología
-                    </a>
+                    </button>
+                    <ul class="dropdown">
+                        <li class="dropdown-header">Gestión Tecnológica</li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarTecnologia(event)"><span class="icon">💻</span> Tecnología</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="abrirUbicacionCamaras(event)"><span class="icon">📷</span> Ubicación de Cámaras</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="cargarSeguridad(event)">
@@ -837,6 +842,7 @@
         const ACTUALIZACION_DATOS_URL = 'https://script.google.com/macros/s/AKfycbwd-iWxH0z5IygwIpTue-nPbhC2JUgf3Nm1P9Ur2_-MAdutgxAUs7HiXXiZCu6CpOKZ0g/exec';
         const TEMPERATURA_URL = 'https://cloud.tzonedigital.com/LoginIndex';
         const SOLICITUD_PRECINTOS_URL = 'https://script.google.com/macros/s/AKfycbx5CXi4wEEoc12-UAvmaTG4wkWadJ1cLoA1vU6jNbcGDV3JAIGlr11lKO4S5EGwsHSM/exec';
+        const UBICACION_CAMARAS_URL = 'https://docs.google.com/spreadsheets/d/1oyopJlHcgQqI5bxjpzsWIHt01WnpUdmyQ1Py2BfzNR4/edit?usp=sharing';
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
@@ -984,6 +990,12 @@
         function cargarSolicitudPrecintos(event) {
             if (event) event.preventDefault();
             cargarContenido(SOLICITUD_PRECINTOS_URL, 'Solicitud de Precintos tipo Botella', true);
+        }
+
+        // Nueva función para abrir la ubicación de cámaras (en nueva pestaña)
+        function abrirUbicacionCamaras(event) {
+            if (event) event.preventDefault();
+            window.open(UBICACION_CAMARAS_URL, '_blank');
         }
 
         function cargarComercial(event) {

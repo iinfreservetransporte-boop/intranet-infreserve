@@ -199,6 +199,7 @@
             font-size: 13px;
         }
 
+        /* Dropdown principal */
         .dropdown {
             position: absolute;
             top: 100%;
@@ -222,6 +223,27 @@
             transform: translateY(0);
         }
 
+        /* Submenú anidado (segundo nivel) */
+        .dropdown .dropdown {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            min-width: 200px;
+            margin-left: 5px;
+            border-radius: var(--radius-sm);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: var(--transition);
+        }
+
+        .dropdown li:hover > .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        /* Estilos para los items del dropdown */
         .dropdown-link {
             display: flex;
             align-items: center;
@@ -232,6 +254,7 @@
             font-size: 12px;
             transition: var(--transition);
             border-left: 3px solid transparent;
+            white-space: nowrap;
         }
 
         .dropdown-link:hover {
@@ -245,6 +268,19 @@
             font-size: 14px;
             width: 20px;
             text-align: center;
+        }
+
+        /* Para indicar que hay submenú */
+        .dropdown-item-has-sub {
+            position: relative;
+        }
+
+        .dropdown-item-has-sub > .dropdown-link::after {
+            content: '›';
+            position: absolute;
+            right: 15px;
+            font-size: 16px;
+            color: var(--text-light);
         }
 
         .dropdown-divider {
@@ -512,6 +548,21 @@
                 max-height: 500px;
             }
 
+            .dropdown .dropdown {
+                position: static;
+                left: 0;
+                margin-left: 20px;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                max-height: 0;
+                overflow: hidden;
+            }
+
+            .dropdown li.open > .dropdown {
+                max-height: 500px;
+            }
+
             .dropdown-link {
                 color: rgba(255,255,255,0.8);
                 padding-left: 40px;
@@ -642,11 +693,37 @@
                         <li><a href="#" class="dropdown-link" onclick="cargarCheques(event)"><span class="icon">💳</span> Impresión de Cheques</a></li>
                     </ul>
                 </li>
+                <!-- ===== OPERACIONES CON SUBMENÚS ANIDADOS ===== -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="cargarOperaciones(event)">
+                    <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">🚢</span> Operaciones
-                    </a>
+                    </button>
+                    <ul class="dropdown">
+                        <li class="dropdown-header">Gestión Operativa</li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarOperaciones(event)"><span class="icon">📊</span> Dashboard de Operaciones</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarSeguimientoCargas(event)"><span class="icon">📦</span> Seguimiento de Cargas</a></li>
+                        <li class="dropdown-divider"></li>
+                        <!-- Bodega con submenú -->
+                        <li class="dropdown-item-has-sub">
+                            <a href="#" class="dropdown-link" onclick="return false;">
+                                <span class="icon">🏪</span> Bodega
+                            </a>
+                            <ul class="dropdown">
+                                <li><a href="#" class="dropdown-link" onclick="cargarInspeccionBodega(event)"><span class="icon">🔍</span> Inspecciones</a></li>
+                            </ul>
+                        </li>
+                        <!-- Mantenimiento con submenú -->
+                        <li class="dropdown-item-has-sub">
+                            <a href="#" class="dropdown-link" onclick="return false;">
+                                <span class="icon">🛠️</span> Mantenimiento
+                            </a>
+                            <ul class="dropdown">
+                                <li><a href="#" class="dropdown-link" onclick="cargarInspeccionMantenimiento(event)"><span class="icon">🔍</span> Inspecciones</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </li>
+                <!-- Fin Operaciones -->
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="cargarGesHumana(event)">
                         <span class="icon">👤</span> Ges. Humana
@@ -662,15 +739,10 @@
                         <span class="icon">🔒</span> Seguridad
                     </a>
                 </li>
-                <!-- ===== TRÁFICO CON DROPDOWN (NUEVO) ===== -->
                 <li class="nav-item">
-                    <button class="nav-link" onclick="toggleDropdown(this)">
+                    <a href="#" class="nav-link" onclick="cargarTrafico(event)">
                         <span class="icon">🚦</span> Tráfico
-                    </button>
-                    <ul class="dropdown">
-                        <li class="dropdown-header">Gestión de Tráfico</li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarSolicitudSellos(event)"><span class="icon">🍾</span> Solicitud de Sellos Tipo Botella</a></li>
-                    </ul>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="cargarComercial(event)">
@@ -709,7 +781,6 @@
             <a href="#" class="quick-link" onclick="cargarSolicitudUtiles(event)">🧹 Útiles y Limpieza</a>
             <a href="#" class="quick-link" onclick="cargarClientes(event)">👥 Clientes</a>
             <a href="#" class="quick-link" onclick="cargarActualizacionDatos(event)">✏️ Actualización Datos del Cliente</a>
-            <a href="#" class="quick-link" onclick="cargarSolicitudSellos(event)">🍾 Solicitud Sellos</a>
             <a href="#" class="quick-link" onclick="cargarCheques(event)">💳 Cheques</a>
         </div>
 
@@ -748,7 +819,7 @@
         const SOLICITUD_UTILES_URL = 'https://script.google.com/macros/s/AKfycbz6ZvaBC17xAJIYO4012s7Ug4Sub6H64P7psykFXzoFEs40gHNKRdu_2s5srxAYhDuRaA/exec';
         const OPERACIONES_URL = 'https://script.google.com/macros/s/AKfycbzm_p1ebt3_p6040fCXIwIFfamKVDtTFxxlLZbffVO-3_Tmh3d-WlVvwkWbz-a8neBk/exec';
         const ACTUALIZACION_DATOS_URL = 'https://script.google.com/macros/s/AKfycbwd-iWxH0z5IygwIpTue-nPbhC2JUgf3Nm1P9Ur2_-MAdutgxAUs7HiXXiZCu6CpOKZ0g/exec';
-        const SOLICITUD_SELLOS_URL = 'https://script.google.com/macros/s/AKfycbx5CXi4wEEoc12-UAvmaTG4wkWadJ1cLoA1vU6jNbcGDV3JAIGlr11lKO4S5EGwsHSM/exec';
+        const TEMPERATURA_URL = 'https://cloud.tzonedigital.com/LoginIndex';
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
@@ -812,10 +883,28 @@
             cargarContenido(ACTUALIZACION_DATOS_URL, 'Actualización de Datos del Cliente', true);
         }
 
-        // Nueva función para Solicitud de Sellos Tipo Botella
-        function cargarSolicitudSellos(event) {
+        // Nuevas funciones para inspecciones de Bodega y Mantenimiento
+        function cargarInspeccionBodega(event) {
             if (event) event.preventDefault();
-            cargarContenido(SOLICITUD_SELLOS_URL, 'Solicitud de Sellos Tipo Botella', true);
+            // Aquí puedes cambiar la URL por el formulario real de inspección de bodega
+            cargarContenido('#', 'Inspecciones de Bodega (próximamente)', false);
+        }
+
+        function cargarInspeccionMantenimiento(event) {
+            if (event) event.preventDefault();
+            // Aquí puedes cambiar la URL por el formulario real de inspección de mantenimiento
+            cargarContenido('#', 'Inspecciones de Mantenimiento (próximamente)', false);
+        }
+
+        // Función para abrir control de temperatura (abre en nueva pestaña)
+        function abrirControlTemperatura(event) {
+            if (event) event.preventDefault();
+            window.open(TEMPERATURA_URL, '_blank');
+        }
+
+        function cargarSeguimientoCargas(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Seguimiento de Cargas (próximamente)', false);
         }
 
         function cargarClientes(event) {
@@ -873,8 +962,6 @@
             cargarContenido('#', 'Seguridad (próximamente)', false);
         }
 
-        // Nota: La función cargarTrafico ya no se usa porque Tráfico ahora tiene dropdown,
-        // pero la dejamos para compatibilidad (aunque no se llama). Puedes eliminarla si quieres.
         function cargarTrafico(event) {
             if (event) event.preventDefault();
             cargarContenido('#', 'Tráfico (próximamente)', false);
@@ -1005,6 +1092,23 @@
             }
         }
 
+        // Manejo de submenús en móvil (toggle anidado)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Para móvil, permitir abrir submenús al hacer clic en los items que tienen submenu
+            const submenuParents = document.querySelectorAll('.dropdown-item-has-sub');
+            submenuParents.forEach(parent => {
+                const link = parent.querySelector('.dropdown-link');
+                if (link) {
+                    link.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 768) {
+                            e.preventDefault();
+                            parent.classList.toggle('open');
+                        }
+                    });
+                }
+            });
+        });
+
         // ========== INICIALIZACIÓN ==========
         document.addEventListener('DOMContentLoaded', function() {
             updateDate();
@@ -1021,7 +1125,7 @@
                 item.addEventListener('click', function(e) {
                     if (window.innerWidth <= 768) {
                         const dropdown = this.querySelector('.dropdown');
-                        if (dropdown) {
+                        if (dropdown && !this.classList.contains('open')) {
                             e.preventDefault();
                             this.classList.toggle('open');
                         }

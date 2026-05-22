@@ -731,7 +731,7 @@
                         <span class="icon">👤</span> Ges. Humana
                     </a>
                 </li>
-                <!-- ===== TECNOLOGÍA CON DROPDOWN (NUEVO) ===== -->
+                <!-- ===== TECNOLOGÍA CON DROPDOWN ===== -->
                 <li class="nav-item">
                     <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">💻</span> Tecnología
@@ -842,7 +842,8 @@
         const ACTUALIZACION_DATOS_URL = 'https://script.google.com/macros/s/AKfycbwd-iWxH0z5IygwIpTue-nPbhC2JUgf3Nm1P9Ur2_-MAdutgxAUs7HiXXiZCu6CpOKZ0g/exec';
         const TEMPERATURA_URL = 'https://cloud.tzonedigital.com/LoginIndex';
         const SOLICITUD_PRECINTOS_URL = 'https://script.google.com/macros/s/AKfycbx5CXi4wEEoc12-UAvmaTG4wkWadJ1cLoA1vU6jNbcGDV3JAIGlr11lKO4S5EGwsHSM/exec';
-        const UBICACION_CAMARAS_URL = 'https://docs.google.com/spreadsheets/d/1oyopJlHcgQqI5bxjpzsWIHt01WnpUdmyQ1Py2BfzNR4/edit?usp=sharing';
+        // NUEVA URL de la hoja de cálculo (sin gid específico, abrirá el libro)
+        const UBICACION_CAMARAS_URL = 'https://docs.google.com/spreadsheets/d/1WfmZnQiEsnrJYK-RA-MBxjsKu3h6I1JtWY03-qQDEzo/edit?usp=sharing';
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
@@ -992,7 +993,7 @@
             cargarContenido(SOLICITUD_PRECINTOS_URL, 'Solicitud de Precintos tipo Botella', true);
         }
 
-        // Nueva función para abrir la ubicación de cámaras (en nueva pestaña)
+        // Función para abrir la ubicación de cámaras (nueva URL)
         function abrirUbicacionCamaras(event) {
             if (event) event.preventDefault();
             window.open(UBICACION_CAMARAS_URL, '_blank');

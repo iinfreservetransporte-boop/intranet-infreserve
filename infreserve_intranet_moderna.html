@@ -717,6 +717,15 @@
                                 <li><a href="#" class="dropdown-link" onclick="cargarInspeccionMantenimiento(event)"><span class="icon">🔍</span> Inspecciones</a></li>
                             </ul>
                         </li>
+                        <!-- Nuevo: Transporte con submenú -->
+                        <li class="dropdown-item-has-sub">
+                            <a href="#" class="dropdown-link" onclick="return false;">
+                                <span class="icon">🚛</span> Transporte
+                            </a>
+                            <ul class="dropdown">
+                                <li><a href="#" class="dropdown-link" onclick="cargarInspeccionTransporte(event)"><span class="icon">🔍</span> Inspecciones</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <!-- Fin Operaciones -->
@@ -735,7 +744,7 @@
                         <span class="icon">🔒</span> Seguridad
                     </a>
                 </li>
-                <!-- ===== TRÁFICO CON DROPDOWN (NUEVO) ===== -->
+                <!-- ===== TRÁFICO CON DROPDOWN ===== -->
                 <li class="nav-item">
                     <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">🚦</span> Tráfico
@@ -887,20 +896,23 @@
             cargarContenido(ACTUALIZACION_DATOS_URL, 'Actualización de Datos del Cliente', true);
         }
 
-        // Nuevas funciones para inspecciones de Bodega y Mantenimiento
+        // Inspecciones
         function cargarInspeccionBodega(event) {
             if (event) event.preventDefault();
-            // Aquí puedes cambiar la URL por el formulario real de inspección de bodega
             cargarContenido('#', 'Inspecciones de Bodega (próximamente)', false);
         }
 
         function cargarInspeccionMantenimiento(event) {
             if (event) event.preventDefault();
-            // Aquí puedes cambiar la URL por el formulario real de inspección de mantenimiento
             cargarContenido('#', 'Inspecciones de Mantenimiento (próximamente)', false);
         }
 
-        // Función para abrir control de temperatura (abre en nueva pestaña)
+        // Nueva función para Inspecciones de Transporte
+        function cargarInspeccionTransporte(event) {
+            if (event) event.preventDefault();
+            cargarContenido('#', 'Inspecciones de Transporte (próximamente)', false);
+        }
+
         function abrirControlTemperatura(event) {
             if (event) event.preventDefault();
             window.open(TEMPERATURA_URL, '_blank');
@@ -971,7 +983,6 @@
             cargarContenido('#', 'Tráfico (próximamente)', false);
         }
 
-        // Nueva función para Solicitud de Precintos tipo Botella
         function cargarSolicitudPrecintos(event) {
             if (event) event.preventDefault();
             cargarContenido(SOLICITUD_PRECINTOS_URL, 'Solicitud de Precintos tipo Botella', true);

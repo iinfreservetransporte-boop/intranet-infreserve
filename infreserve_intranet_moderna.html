@@ -199,7 +199,6 @@
             font-size: 13px;
         }
 
-        /* Dropdown principal */
         .dropdown {
             position: absolute;
             top: 100%;
@@ -223,7 +222,6 @@
             transform: translateY(0);
         }
 
-        /* Submenú anidado (segundo nivel) */
         .dropdown .dropdown {
             position: absolute;
             top: 0;
@@ -243,7 +241,6 @@
             transform: translateX(0);
         }
 
-        /* Estilos para los items del dropdown */
         .dropdown-link {
             display: flex;
             align-items: center;
@@ -270,7 +267,6 @@
             text-align: center;
         }
 
-        /* Para indicar que hay submenú */
         .dropdown-item-has-sub {
             position: relative;
         }
@@ -739,10 +735,16 @@
                         <span class="icon">🔒</span> Seguridad
                     </a>
                 </li>
+                <!-- ===== TRÁFICO CON DROPDOWN (NUEVO) ===== -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="cargarTrafico(event)">
+                    <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">🚦</span> Tráfico
-                    </a>
+                    </button>
+                    <ul class="dropdown">
+                        <li class="dropdown-header">Gestión de Tráfico</li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarTrafico(event)"><span class="icon">🚦</span> Tráfico</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarSolicitudPrecintos(event)"><span class="icon">🏷️</span> Solicitud de Precintos tipo Botella</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="cargarComercial(event)">
@@ -782,6 +784,7 @@
             <a href="#" class="quick-link" onclick="cargarClientes(event)">👥 Clientes</a>
             <a href="#" class="quick-link" onclick="cargarActualizacionDatos(event)">✏️ Actualización Datos del Cliente</a>
             <a href="#" class="quick-link" onclick="cargarCheques(event)">💳 Cheques</a>
+            <a href="#" class="quick-link" onclick="cargarSolicitudPrecintos(event)">🏷️ Solicitud Precintos</a>
         </div>
 
         <!-- Dynamic Content Area -->
@@ -820,6 +823,7 @@
         const OPERACIONES_URL = 'https://script.google.com/macros/s/AKfycbzm_p1ebt3_p6040fCXIwIFfamKVDtTFxxlLZbffVO-3_Tmh3d-WlVvwkWbz-a8neBk/exec';
         const ACTUALIZACION_DATOS_URL = 'https://script.google.com/macros/s/AKfycbwd-iWxH0z5IygwIpTue-nPbhC2JUgf3Nm1P9Ur2_-MAdutgxAUs7HiXXiZCu6CpOKZ0g/exec';
         const TEMPERATURA_URL = 'https://cloud.tzonedigital.com/LoginIndex';
+        const SOLICITUD_PRECINTOS_URL = 'https://script.google.com/macros/s/AKfycbx5CXi4wEEoc12-UAvmaTG4wkWadJ1cLoA1vU6jNbcGDV3JAIGlr11lKO4S5EGwsHSM/exec';
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
@@ -965,6 +969,12 @@
         function cargarTrafico(event) {
             if (event) event.preventDefault();
             cargarContenido('#', 'Tráfico (próximamente)', false);
+        }
+
+        // Nueva función para Solicitud de Precintos tipo Botella
+        function cargarSolicitudPrecintos(event) {
+            if (event) event.preventDefault();
+            cargarContenido(SOLICITUD_PRECINTOS_URL, 'Solicitud de Precintos tipo Botella', true);
         }
 
         function cargarComercial(event) {

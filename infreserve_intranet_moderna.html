@@ -739,7 +739,7 @@
                     <ul class="dropdown">
                         <li class="dropdown-header">Gestión Tecnológica</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarTecnologia(event)"><span class="icon">💻</span> Tecnología</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="abrirUbicacionCamaras(event)"><span class="icon">📷</span> Ubicación de Cámaras</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarUbicacionCamaras(event)"><span class="icon">📷</span> Ubicación de Cámaras</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -842,8 +842,8 @@
         const ACTUALIZACION_DATOS_URL = 'https://script.google.com/macros/s/AKfycbwd-iWxH0z5IygwIpTue-nPbhC2JUgf3Nm1P9Ur2_-MAdutgxAUs7HiXXiZCu6CpOKZ0g/exec';
         const TEMPERATURA_URL = 'https://cloud.tzonedigital.com/LoginIndex';
         const SOLICITUD_PRECINTOS_URL = 'https://script.google.com/macros/s/AKfycbx5CXi4wEEoc12-UAvmaTG4wkWadJ1cLoA1vU6jNbcGDV3JAIGlr11lKO4S5EGwsHSM/exec';
-        // NUEVA URL de la hoja de cálculo (sin gid específico, abrirá el libro)
-        const UBICACION_CAMARAS_URL = 'https://docs.google.com/spreadsheets/d/1WfmZnQiEsnrJYK-RA-MBxjsKu3h6I1JtWY03-qQDEzo/edit?usp=sharing';
+        // NUEVA URL de la hoja de cálculo publicada para incrustar en iframe
+        const UBICACION_CAMARAS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSBVQiYJE3JAgRT0Cuv9dqxmIXs6f085i1IHoNesX9YLqW_wvxCQmi2MOXO1uXhjKm3KfYj2MTpvx0g/pubhtml?gid=1323538902&single=true';
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
@@ -993,10 +993,10 @@
             cargarContenido(SOLICITUD_PRECINTOS_URL, 'Solicitud de Precintos tipo Botella', true);
         }
 
-        // Función para abrir la ubicación de cámaras (nueva URL)
-        function abrirUbicacionCamaras(event) {
+        // Función para cargar la ubicación de cámaras dentro de la intranet (iframe)
+        function cargarUbicacionCamaras(event) {
             if (event) event.preventDefault();
-            window.open(UBICACION_CAMARAS_URL, '_blank');
+            cargarContenido(UBICACION_CAMARAS_URL, 'Ubicación de Cámaras', true);
         }
 
         function cargarComercial(event) {

@@ -676,10 +676,9 @@
                     <ul class="dropdown">
                         <li class="dropdown-header">Control de Listas</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarClientes(event)"><span class="icon">👥</span> Clientes</a></li>
-                        <!-- Actualización de Datos del Cliente se ha movido a Comercial -->
+                        <!-- Eliminado Transporte -->
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudUtiles(event)"><span class="icon">🧹</span> Solicitud de Útiles y Artículos de Limpieza</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarDepartamentos(event)"><span class="icon">🏢</span> Departamentos</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarTransporte(event)"><span class="icon">🚛</span> Transporte</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarProveedores(event)"><span class="icon">🤝</span> Proveedores</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCxCP(event)"><span class="icon">📑</span> CxCP</a></li>
                         <li class="dropdown-divider"></li>
@@ -762,7 +761,6 @@
                     <ul class="dropdown">
                         <li class="dropdown-header">Gestión Comercial</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCotizaciones(event)"><span class="icon">📊</span> Cotización y Presupuestos</a></li>
-                        <!-- Ítem movido aquí -->
                         <li><a href="#" class="dropdown-link" onclick="cargarActualizacionDatos(event)"><span class="icon">✏️</span> Actualización de Datos del Cliente</a></li>
                     </ul>
                 </li>
@@ -936,11 +934,6 @@
         function cargarDepartamentos(event) {
             if (event) event.preventDefault();
             cargarContenido('#', 'Departamentos (próximamente)', false);
-        }
-
-        function cargarTransporte(event) {
-            if (event) event.preventDefault();
-            cargarContenido('#', 'Transporte (próximamente)', false);
         }
 
         function cargarProveedores(event) {

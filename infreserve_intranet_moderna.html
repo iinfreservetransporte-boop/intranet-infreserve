@@ -667,7 +667,6 @@
                         <li class="dropdown-header">Gestión Operativa</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudPago(event)"><span class="icon">💰</span> Solicitud de Pago</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCertificacion(event)"><span class="icon">📦</span> Certificación de Carga</a></li>
-                        <!-- Movido Solicitud de Útiles a Administración -->
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -677,8 +676,7 @@
                     <ul class="dropdown">
                         <li class="dropdown-header">Control de Listas</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarClientes(event)"><span class="icon">👥</span> Clientes</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarActualizacionDatos(event)"><span class="icon">✏️</span> Actualización de Datos del Cliente</a></li>
-                        <!-- Nuevo ítem agregado aquí -->
+                        <!-- Actualización de Datos del Cliente se ha movido a Comercial -->
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudUtiles(event)"><span class="icon">🧹</span> Solicitud de Útiles y Artículos de Limpieza</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarDepartamentos(event)"><span class="icon">🏢</span> Departamentos</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarTransporte(event)"><span class="icon">🚛</span> Transporte</a></li>
@@ -764,6 +762,8 @@
                     <ul class="dropdown">
                         <li class="dropdown-header">Gestión Comercial</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCotizaciones(event)"><span class="icon">📊</span> Cotización y Presupuestos</a></li>
+                        <!-- Ítem movido aquí -->
+                        <li><a href="#" class="dropdown-link" onclick="cargarActualizacionDatos(event)"><span class="icon">✏️</span> Actualización de Datos del Cliente</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -796,10 +796,10 @@
             <a href="#" class="quick-link" onclick="cargarCertificacion(event)">📦 Certificación de Carga</a>
             <a href="#" class="quick-link" onclick="cargarSolicitudUtiles(event)">🧹 Útiles y Limpieza</a>
             <a href="#" class="quick-link" onclick="cargarClientes(event)">👥 Clientes</a>
-            <a href="#" class="quick-link" onclick="cargarActualizacionDatos(event)">✏️ Actualización Datos del Cliente</a>
             <a href="#" class="quick-link" onclick="cargarCheques(event)">💳 Cheques</a>
             <a href="#" class="quick-link" onclick="cargarSolicitudPrecintos(event)">🏷️ Solicitud Precintos</a>
             <a href="#" class="quick-link" onclick="cargarCotizaciones(event)">📊 Cotizaciones</a>
+            <a href="#" class="quick-link" onclick="cargarActualizacionDatos(event)">✏️ Actualización Datos Cliente</a>
         </div>
 
         <!-- Dynamic Content Area -->

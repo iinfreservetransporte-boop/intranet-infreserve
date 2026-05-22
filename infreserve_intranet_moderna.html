@@ -667,8 +667,8 @@
                         <li class="dropdown-header">Gestión Operativa</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudPago(event)"><span class="icon">💰</span> Solicitud de Pago</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCertificacion(event)"><span class="icon">📦</span> Certificación de Carga</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarCotizaciones(event)"><span class="icon">📊</span> Cotización y Presupuestos</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudUtiles(event)"><span class="icon">🧹</span> Solicitud de Útiles y Artículos de Limpieza</a></li>
+                        <!-- Cotización y Presupuestos eliminado de aquí -->
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -717,7 +717,7 @@
                                 <li><a href="#" class="dropdown-link" onclick="cargarInspeccionMantenimiento(event)"><span class="icon">🔍</span> Inspecciones</a></li>
                             </ul>
                         </li>
-                        <!-- Nuevo: Transporte con submenú -->
+                        <!-- Transporte con submenú -->
                         <li class="dropdown-item-has-sub">
                             <a href="#" class="dropdown-link" onclick="return false;">
                                 <span class="icon">🚛</span> Transporte
@@ -755,10 +755,15 @@
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudPrecintos(event)"><span class="icon">🏷️</span> Solicitud de Precintos tipo Botella</a></li>
                     </ul>
                 </li>
+                <!-- ===== COMERCIAL CON DROPDOWN (NUEVO) ===== -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="cargarComercial(event)">
+                    <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">📈</span> Comercial
-                    </a>
+                    </button>
+                    <ul class="dropdown">
+                        <li class="dropdown-header">Gestión Comercial</li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarCotizaciones(event)"><span class="icon">📊</span> Cotización y Presupuestos</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="cargarGerencia(event)">
@@ -788,12 +793,12 @@
             <span class="quick-label">Acceso Rápido:</span>
             <a href="#" class="quick-link" onclick="cargarSolicitudPago(event)">💰 Solicitud de Pago</a>
             <a href="#" class="quick-link" onclick="cargarCertificacion(event)">📦 Certificación de Carga</a>
-            <a href="#" class="quick-link" onclick="cargarCotizaciones(event)">📊 Cotizaciones</a>
             <a href="#" class="quick-link" onclick="cargarSolicitudUtiles(event)">🧹 Útiles y Limpieza</a>
             <a href="#" class="quick-link" onclick="cargarClientes(event)">👥 Clientes</a>
             <a href="#" class="quick-link" onclick="cargarActualizacionDatos(event)">✏️ Actualización Datos del Cliente</a>
             <a href="#" class="quick-link" onclick="cargarCheques(event)">💳 Cheques</a>
             <a href="#" class="quick-link" onclick="cargarSolicitudPrecintos(event)">🏷️ Solicitud Precintos</a>
+            <a href="#" class="quick-link" onclick="cargarCotizaciones(event)">📊 Cotizaciones</a>
         </div>
 
         <!-- Dynamic Content Area -->
@@ -907,7 +912,6 @@
             cargarContenido('#', 'Inspecciones de Mantenimiento (próximamente)', false);
         }
 
-        // Nueva función para Inspecciones de Transporte
         function cargarInspeccionTransporte(event) {
             if (event) event.preventDefault();
             cargarContenido('#', 'Inspecciones de Transporte (próximamente)', false);
@@ -1113,9 +1117,8 @@
             }
         }
 
-        // Manejo de submenús en móvil (toggle anidado)
+        // Manejo de submenús en móvil
         document.addEventListener('DOMContentLoaded', function() {
-            // Para móvil, permitir abrir submenús al hacer clic en los items que tienen submenu
             const submenuParents = document.querySelectorAll('.dropdown-item-has-sub');
             submenuParents.forEach(parent => {
                 const link = parent.querySelector('.dropdown-link');

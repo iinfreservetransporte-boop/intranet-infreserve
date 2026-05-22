@@ -740,6 +740,8 @@
                         <li class="dropdown-header">Gestión Tecnológica</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarTecnologia(event)"><span class="icon">💻</span> Tecnología</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarUbicacionCamaras(event)"><span class="icon">📷</span> Ubicación de Cámaras</a></li>
+                        <!-- NUEVO ÍTEM: Ubicación de Extintores -->
+                        <li><a href="#" class="dropdown-link" onclick="cargarUbicacionExtintores(event)"><span class="icon">🔥</span> Ubicación de Extintores</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -842,8 +844,10 @@
         const ACTUALIZACION_DATOS_URL = 'https://script.google.com/macros/s/AKfycbwd-iWxH0z5IygwIpTue-nPbhC2JUgf3Nm1P9Ur2_-MAdutgxAUs7HiXXiZCu6CpOKZ0g/exec';
         const TEMPERATURA_URL = 'https://cloud.tzonedigital.com/LoginIndex';
         const SOLICITUD_PRECINTOS_URL = 'https://script.google.com/macros/s/AKfycbx5CXi4wEEoc12-UAvmaTG4wkWadJ1cLoA1vU6jNbcGDV3JAIGlr11lKO4S5EGwsHSM/exec';
-        // NUEVA URL de la hoja de cálculo publicada para incrustar en iframe
+        // Ubicación de Cámaras (ya existente)
         const UBICACION_CAMARAS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSBVQiYJE3JAgRT0Cuv9dqxmIXs6f085i1IHoNesX9YLqW_wvxCQmi2MOXO1uXhjKm3KfYj2MTpvx0g/pubhtml?gid=1323538902&single=true';
+        // NUEVA URL: Ubicación de Extintores
+        const UBICACION_EXTINTORES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDwunlj0PB809wm7C5TWE5mchOWit-0BG6q_qPLTdNRJLslzIFYUOuEeNbrQfBf8oSUK1OUeo9-BBZ/pubhtml?gid=1616455784&single=true';
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
@@ -993,10 +997,16 @@
             cargarContenido(SOLICITUD_PRECINTOS_URL, 'Solicitud de Precintos tipo Botella', true);
         }
 
-        // Función para cargar la ubicación de cámaras dentro de la intranet (iframe)
+        // Funciones para Tecnología
         function cargarUbicacionCamaras(event) {
             if (event) event.preventDefault();
             cargarContenido(UBICACION_CAMARAS_URL, 'Ubicación de Cámaras', true);
+        }
+
+        // NUEVA FUNCIÓN: Ubicación de Extintores
+        function cargarUbicacionExtintores(event) {
+            if (event) event.preventDefault();
+            cargarContenido(UBICACION_EXTINTORES_URL, 'Ubicación de Extintores', true);
         }
 
         function cargarComercial(event) {

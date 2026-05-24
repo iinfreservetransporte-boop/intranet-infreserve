@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infreserve - Intranet</title>
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌐%3C/text%3E%3C/svg%3E">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ===== ESTILOS (MANTENIDOS IGUALES) ===== */
         :root {
@@ -442,6 +444,137 @@
             color: var(--text-light);
         }
 
+        /* ===== TABLA DE DOCUMENTOS PROFESIONAL ===== */
+        .tabla-documentos {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+
+        .tabla-documentos thead tr {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+        }
+
+        .tabla-documentos th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tabla-documentos td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        .tabla-documentos tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        .tabla-documentos tbody tr:hover {
+            background: var(--bg);
+        }
+
+        .tabla-documentos tbody tr:nth-child(even) {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .tabla-documentos tbody tr:nth-child(even):hover {
+            background: var(--bg);
+        }
+
+        .badge-tipo {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #e9ecef;
+            color: #495057;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-descarga {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #28a745;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-descarga:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(40,167,69,0.3);
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            .tabla-documentos,
+            .tabla-documentos thead,
+            .tabla-documentos tbody,
+            .tabla-documentos tr,
+            .tabla-documentos td {
+                display: block;
+            }
+            
+            .tabla-documentos thead {
+                display: none;
+            }
+            
+            .tabla-documentos tr {
+                margin-bottom: 16px;
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                overflow: hidden;
+            }
+            
+            .tabla-documentos td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 16px;
+                border-bottom: 1px solid var(--border);
+            }
+            
+            .tabla-documentos td:last-child {
+                border-bottom: none;
+            }
+            
+            .tabla-documentos td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                color: var(--primary);
+                width: 45%;
+                font-size: 12px;
+            }
+            
+            .badge-tipo {
+                font-size: 10px;
+            }
+            
+            .btn-descarga {
+                padding: 4px 12px;
+                font-size: 11px;
+            }
+        }
+
         /* ===== FOOTER ===== */
         .footer {
             background: var(--dark);
@@ -488,7 +621,25 @@
             color: var(--secondary);
         }
 
-        /* ===== MOBILE RESPONSIVE ===== */
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-light);
+        }
+
+        /* ===== MOBILE RESPONSIVE GENERAL ===== */
         @media (max-width: 768px) {
             .header-top {
                 padding: 8px 16px;
@@ -605,24 +756,6 @@
                 text-align: center;
             }
         }
-
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-light);
-        }
     </style>
 </head>
 <body>
@@ -667,6 +800,7 @@
                         <li class="dropdown-header">Gestión Operativa</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudPago(event)"><span class="icon">💰</span> Solicitud de Pago</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCertificacion(event)"><span class="icon">📦</span> Certificación de Carga</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Operaciones y Logística', 'Documentos Operaciones')"><span class="icon">📁</span> Documentos y Formatos</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -680,6 +814,7 @@
                         <li><a href="#" class="dropdown-link" onclick="cargarDepartamentos(event)"><span class="icon">🏢</span> Departamentos</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarProveedores(event)"><span class="icon">🤝</span> Proveedores</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCxCP(event)"><span class="icon">📑</span> CxCP</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Administración y Finanzas', 'Documentos Administración')"><span class="icon">📁</span> Documentos y Formatos</a></li>
                         <li class="dropdown-divider"></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarProcedimientos(event)"><span class="icon">📄</span> Procedimientos</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarFormularios(event)"><span class="icon">📝</span> Formularios</a></li>
@@ -695,6 +830,7 @@
                         <li class="dropdown-header">Gestión Operativa</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarOperaciones(event)"><span class="icon">📊</span> Dashboard de Operaciones</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarSeguimientoCargas(event)"><span class="icon">📦</span> Seguimiento de Cargas</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Operaciones y Logística', 'Documentos Operaciones')"><span class="icon">📁</span> Documentos y Formatos</a></li>
                         <li class="dropdown-divider"></li>
                         <!-- Bodega con submenú -->
                         <li class="dropdown-item-has-sub">
@@ -703,6 +839,7 @@
                             </a>
                             <ul class="dropdown">
                                 <li><a href="#" class="dropdown-link" onclick="cargarInspeccionBodega(event)"><span class="icon">🔍</span> Inspecciones</a></li>
+                                <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Operaciones y Logística', 'Documentos Bodega')"><span class="icon">📁</span> Documentos y Formatos</a></li>
                             </ul>
                         </li>
                         <!-- Mantenimiento con submenú -->
@@ -712,6 +849,7 @@
                             </a>
                             <ul class="dropdown">
                                 <li><a href="#" class="dropdown-link" onclick="cargarInspeccionMantenimiento(event)"><span class="icon">🔍</span> Inspecciones</a></li>
+                                <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Operaciones y Logística', 'Documentos Mantenimiento')"><span class="icon">📁</span> Documentos y Formatos</a></li>
                             </ul>
                         </li>
                         <!-- Transporte con submenú -->
@@ -721,15 +859,21 @@
                             </a>
                             <ul class="dropdown">
                                 <li><a href="#" class="dropdown-link" onclick="cargarInspeccionTransporte(event)"><span class="icon">🔍</span> Inspecciones</a></li>
+                                <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Operaciones y Logística', 'Documentos Transporte')"><span class="icon">📁</span> Documentos y Formatos</a></li>
                             </ul>
                         </li>
                     </ul>
                 </li>
                 <!-- Fin Operaciones -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="cargarGesHumana(event)">
+                    <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">👤</span> Ges. Humana
-                    </a>
+                    </button>
+                    <ul class="dropdown">
+                        <li class="dropdown-header">Gestión Humana</li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarGesHumana(event)"><span class="icon">👤</span> Ges. Humana</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Gestión Humana', 'Documentos Gestión Humana')"><span class="icon">📁</span> Documentos y Formatos</a></li>
+                    </ul>
                 </li>
                 <!-- ===== TECNOLOGÍA CON DROPDOWN ===== -->
                 <li class="nav-item">
@@ -740,14 +884,19 @@
                         <li class="dropdown-header">Gestión Tecnológica</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarTecnologia(event)"><span class="icon">💻</span> Tecnología</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarUbicacionCamaras(event)"><span class="icon">📷</span> Ubicación de Cámaras</a></li>
-                        <!-- NUEVO ÍTEM: Ubicación de Extintores -->
                         <li><a href="#" class="dropdown-link" onclick="cargarUbicacionExtintores(event)"><span class="icon">🔥</span> Ubicación de Extintores</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Tecnología de la Información', 'Documentos Tecnología')"><span class="icon">📁</span> Documentos y Formatos</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="cargarSeguridad(event)">
+                    <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">🔒</span> Seguridad
-                    </a>
+                    </button>
+                    <ul class="dropdown">
+                        <li class="dropdown-header">Seguridad, Higiene y Ambiente</li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarSeguridad(event)"><span class="icon">🔒</span> Seguridad</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Seguridad, Higiene y Ambiente', 'Documentos Seguridad')"><span class="icon">📁</span> Documentos y Formatos</a></li>
+                    </ul>
                 </li>
                 <!-- ===== TRÁFICO CON DROPDOWN ===== -->
                 <li class="nav-item">
@@ -758,6 +907,7 @@
                         <li class="dropdown-header">Gestión de Tráfico</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarTrafico(event)"><span class="icon">🚦</span> Tráfico</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarSolicitudPrecintos(event)"><span class="icon">🏷️</span> Solicitud de Precintos tipo Botella</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Tráfico y Documentación', 'Documentos Tráfico')"><span class="icon">📁</span> Documentos y Formatos</a></li>
                     </ul>
                 </li>
                 <!-- ===== COMERCIAL CON DROPDOWN ===== -->
@@ -769,17 +919,30 @@
                         <li class="dropdown-header">Gestión Comercial</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCotizaciones(event)"><span class="icon">📊</span> Cotización y Presupuestos</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarActualizacionDatos(event)"><span class="icon">✏️</span> Actualización de Datos del Cliente</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Comercial', 'Documentos Comercial')"><span class="icon">📁</span> Documentos y Formatos</a></li>
                     </ul>
                 </li>
+                <!-- Ger. General -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="cargarGerencia(event)">
+                    <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">👔</span> Ger. General
-                    </a>
+                    </button>
+                    <ul class="dropdown">
+                        <li class="dropdown-header">Gerencia General</li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarGerencia(event)"><span class="icon">👔</span> Ger. General</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Gerencia General', 'Documentos Gerencia General')"><span class="icon">📁</span> Documentos y Formatos</a></li>
+                    </ul>
                 </li>
+                <!-- Ges. Control -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="cargarControl(event)">
+                    <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">📊</span> Ges. Control
-                    </a>
+                    </button>
+                    <ul class="dropdown">
+                        <li class="dropdown-header">Sistemas de Gestión y Control</li>
+                        <li><a href="#" class="dropdown-link" onclick="cargarControl(event)"><span class="icon">📊</span> Ges. Control</a></li>
+                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Sistemas de Gestión y Control', 'Documentos Gestión y Control')"><span class="icon">📁</span> Documentos y Formatos</a></li>
+                    </ul>
                 </li>
             </ul>
         </nav>
@@ -844,9 +1007,7 @@
         const ACTUALIZACION_DATOS_URL = 'https://script.google.com/macros/s/AKfycbwd-iWxH0z5IygwIpTue-nPbhC2JUgf3Nm1P9Ur2_-MAdutgxAUs7HiXXiZCu6CpOKZ0g/exec';
         const TEMPERATURA_URL = 'https://cloud.tzonedigital.com/LoginIndex';
         const SOLICITUD_PRECINTOS_URL = 'https://script.google.com/macros/s/AKfycbx5CXi4wEEoc12-UAvmaTG4wkWadJ1cLoA1vU6jNbcGDV3JAIGlr11lKO4S5EGwsHSM/exec';
-        // Ubicación de Cámaras (ya existente)
         const UBICACION_CAMARAS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSBVQiYJE3JAgRT0Cuv9dqxmIXs6f085i1IHoNesX9YLqW_wvxCQmi2MOXO1uXhjKm3KfYj2MTpvx0g/pubhtml?gid=1323538902&single=true';
-        // NUEVA URL: Ubicación de Extintores
         const UBICACION_EXTINTORES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDwunlj0PB809wm7C5TWE5mchOWit-0BG6q_qPLTdNRJLslzIFYUOuEeNbrQfBf8oSUK1OUeo9-BBZ/pubhtml?gid=1616455784&single=true';
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
@@ -997,18 +1158,6 @@
             cargarContenido(SOLICITUD_PRECINTOS_URL, 'Solicitud de Precintos tipo Botella', true);
         }
 
-        // Funciones para Tecnología
-        function cargarUbicacionCamaras(event) {
-            if (event) event.preventDefault();
-            cargarContenido(UBICACION_CAMARAS_URL, 'Ubicación de Cámaras', true);
-        }
-
-        // NUEVA FUNCIÓN: Ubicación de Extintores
-        function cargarUbicacionExtintores(event) {
-            if (event) event.preventDefault();
-            cargarContenido(UBICACION_EXTINTORES_URL, 'Ubicación de Extintores', true);
-        }
-
         function cargarComercial(event) {
             if (event) event.preventDefault();
             cargarContenido('#', 'Comercial (próximamente)', false);
@@ -1022,6 +1171,107 @@
         function cargarControl(event) {
             if (event) event.preventDefault();
             cargarContenido('#', 'Gestión de Control (próximamente)', false);
+        }
+
+        // Funciones para Tecnología
+        function cargarUbicacionCamaras(event) {
+            if (event) event.preventDefault();
+            cargarContenido(UBICACION_CAMARAS_URL, 'Ubicación de Cámaras', true);
+        }
+
+        function cargarUbicacionExtintores(event) {
+            if (event) event.preventDefault();
+            cargarContenido(UBICACION_EXTINTORES_URL, 'Ubicación de Extintores', true);
+        }
+
+        // ========== FUNCIÓN PARA MOSTRAR DOCUMENTOS (TABLA PROFESIONAL) ==========
+        function mostrarDocumentos(departamento, titulo) {
+            if (window.event) window.event.preventDefault();
+            // Mostrar loading
+            document.getElementById('dynamicContent').innerHTML = `
+                <div class="content-header">
+                    <div class="content-title">${titulo}</div>
+                    <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver al Dashboard</button>
+                </div>
+                <div class="loading-message">Cargando documentos...</div>
+            `;
+            
+            google.script.run
+                .withSuccessHandler(function(result) {
+                    if (!result.exito) {
+                        document.getElementById('dynamicContent').innerHTML = `
+                            <div class="content-header">
+                                <div class="content-title">${titulo}</div>
+                                <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver</button>
+                            </div>
+                            <div class="alert-error" style="padding:20px; text-align:center;">Error: ${result.error || 'No se pudieron cargar los documentos'}</div>
+                        `;
+                        return;
+                    }
+                    const docs = result.documentos || [];
+                    if (docs.length === 0) {
+                        document.getElementById('dynamicContent').innerHTML = `
+                            <div class="content-header">
+                                <div class="content-title">${titulo}</div>
+                                <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver</button>
+                            </div>
+                            <div style="text-align:center; padding:60px; color:#999;">No hay documentos disponibles para esta sección.</div>
+                        `;
+                        return;
+                    }
+                    let html = `
+                        <div class="content-header">
+                            <div class="content-title">${titulo}</div>
+                            <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver al Dashboard</button>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="tabla-documentos">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre del Documento</th>
+                                        <th>Tipo</th>
+                                        <th>Código</th>
+                                        <th>Procedimiento Relacionado</th>
+                                        <th>Descargar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    `;
+                    docs.forEach(d => {
+                        html += `
+                            <tr>
+                                <td data-label="Nombre del Documento">${escapeHtml(d.nombre)}</td>
+                                <td data-label="Tipo"><span class="badge-tipo">${escapeHtml(d.tipo)}</span></td>
+                                <td data-label="Código">${escapeHtml(d.codigo)}</td>
+                                <td data-label="Procedimiento">${escapeHtml(d.procedimiento || '-')}</td>
+                                <td data-label="Descargar"><a href="${escapeHtml(d.url)}" target="_blank" class="btn-descarga"><i class="fas fa-download"></i> Descargar</a></td>
+                            </tr>
+                        `;
+                    });
+                    html += `</tbody></table></div>`;
+                    document.getElementById('dynamicContent').innerHTML = html;
+                })
+                .withFailureHandler(function(error) {
+                    document.getElementById('dynamicContent').innerHTML = `
+                        <div class="content-header">
+                            <div class="content-title">${titulo}</div>
+                            <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver</button>
+                        </div>
+                        <div class="alert-error" style="padding:20px; text-align:center;">Error de comunicación: ${error.message}</div>
+                    `;
+                })
+                .obtenerDocumentos(departamento);
+        }
+
+        // Función auxiliar para escapar HTML
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
         }
 
         // ========== FUNCIONES DE SESIÓN Y UTILIDADES ==========
@@ -1136,6 +1386,7 @@
 
         // Manejo de submenús en móvil
         document.addEventListener('DOMContentLoaded', function() {
+            // Para móvil, permitir abrir submenús al hacer clic en los items que tienen submenu
             const submenuParents = document.querySelectorAll('.dropdown-item-has-sub');
             submenuParents.forEach(parent => {
                 const link = parent.querySelector('.dropdown-link');

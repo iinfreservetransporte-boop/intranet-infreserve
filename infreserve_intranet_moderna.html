@@ -145,7 +145,7 @@
             margin-top: -2px;
         }
 
-        /* ===== NAVIGATION ===== */
+        /* ===== NAVIGATION (igual) ===== */
         .nav-toggle {
             display: none;
             background: none;
@@ -1009,6 +1009,26 @@
         const UBICACION_CAMARAS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSBVQiYJE3JAgRT0Cuv9dqxmIXs6f085i1IHoNesX9YLqW_wvxCQmi2MOXO1uXhjKm3KfYj2MTpvx0g/pubhtml?gid=1323538902&single=true';
         const UBICACION_EXTINTORES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDwunlj0PB809wm7C5TWE5mchOWit-0BG6q_qPLTdNRJLslzIFYUOuEeNbrQfBf8oSUK1OUeo9-BBZ/pubhtml?gid=1616455784&single=true';
 
+        // ========== FUNCIÓN DE LOGGING ==========
+        function registrarEvento(accion, detalle) {
+            const session = getUserData();
+            if (!session) return;
+            
+            fetch(LOGIN_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    action: 'registrarActividad',
+                    usuario: session.nombre,
+                    email: session.email,
+                    rol: session.rol,
+                    accion: accion,
+                    detalle: detalle,
+                    userAgent: navigator.userAgent
+                })
+            }).catch(e => console.error('Error logging:', e));
+        }
+
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
             const container = document.getElementById('dynamicContent');
@@ -1040,152 +1060,181 @@
             cargarOperaciones(event);
         }
 
-        // ========== FUNCIONES PARA CADA MÓDULO ==========
+        // ========== FUNCIONES PARA CADA MÓDULO (con logging) ==========
         function cargarSolicitudPago(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Solicitud de Pago');
             cargarContenido('#', 'Solicitud de Pago (próximamente)', false);
         }
 
         function cargarCertificacion(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Certificación de Carga');
             cargarContenido('#', 'Certificación de Carga (próximamente)', false);
         }
 
         function cargarCotizaciones(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Cotización y Presupuestos');
             cargarContenido(COTIZACIONES_URL, 'Cotización y Presupuestos', true);
         }
 
         function cargarSolicitudUtiles(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Solicitud de Útiles y Artículos de Limpieza');
             cargarContenido(SOLICITUD_UTILES_URL, 'Solicitud de Útiles y Artículos de Limpieza', true);
         }
 
         function cargarOperaciones(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Dashboard de Operaciones');
             cargarContenido(OPERACIONES_URL, 'Dashboard de Operaciones', true);
         }
 
         function cargarActualizacionDatos(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Actualización de Datos del Cliente');
             cargarContenido(ACTUALIZACION_DATOS_URL, 'Actualización de Datos del Cliente', true);
         }
 
         // Inspecciones
         function cargarInspeccionBodega(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Inspecciones de Bodega');
             cargarContenido('#', 'Inspecciones de Bodega (próximamente)', false);
         }
 
         function cargarInspeccionMantenimiento(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Inspecciones de Mantenimiento');
             cargarContenido('#', 'Inspecciones de Mantenimiento (próximamente)', false);
         }
 
         function cargarInspeccionTransporte(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Inspecciones de Transporte');
             cargarContenido('#', 'Inspecciones de Transporte (próximamente)', false);
         }
 
         function abrirControlTemperatura(event) {
             if (event) event.preventDefault();
+            registrarEvento('external_link', 'Control de Temperatura');
             window.open(TEMPERATURA_URL, '_blank');
         }
 
         function cargarSeguimientoCargas(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Seguimiento de Cargas');
             cargarContenido('#', 'Seguimiento de Cargas (próximamente)', false);
         }
 
         function cargarClientes(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Clientes');
             cargarContenido('#', 'Gestión de Clientes (próximamente)', false);
         }
 
         function cargarDepartamentos(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Departamentos');
             cargarContenido('#', 'Departamentos (próximamente)', false);
         }
 
         function cargarProveedores(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Proveedores');
             cargarContenido('#', 'Proveedores (próximamente)', false);
         }
 
         function cargarCxCP(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'CxCP');
             cargarContenido('#', 'CxCP (próximamente)', false);
         }
 
         function cargarProcedimientos(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Procedimientos');
             cargarContenido('#', 'Procedimientos (próximamente)', false);
         }
 
         function cargarFormularios(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Formularios');
             cargarContenido('#', 'Formularios (próximamente)', false);
         }
 
         function cargarCheques(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Impresión de Cheques');
             cargarContenido('#', 'Impresión de Cheques (próximamente)', false);
         }
 
         function cargarGesHumana(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Gestión Humana');
             cargarContenido('#', 'Gestión Humana (próximamente)', false);
         }
 
         function cargarTecnologia(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Tecnología');
             cargarContenido('#', 'Tecnología (próximamente)', false);
         }
 
         function cargarSeguridad(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Seguridad');
             cargarContenido('#', 'Seguridad (próximamente)', false);
         }
 
         function cargarTrafico(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Tráfico');
             cargarContenido('#', 'Tráfico (próximamente)', false);
         }
 
         function cargarSolicitudPrecintos(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Solicitud de Precintos');
             cargarContenido(SOLICITUD_PRECINTOS_URL, 'Solicitud de Precintos tipo Botella', true);
         }
 
         function cargarComercial(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Comercial');
             cargarContenido('#', 'Comercial (próximamente)', false);
         }
 
         function cargarGerencia(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Gerencia General');
             cargarContenido('#', 'Gerencia General (próximamente)', false);
         }
 
         function cargarControl(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Gestión de Control');
             cargarContenido('#', 'Gestión de Control (próximamente)', false);
         }
 
         // Funciones para Tecnología
         function cargarUbicacionCamaras(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Ubicación de Cámaras');
             cargarContenido(UBICACION_CAMARAS_URL, 'Ubicación de Cámaras', true);
         }
 
         function cargarUbicacionExtintores(event) {
             if (event) event.preventDefault();
+            registrarEvento('view_module', 'Ubicación de Extintores');
             cargarContenido(UBICACION_EXTINTORES_URL, 'Ubicación de Extintores', true);
         }
 
-        // ========== FUNCIÓN PARA MOSTRAR DOCUMENTOS (USANDO FETCH A APPS SCRIPT) ==========
+        // ========== FUNCIÓN PARA MOSTRAR DOCUMENTOS (CON LOGGING EN DESCARGA) ==========
         function mostrarDocumentos(departamento, titulo) {
             if (window.event) window.event.preventDefault();
+            registrarEvento('view_documents', `Departamento: ${departamento} - ${titulo}`);
             const container = document.getElementById('dynamicContent');
             container.innerHTML = `
                 <div class="content-header">
@@ -1195,7 +1244,7 @@
                 <div class="loading-message">Cargando documentos...</div>
             `;
 
-            const scriptUrl = LOGIN_URL; // la URL de tu Apps Script (termina en /exec)
+            const scriptUrl = LOGIN_URL;
             const url = `${scriptUrl}?departamento=${encodeURIComponent(departamento)}`;
 
             fetch(url)
@@ -1235,13 +1284,15 @@
                                 <tbody>
                     `;
                     docs.forEach(d => {
+                        // Escapar y agregar evento de descarga
+                        const nombreDoc = escapeHtml(d.nombre);
                         html += `
                             <tr>
-                                <td data-label="Nombre del Documento">${escapeHtml(d.nombre)}</td>
+                                <td data-label="Nombre del Documento">${nombreDoc}</td>
                                 <td data-label="Tipo"><span class="badge-tipo">${escapeHtml(d.tipo)}</span></td>
                                 <td data-label="Código">${escapeHtml(d.codigo)}</td>
                                 <td data-label="Procedimiento">${escapeHtml(d.procedimiento || '-')}</td>
-                                <td data-label="Descargar"><a href="${escapeHtml(d.url)}" target="_blank" class="btn-descarga"><i class="fas fa-download"></i> Descargar</a></td>
+                                <td data-label="Descargar"><a href="${escapeHtml(d.url)}" target="_blank" class="btn-descarga" onclick="registrarEvento('download', '${nombreDoc.replace(/'/g, "\\'")}')"><i class="fas fa-download"></i> Descargar</a></td>
                             </tr>
                         `;
                     });
@@ -1303,6 +1354,7 @@
                         localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
                         actualizarUI(sessionData);
                         window.history.replaceState({}, document.title, window.location.pathname);
+                        registrarEvento('login', 'Inicio de sesión');
                         cargarOperaciones();
                         return true;
                     }
@@ -1315,6 +1367,11 @@
 
             if (userData && userData.token && userData.id) {
                 actualizarUI(userData);
+                // Evitar registrar login cada vez que se recarga la página, solo la primera vez
+                if (!sessionStorage.getItem('login_logged')) {
+                    registrarEvento('login', 'Inicio de sesión (recarga)');
+                    sessionStorage.setItem('login_logged', 'true');
+                }
                 cargarOperaciones();
                 return true;
             }
@@ -1344,6 +1401,7 @@
 
         function handleLogout(e) {
             if (e && e.preventDefault) e.preventDefault();
+            registrarEvento('logout', 'Cierre de sesión');
             if (confirm('¿Está seguro que desea cerrar sesión?')) {
                 localStorage.removeItem(SESSION_KEY);
                 sessionStorage.removeItem(SESSION_KEY);

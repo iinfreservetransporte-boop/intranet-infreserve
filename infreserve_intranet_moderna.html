@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infreserve - Intranet</title>
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌐%3C/text%3E%3C/svg%3E">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ===== ESTILOS (MANTENIDOS IGUALES) ===== */
@@ -1184,33 +1183,37 @@
             cargarContenido(UBICACION_EXTINTORES_URL, 'Ubicación de Extintores', true);
         }
 
-        // ========== FUNCIÓN PARA MOSTRAR DOCUMENTOS (TABLA PROFESIONAL) ==========
+        // ========== FUNCIÓN PARA MOSTRAR DOCUMENTOS (USANDO FETCH A APPS SCRIPT) ==========
         function mostrarDocumentos(departamento, titulo) {
             if (window.event) window.event.preventDefault();
-            // Mostrar loading
-            document.getElementById('dynamicContent').innerHTML = `
+            const container = document.getElementById('dynamicContent');
+            container.innerHTML = `
                 <div class="content-header">
                     <div class="content-title">${titulo}</div>
                     <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver al Dashboard</button>
                 </div>
                 <div class="loading-message">Cargando documentos...</div>
             `;
-            
-            google.script.run
-                .withSuccessHandler(function(result) {
+
+            const scriptUrl = LOGIN_URL; // la URL de tu Apps Script (termina en /exec)
+            const url = `${scriptUrl}?departamento=${encodeURIComponent(departamento)}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(result => {
                     if (!result.exito) {
-                        document.getElementById('dynamicContent').innerHTML = `
+                        container.innerHTML = `
                             <div class="content-header">
                                 <div class="content-title">${titulo}</div>
                                 <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver</button>
                             </div>
-                            <div class="alert-error" style="padding:20px; text-align:center;">Error: ${result.error || 'No se pudieron cargar los documentos'}</div>
+                            <div style="padding:20px; text-align:center; color:red;">Error: ${result.error || 'No se pudieron cargar los documentos'}</div>
                         `;
                         return;
                     }
                     const docs = result.documentos || [];
                     if (docs.length === 0) {
-                        document.getElementById('dynamicContent').innerHTML = `
+                        container.innerHTML = `
                             <div class="content-header">
                                 <div class="content-title">${titulo}</div>
                                 <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver</button>
@@ -1227,13 +1230,7 @@
                         <div style="overflow-x: auto;">
                             <table class="tabla-documentos">
                                 <thead>
-                                    <tr>
-                                        <th>Nombre del Documento</th>
-                                        <th>Tipo</th>
-                                        <th>Código</th>
-                                        <th>Procedimiento Relacionado</th>
-                                        <th>Descargar</th>
-                                    </tr>
+                                    <tr><th>Nombre del Documento</th><th>Tipo</th><th>Código</th><th>Procedimiento Relacionado</th><th>Descargar</th></tr>
                                 </thead>
                                 <tbody>
                     `;
@@ -1249,18 +1246,17 @@
                         `;
                     });
                     html += `</tbody></table></div>`;
-                    document.getElementById('dynamicContent').innerHTML = html;
+                    container.innerHTML = html;
                 })
-                .withFailureHandler(function(error) {
-                    document.getElementById('dynamicContent').innerHTML = `
+                .catch(error => {
+                    container.innerHTML = `
                         <div class="content-header">
                             <div class="content-title">${titulo}</div>
                             <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver</button>
                         </div>
-                        <div class="alert-error" style="padding:20px; text-align:center;">Error de comunicación: ${error.message}</div>
+                        <div style="padding:20px; text-align:center; color:red;">Error de comunicación: ${error.message}</div>
                     `;
-                })
-                .obtenerDocumentos(departamento);
+                });
         }
 
         // Función auxiliar para escapar HTML
@@ -1307,7 +1303,6 @@
                         localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
                         actualizarUI(sessionData);
                         window.history.replaceState({}, document.title, window.location.pathname);
-                        // Cargar el dashboard después de validar sesión
                         cargarOperaciones();
                         return true;
                     }
@@ -1320,7 +1315,6 @@
 
             if (userData && userData.token && userData.id) {
                 actualizarUI(userData);
-                // Cargar el dashboard después de validar sesión
                 cargarOperaciones();
                 return true;
             }
@@ -1386,7 +1380,6 @@
 
         // Manejo de submenús en móvil
         document.addEventListener('DOMContentLoaded', function() {
-            // Para móvil, permitir abrir submenús al hacer clic en los items que tienen submenu
             const submenuParents = document.querySelectorAll('.dropdown-item-has-sub');
             submenuParents.forEach(parent => {
                 const link = parent.querySelector('.dropdown-link');

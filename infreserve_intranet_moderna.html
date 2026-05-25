@@ -764,7 +764,7 @@
         <div class="header-top">
             <div class="user-info">
                 <div class="user-avatar" id="userAvatar">JH</div>
-                <span id="userNameDisplay">Bienvenido, <strong>Jorge Hassan</strong></span>
+                <span id="userNameDisplay">Bienvenido, <strong>Cargando...</strong></span>
             </div>
             <a href="#" class="btn-logout" onclick="handleLogout(event)">
                 <span>🚪</span> Cerrar Sesión
@@ -785,166 +785,8 @@
             <button class="nav-toggle" onclick="toggleNav()" aria-label="Menú">☰</button>
         </div>
         <nav class="nav" id="mainNav">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="cargarOperaciones(event)">
-                        <span class="icon">🏠</span> Inicio
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" onclick="toggleDropdown(this)">
-                        <span class="icon">📋</span> Procesos
-                    </button>
-                    <ul class="dropdown">
-                        <li class="dropdown-header">Gestión Operativa</li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarSolicitudPago(event)"><span class="icon">💰</span> Solicitud de Pago</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarCertificacion(event)"><span class="icon">📦</span> Certificación de Carga</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Operaciones y Logística', 'Documentos Operaciones')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" onclick="toggleDropdown(this)">
-                        <span class="icon">⚙️</span> Administración
-                    </button>
-                    <ul class="dropdown">
-                        <li class="dropdown-header">Control de Listas</li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarClientes(event)"><span class="icon">👥</span> Clientes</a></li>
-                        <!-- Línea eliminada: Solicitud de Útiles movida a Operaciones -->
-                        <li><a href="#" class="dropdown-link" onclick="cargarDepartamentos(event)"><span class="icon">🏢</span> Departamentos</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarProveedores(event)"><span class="icon">🤝</span> Proveedores</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarCxCP(event)"><span class="icon">📑</span> CxCP</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Administración y Finanzas', 'Documentos Administración')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                        <li class="dropdown-divider"></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarProcedimientos(event)"><span class="icon">📄</span> Procedimientos</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarFormularios(event)"><span class="icon">📝</span> Formularios</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarCheques(event)"><span class="icon">💳</span> Impresión de Cheques</a></li>
-                    </ul>
-                </li>
-                <!-- ===== OPERACIONES CON SUBMENÚS ANIDADOS (MODIFICADO) ===== -->
-                <li class="nav-item">
-                    <button class="nav-link" onclick="toggleDropdown(this)">
-                        <span class="icon">🚢</span> Operaciones
-                    </button>
-                    <ul class="dropdown">
-                        <li class="dropdown-header">Gestión Operativa</li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarOperaciones(event)"><span class="icon">📊</span> Dashboard de Operaciones</a></li>
-                        <!-- Ítem movido de Administración a Operaciones -->
-                        <li><a href="#" class="dropdown-link" onclick="cargarSolicitudUtiles(event)"><span class="icon">🧹</span> Solicitud de Útiles y Artículos de Limpieza</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarSeguimientoCargas(event)"><span class="icon">📦</span> Seguimiento de Cargas</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Operaciones y Logística', 'Documentos Operaciones')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                        <li class="dropdown-divider"></li>
-                        <!-- Bodega con submenú -->
-                        <li class="dropdown-item-has-sub">
-                            <a href="#" class="dropdown-link" onclick="return false;">
-                                <span class="icon">🏪</span> Bodega
-                            </a>
-                            <ul class="dropdown">
-                                <li><a href="#" class="dropdown-link" onclick="cargarInspeccionBodega(event)"><span class="icon">🔍</span> Inspecciones</a></li>
-                                <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Operaciones y Logística', 'Documentos Bodega')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                            </ul>
-                        </li>
-                        <!-- Mantenimiento con submenú -->
-                        <li class="dropdown-item-has-sub">
-                            <a href="#" class="dropdown-link" onclick="return false;">
-                                <span class="icon">🛠️</span> Mantenimiento
-                            </a>
-                            <ul class="dropdown">
-                                <li><a href="#" class="dropdown-link" onclick="cargarInspeccionMantenimiento(event)"><span class="icon">🔍</span> Inspecciones</a></li>
-                                <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Operaciones y Logística', 'Documentos Mantenimiento')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                            </ul>
-                        </li>
-                        <!-- Transporte con submenú -->
-                        <li class="dropdown-item-has-sub">
-                            <a href="#" class="dropdown-link" onclick="return false;">
-                                <span class="icon">🚛</span> Transporte
-                            </a>
-                            <ul class="dropdown">
-                                <li><a href="#" class="dropdown-link" onclick="cargarInspeccionTransporte(event)"><span class="icon">🔍</span> Inspecciones</a></li>
-                                <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Operaciones y Logística', 'Documentos Transporte')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <!-- Fin Operaciones -->
-                <li class="nav-item">
-                    <button class="nav-link" onclick="toggleDropdown(this)">
-                        <span class="icon">👤</span> Ges. Humana
-                    </button>
-                    <ul class="dropdown">
-                        <li class="dropdown-header">Gestión Humana</li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarGesHumana(event)"><span class="icon">👤</span> Ges. Humana</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Gestión Humana', 'Documentos Gestión Humana')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                    </ul>
-                </li>
-                <!-- ===== TECNOLOGÍA CON DROPDOWN ===== -->
-                <li class="nav-item">
-                    <button class="nav-link" onclick="toggleDropdown(this)">
-                        <span class="icon">💻</span> Tecnología
-                    </button>
-                    <ul class="dropdown">
-                        <li class="dropdown-header">Gestión Tecnológica</li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarTecnologia(event)"><span class="icon">💻</span> Tecnología</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarUbicacionCamaras(event)"><span class="icon">📷</span> Ubicación de Cámaras</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarUbicacionExtintores(event)"><span class="icon">🔥</span> Ubicación de Extintores</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Tecnología de la Información', 'Documentos Tecnología')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" onclick="toggleDropdown(this)">
-                        <span class="icon">🔒</span> Seguridad
-                    </button>
-                    <ul class="dropdown">
-                        <li class="dropdown-header">Seguridad, Higiene y Ambiente</li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarSeguridad(event)"><span class="icon">🔒</span> Seguridad</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Seguridad, Higiene y Ambiente', 'Documentos Seguridad')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                    </ul>
-                </li>
-                <!-- ===== TRÁFICO CON DROPDOWN ===== -->
-                <li class="nav-item">
-                    <button class="nav-link" onclick="toggleDropdown(this)">
-                        <span class="icon">🚦</span> Tráfico
-                    </button>
-                    <ul class="dropdown">
-                        <li class="dropdown-header">Gestión de Tráfico</li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarTrafico(event)"><span class="icon">🚦</span> Tráfico</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarSolicitudPrecintos(event)"><span class="icon">🏷️</span> Solicitud de Precintos tipo Botella</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Tráfico y Documentación', 'Documentos Tráfico')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                    </ul>
-                </li>
-                <!-- ===== COMERCIAL CON DROPDOWN ===== -->
-                <li class="nav-item">
-                    <button class="nav-link" onclick="toggleDropdown(this)">
-                        <span class="icon">📈</span> Comercial
-                    </button>
-                    <ul class="dropdown">
-                        <li class="dropdown-header">Gestión Comercial</li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarCotizaciones(event)"><span class="icon">📊</span> Cotización y Presupuestos</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarActualizacionDatos(event)"><span class="icon">✏️</span> Actualización de Datos del Cliente</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Comercial', 'Documentos Comercial')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                    </ul>
-                </li>
-                <!-- Ger. General -->
-                <li class="nav-item">
-                    <button class="nav-link" onclick="toggleDropdown(this)">
-                        <span class="icon">👔</span> Ger. General
-                    </button>
-                    <ul class="dropdown">
-                        <li class="dropdown-header">Gerencia General</li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarGerencia(event)"><span class="icon">👔</span> Ger. General</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Gerencia General', 'Documentos Gerencia General')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                    </ul>
-                </li>
-                <!-- Ges. Control -->
-                <li class="nav-item">
-                    <button class="nav-link" onclick="toggleDropdown(this)">
-                        <span class="icon">📊</span> Ges. Control
-                    </button>
-                    <ul class="dropdown">
-                        <li class="dropdown-header">Sistemas de Gestión y Control</li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarControl(event)"><span class="icon">📊</span> Ges. Control</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Sistemas de Gestión y Control', 'Documentos Gestión y Control')"><span class="icon">📁</span> Documentos y Formatos</a></li>
-                    </ul>
-                </li>
+            <ul class="nav-list" id="navList">
+                <!-- El menú se generará dinámicamente con JavaScript según el rol -->
             </ul>
         </nav>
     </header>
@@ -959,16 +801,8 @@
         </section>
 
         <!-- Quick Links -->
-        <div class="quick-bar">
-            <span class="quick-label">Acceso Rápido:</span>
-            <a href="#" class="quick-link" onclick="cargarSolicitudPago(event)">💰 Solicitud de Pago</a>
-            <a href="#" class="quick-link" onclick="cargarCertificacion(event)">📦 Certificación de Carga</a>
-            <a href="#" class="quick-link" onclick="cargarSolicitudUtiles(event)">🧹 Útiles y Limpieza</a>
-            <a href="#" class="quick-link" onclick="cargarClientes(event)">👥 Clientes</a>
-            <a href="#" class="quick-link" onclick="cargarCheques(event)">💳 Cheques</a>
-            <a href="#" class="quick-link" onclick="cargarSolicitudPrecintos(event)">🏷️ Solicitud Precintos</a>
-            <a href="#" class="quick-link" onclick="cargarCotizaciones(event)">📊 Cotizaciones</a>
-            <a href="#" class="quick-link" onclick="cargarActualizacionDatos(event)">✏️ Actualización Datos Cliente</a>
+        <div class="quick-bar" id="quickBar">
+            <!-- Los accesos rápidos se llenarán dinámicamente -->
         </div>
 
         <!-- Dynamic Content Area -->
@@ -1010,6 +844,9 @@
         const SOLICITUD_PRECINTOS_URL = 'https://script.google.com/macros/s/AKfycbx5CXi4wEEoc12-UAvmaTG4wkWadJ1cLoA1vU6jNbcGDV3JAIGlr11lKO4S5EGwsHSM/exec';
         const UBICACION_CAMARAS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSBVQiYJE3JAgRT0Cuv9dqxmIXs6f085i1IHoNesX9YLqW_wvxCQmi2MOXO1uXhjKm3KfYj2MTpvx0g/pubhtml?gid=1323538902&single=true';
         const UBICACION_EXTINTORES_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDwunlj0PB809wm7C5TWE5mchOWit-0BG6q_qPLTdNRJLslzIFYUOuEeNbrQfBf8oSUK1OUeo9-BBZ/pubhtml?gid=1616455784&single=true';
+
+        let currentUser = null;
+        let currentRol = '';
 
         // ========== FUNCIÓN DE LOGGING ==========
         function registrarEvento(accion, detalle) {
@@ -1065,24 +902,28 @@
         // ========== FUNCIONES PARA CADA MÓDULO (con logging) ==========
         function cargarSolicitudPago(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Procesos')) return;
             registrarEvento('view_module', 'Solicitud de Pago');
             cargarContenido('#', 'Solicitud de Pago (próximamente)', false);
         }
 
         function cargarCertificacion(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Procesos')) return;
             registrarEvento('view_module', 'Certificación de Carga');
             cargarContenido('#', 'Certificación de Carga (próximamente)', false);
         }
 
         function cargarCotizaciones(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Comercial')) return;
             registrarEvento('view_module', 'Cotización y Presupuestos');
             cargarContenido(COTIZACIONES_URL, 'Cotización y Presupuestos', true);
         }
 
         function cargarSolicitudUtiles(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Procesos')) return;
             registrarEvento('view_module', 'Solicitud de Útiles y Artículos de Limpieza');
             cargarContenido(SOLICITUD_UTILES_URL, 'Solicitud de Útiles y Artículos de Limpieza', true);
         }
@@ -1095,6 +936,7 @@
 
         function cargarActualizacionDatos(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Comercial')) return;
             registrarEvento('view_module', 'Actualización de Datos del Cliente');
             cargarContenido(ACTUALIZACION_DATOS_URL, 'Actualización de Datos del Cliente', true);
         }
@@ -1102,18 +944,21 @@
         // Inspecciones
         function cargarInspeccionBodega(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Operaciones')) return;
             registrarEvento('view_module', 'Inspecciones de Bodega');
             cargarContenido('#', 'Inspecciones de Bodega (próximamente)', false);
         }
 
         function cargarInspeccionMantenimiento(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Operaciones')) return;
             registrarEvento('view_module', 'Inspecciones de Mantenimiento');
             cargarContenido('#', 'Inspecciones de Mantenimiento (próximamente)', false);
         }
 
         function cargarInspeccionTransporte(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Operaciones')) return;
             registrarEvento('view_module', 'Inspecciones de Transporte');
             cargarContenido('#', 'Inspecciones de Transporte (próximamente)', false);
         }
@@ -1126,96 +971,112 @@
 
         function cargarSeguimientoCargas(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Operaciones')) return;
             registrarEvento('view_module', 'Seguimiento de Cargas');
             cargarContenido('#', 'Seguimiento de Cargas (próximamente)', false);
         }
 
         function cargarClientes(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Administración')) return;
             registrarEvento('view_module', 'Clientes');
             cargarContenido('#', 'Gestión de Clientes (próximamente)', false);
         }
 
         function cargarDepartamentos(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Administración')) return;
             registrarEvento('view_module', 'Departamentos');
             cargarContenido('#', 'Departamentos (próximamente)', false);
         }
 
         function cargarProveedores(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Administración')) return;
             registrarEvento('view_module', 'Proveedores');
             cargarContenido('#', 'Proveedores (próximamente)', false);
         }
 
         function cargarCxCP(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Administración')) return;
             registrarEvento('view_module', 'CxCP');
             cargarContenido('#', 'CxCP (próximamente)', false);
         }
 
         function cargarProcedimientos(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Administración')) return;
             registrarEvento('view_module', 'Procedimientos');
             cargarContenido('#', 'Procedimientos (próximamente)', false);
         }
 
         function cargarFormularios(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Administración')) return;
             registrarEvento('view_module', 'Formularios');
             cargarContenido('#', 'Formularios (próximamente)', false);
         }
 
         function cargarCheques(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Administración')) return;
             registrarEvento('view_module', 'Impresión de Cheques');
             cargarContenido('#', 'Impresión de Cheques (próximamente)', false);
         }
 
         function cargarGesHumana(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Ges. Humana')) return;
             registrarEvento('view_module', 'Gestión Humana');
             cargarContenido('#', 'Gestión Humana (próximamente)', false);
         }
 
         function cargarTecnologia(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Tecnología')) return;
             registrarEvento('view_module', 'Tecnología');
             cargarContenido('#', 'Tecnología (próximamente)', false);
         }
 
         function cargarSeguridad(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Seguridad')) return;
             registrarEvento('view_module', 'Seguridad');
             cargarContenido('#', 'Seguridad (próximamente)', false);
         }
 
         function cargarTrafico(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Tráfico')) return;
             registrarEvento('view_module', 'Tráfico');
             cargarContenido('#', 'Tráfico (próximamente)', false);
         }
 
         function cargarSolicitudPrecintos(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Tráfico')) return;
             registrarEvento('view_module', 'Solicitud de Precintos');
             cargarContenido(SOLICITUD_PRECINTOS_URL, 'Solicitud de Precintos tipo Botella', true);
         }
 
         function cargarComercial(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Comercial')) return;
             registrarEvento('view_module', 'Comercial');
             cargarContenido('#', 'Comercial (próximamente)', false);
         }
 
         function cargarGerencia(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Ger. General')) return;
             registrarEvento('view_module', 'Gerencia General');
             cargarContenido('#', 'Gerencia General (próximamente)', false);
         }
 
         function cargarControl(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Ges. Control')) return;
             registrarEvento('view_module', 'Gestión de Control');
             cargarContenido('#', 'Gestión de Control (próximamente)', false);
         }
@@ -1223,19 +1084,57 @@
         // Funciones para Tecnología
         function cargarUbicacionCamaras(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Tecnología')) return;
             registrarEvento('view_module', 'Ubicación de Cámaras');
             cargarContenido(UBICACION_CAMARAS_URL, 'Ubicación de Cámaras', true);
         }
 
         function cargarUbicacionExtintores(event) {
             if (event) event.preventDefault();
+            if (!verificarAcceso('Tecnología')) return;
             registrarEvento('view_module', 'Ubicación de Extintores');
             cargarContenido(UBICACION_EXTINTORES_URL, 'Ubicación de Extintores', true);
+        }
+
+        // ========== VERIFICACIÓN DE PERMISOS POR ROL ==========
+        function tienePermisoDepartamento(departamento) {
+            if (currentRol === 'Admin') return true;
+            if (currentRol === 'Supervisor') return true;
+            if (currentRol === 'Usuario') {
+                const restringidos = ['Tecnología', 'Comercial', 'Ges. Control', 'Ger. General', 'Seguridad', 'Administración'];
+                return !restringidos.includes(departamento);
+            }
+            return false;
+        }
+
+        function verificarAcceso(modulo) {
+            if (!tienePermisoDepartamento(modulo)) {
+                mostrarErrorAcceso(modulo);
+                return false;
+            }
+            return true;
+        }
+
+        function mostrarErrorAcceso(modulo) {
+            const container = document.getElementById('dynamicContent');
+            container.innerHTML = `
+                <div class="content-header">
+                    <div class="content-title">Acceso Denegado</div>
+                    <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver al Dashboard</button>
+                </div>
+                <div style="text-align:center; padding:60px; color:#dc3545;">
+                    <i class="fas fa-lock" style="font-size:48px; margin-bottom:20px;"></i>
+                    <h3>No tienes permisos para acceder a ${modulo}</h3>
+                    <p>Tu rol actual es: <strong>${currentRol}</strong></p>
+                </div>
+            `;
+            registrarEvento('acceso_denegado', `Intento de acceso a ${modulo} sin permisos`);
         }
 
         // ========== FUNCIÓN PARA MOSTRAR DOCUMENTOS (CON LOGGING EN DESCARGA) ==========
         function mostrarDocumentos(departamento, titulo) {
             if (window.event) window.event.preventDefault();
+            if (!verificarAcceso(departamento)) return;
             registrarEvento('view_documents', `Departamento: ${departamento} - ${titulo}`);
             const container = document.getElementById('dynamicContent');
             container.innerHTML = `
@@ -1292,8 +1191,8 @@
                             <tr>
                                 <td data-label="Nombre del Documento">${nombreDoc}</td>
                                 <td data-label="Tipo"><span class="badge-tipo">${escapeHtml(d.tipo)}</span></td>
-                                <td data-label="Código">${escapeHtml(d.codigo)}</td>
-                                <td data-label="Procedimiento">${escapeHtml(d.procedimiento || '-')}</td>
+                                <td data-label="Código">${escapeHtml(d.codigo)}</span></td>
+                                <td data-label="Procedimiento">${escapeHtml(d.procedimiento || '-')}</span></td>
                                 <td data-label="Descargar"><a href="${escapeHtml(d.url)}" target="_blank" class="btn-descarga" onclick="registrarEvento('download', '${nombreDoc.replace(/'/g, "\\'")}')"><i class="fas fa-download"></i> Descargar</a></td>
                             </tr>
                         `;
@@ -1320,6 +1219,196 @@
                 if (m === '<') return '&lt;';
                 if (m === '>') return '&gt;';
                 return m;
+            });
+        }
+
+        // ========== CONSTRUCCIÓN DINÁMICA DEL MENÚ SEGÚN ROL ==========
+        function construirMenu() {
+            const navList = document.getElementById('navList');
+            if (!navList) return;
+
+            // Definición base de todos los items del menú (idéntica al original)
+            const menuItems = [
+                { id: 'inicio', texto: 'Inicio', icono: '🏠', onClick: 'cargarOperaciones(event)', requiere: 'todos' },
+                { id: 'procesos', texto: 'Procesos', icono: '📋', esDropdown: true, requiere: 'todos',
+                  subItems: [
+                      { texto: 'Solicitud de Pago', icono: '💰', onClick: 'cargarSolicitudPago(event)', requiere: 'todos' },
+                      { texto: 'Certificación de Carga', icono: '📦', onClick: 'cargarCertificacion(event)', requiere: 'todos' },
+                      { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Operaciones')", requiere: 'todos' }
+                  ] },
+                { id: 'administracion', texto: 'Administración', icono: '⚙️', esDropdown: true, requiere: 'admin_supervisor',
+                  subItems: [
+                      { texto: 'Clientes', icono: '👥', onClick: 'cargarClientes(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Departamentos', icono: '🏢', onClick: 'cargarDepartamentos(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Proveedores', icono: '🤝', onClick: 'cargarProveedores(event)', requiere: 'admin_supervisor' },
+                      { texto: 'CxCP', icono: '📑', onClick: 'cargarCxCP(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Administración y Finanzas', 'Documentos Administración')", requiere: 'admin_supervisor' },
+                      { texto: 'Procedimientos', icono: '📄', onClick: 'cargarProcedimientos(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Formularios', icono: '📝', onClick: 'cargarFormularios(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Impresión de Cheques', icono: '💳', onClick: 'cargarCheques(event)', requiere: 'admin_supervisor' }
+                  ] },
+                { id: 'operaciones', texto: 'Operaciones', icono: '🚢', esDropdown: true, requiere: 'todos',
+                  subItems: [
+                      { texto: 'Dashboard de Operaciones', icono: '📊', onClick: 'cargarOperaciones(event)', requiere: 'todos' },
+                      { texto: 'Solicitud de Útiles y Artículos de Limpieza', icono: '🧹', onClick: 'cargarSolicitudUtiles(event)', requiere: 'todos' },
+                      { texto: 'Seguimiento de Cargas', icono: '📦', onClick: 'cargarSeguimientoCargas(event)', requiere: 'todos' },
+                      { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Operaciones')", requiere: 'todos' },
+                      { texto: 'Bodega', icono: '🏪', esSubDropdown: true, subItems: [
+                          { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionBodega(event)', requiere: 'todos' },
+                          { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Bodega')", requiere: 'todos' }
+                      ] },
+                      { texto: 'Mantenimiento', icono: '🛠️', esSubDropdown: true, subItems: [
+                          { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionMantenimiento(event)', requiere: 'todos' },
+                          { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Mantenimiento')", requiere: 'todos' }
+                      ] },
+                      { texto: 'Transporte', icono: '🚛', esSubDropdown: true, subItems: [
+                          { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionTransporte(event)', requiere: 'todos' },
+                          { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Transporte')", requiere: 'todos' }
+                      ] }
+                  ] },
+                { id: 'geshumana', texto: 'Ges. Humana', icono: '👤', esDropdown: true, requiere: 'todos',
+                  subItems: [
+                      { texto: 'Ges. Humana', icono: '👤', onClick: 'cargarGesHumana(event)', requiere: 'todos' },
+                      { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Gestión Humana', 'Documentos Gestión Humana')", requiere: 'todos' }
+                  ] },
+                { id: 'tecnologia', texto: 'Tecnología', icono: '💻', esDropdown: true, requiere: 'admin_supervisor',
+                  subItems: [
+                      { texto: 'Tecnología', icono: '💻', onClick: 'cargarTecnologia(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Ubicación de Cámaras', icono: '📷', onClick: 'cargarUbicacionCamaras(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Ubicación de Extintores', icono: '🔥', onClick: 'cargarUbicacionExtintores(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Tecnología de la Información', 'Documentos Tecnología')", requiere: 'admin_supervisor' }
+                  ] },
+                { id: 'seguridad', texto: 'Seguridad', icono: '🔒', esDropdown: true, requiere: 'admin_supervisor',
+                  subItems: [
+                      { texto: 'Seguridad', icono: '🔒', onClick: 'cargarSeguridad(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Seguridad, Higiene y Ambiente', 'Documentos Seguridad')", requiere: 'admin_supervisor' }
+                  ] },
+                { id: 'trafico', texto: 'Tráfico', icono: '🚦', esDropdown: true, requiere: 'todos',
+                  subItems: [
+                      { texto: 'Tráfico', icono: '🚦', onClick: 'cargarTrafico(event)', requiere: 'todos' },
+                      { texto: 'Solicitud de Precintos tipo Botella', icono: '🏷️', onClick: 'cargarSolicitudPrecintos(event)', requiere: 'todos' },
+                      { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Tráfico y Documentación', 'Documentos Tráfico')", requiere: 'todos' }
+                  ] },
+                { id: 'comercial', texto: 'Comercial', icono: '📈', esDropdown: true, requiere: 'admin_supervisor',
+                  subItems: [
+                      { texto: 'Cotización y Presupuestos', icono: '📊', onClick: 'cargarCotizaciones(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Actualización de Datos del Cliente', icono: '✏️', onClick: 'cargarActualizacionDatos(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Comercial', 'Documentos Comercial')", requiere: 'admin_supervisor' }
+                  ] },
+                { id: 'gergeneral', texto: 'Ger. General', icono: '👔', esDropdown: true, requiere: 'admin_supervisor',
+                  subItems: [
+                      { texto: 'Ger. General', icono: '👔', onClick: 'cargarGerencia(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Gerencia General', 'Documentos Gerencia General')", requiere: 'admin_supervisor' }
+                  ] },
+                { id: 'gescontrol', texto: 'Ges. Control', icono: '📊', esDropdown: true, requiere: 'admin_supervisor',
+                  subItems: [
+                      { texto: 'Ges. Control', icono: '📊', onClick: 'cargarControl(event)', requiere: 'admin_supervisor' },
+                      { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Sistemas de Gestión y Control', 'Documentos Gestión y Control')", requiere: 'admin_supervisor' }
+                  ] }
+            ];
+
+            function tienePermiso(item) {
+                if (!item.requiere) return true;
+                if (item.requiere === 'todos') return true;
+                if (item.requiere === 'admin_supervisor') {
+                    return currentRol === 'Admin' || currentRol === 'Supervisor';
+                }
+                return false;
+            }
+
+            function crearElemento(item) {
+                if (!tienePermiso(item)) return null;
+                const li = document.createElement('li');
+                li.className = 'nav-item';
+                if (item.esDropdown) {
+                    const btn = document.createElement('button');
+                    btn.className = 'nav-link';
+                    btn.innerHTML = `<span class="icon">${item.icono}</span> ${item.texto}`;
+                    btn.onclick = () => toggleDropdown(btn);
+                    const ul = document.createElement('ul');
+                    ul.className = 'dropdown';
+                    item.subItems.forEach(sub => {
+                        if (sub.esSubDropdown) {
+                            const subLi = document.createElement('li');
+                            subLi.className = 'dropdown-item-has-sub';
+                            const subLink = document.createElement('a');
+                            subLink.href = '#';
+                            subLink.className = 'dropdown-link';
+                            subLink.innerHTML = `<span class="icon">${sub.icono}</span> ${sub.texto}`;
+                            subLink.onclick = (e) => { e.preventDefault(); if (window.innerWidth <= 768) subLi.classList.toggle('open'); };
+                            const subUl = document.createElement('ul');
+                            subUl.className = 'dropdown';
+                            sub.subItems.forEach(subSub => {
+                                if (tienePermiso(subSub)) {
+                                    const liSub = document.createElement('li');
+                                    const a = document.createElement('a');
+                                    a.href = '#';
+                                    a.className = 'dropdown-link';
+                                    a.innerHTML = `<span class="icon">${subSub.icono}</span> ${subSub.texto}`;
+                                    a.onclick = (e) => { e.preventDefault(); eval(subSub.onClick); };
+                                    liSub.appendChild(a);
+                                    subUl.appendChild(liSub);
+                                }
+                            });
+                            subLi.appendChild(subLink);
+                            subLi.appendChild(subUl);
+                            ul.appendChild(subLi);
+                        } else {
+                            if (tienePermiso(sub)) {
+                                const liSub = document.createElement('li');
+                                const a = document.createElement('a');
+                                a.href = '#';
+                                a.className = 'dropdown-link';
+                                a.innerHTML = `<span class="icon">${sub.icono}</span> ${sub.texto}`;
+                                a.onclick = (e) => { e.preventDefault(); eval(sub.onClick); };
+                                liSub.appendChild(a);
+                                ul.appendChild(liSub);
+                            }
+                        }
+                    });
+                    li.appendChild(btn);
+                    li.appendChild(ul);
+                } else {
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.className = 'nav-link';
+                    link.innerHTML = `<span class="icon">${item.icono}</span> ${item.texto}`;
+                    link.onclick = (e) => { e.preventDefault(); eval(item.onClick); };
+                    li.appendChild(link);
+                }
+                return li;
+            }
+
+            navList.innerHTML = '';
+            menuItems.forEach(item => {
+                const el = crearElemento(item);
+                if (el) navList.appendChild(el);
+            });
+        }
+
+        function construirQuickLinks() {
+            const quickBar = document.getElementById('quickBar');
+            if (!quickBar) return;
+            const allLinks = [
+                { texto: '💰 Solicitud de Pago', onClick: 'cargarSolicitudPago(event)', requiere: 'todos' },
+                { texto: '📦 Certificación de Carga', onClick: 'cargarCertificacion(event)', requiere: 'todos' },
+                { texto: '🧹 Útiles y Limpieza', onClick: 'cargarSolicitudUtiles(event)', requiere: 'todos' },
+                { texto: '👥 Clientes', onClick: 'cargarClientes(event)', requiere: 'admin_supervisor' },
+                { texto: '💳 Cheques', onClick: 'cargarCheques(event)', requiere: 'admin_supervisor' },
+                { texto: '🏷️ Solicitud Precintos', onClick: 'cargarSolicitudPrecintos(event)', requiere: 'todos' },
+                { texto: '📊 Cotizaciones', onClick: 'cargarCotizaciones(event)', requiere: 'admin_supervisor' },
+                { texto: '✏️ Actualización Datos Cliente', onClick: 'cargarActualizacionDatos(event)', requiere: 'admin_supervisor' }
+            ];
+            quickBar.innerHTML = '<span class="quick-label">Acceso Rápido:</span>';
+            allLinks.forEach(link => {
+                if ((link.requiere === 'todos') || (link.requiere === 'admin_supervisor' && (currentRol === 'Admin' || currentRol === 'Supervisor'))) {
+                    const a = document.createElement('a');
+                    a.href = '#';
+                    a.className = 'quick-link';
+                    a.innerHTML = link.texto;
+                    a.onclick = (e) => { e.preventDefault(); eval(link.onClick); };
+                    quickBar.appendChild(a);
+                }
             });
         }
 
@@ -1354,9 +1443,13 @@
                             loginTime: new Date().toISOString()
                         };
                         localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+                        currentUser = sessionData;
+                        currentRol = sessionData.rol;
                         actualizarUI(sessionData);
                         window.history.replaceState({}, document.title, window.location.pathname);
                         registrarEvento('login', 'Inicio de sesión');
+                        construirMenu();
+                        construirQuickLinks();
                         cargarOperaciones();
                         return true;
                     }
@@ -1368,12 +1461,15 @@
             }
 
             if (userData && userData.token && userData.id) {
+                currentUser = userData;
+                currentRol = userData.rol;
                 actualizarUI(userData);
-                // Evitar registrar login cada vez que se recarga la página, solo la primera vez
                 if (!sessionStorage.getItem('login_logged')) {
                     registrarEvento('login', 'Inicio de sesión (recarga)');
                     sessionStorage.setItem('login_logged', 'true');
                 }
+                construirMenu();
+                construirQuickLinks();
                 cargarOperaciones();
                 return true;
             }
@@ -1386,7 +1482,7 @@
             const userNameSpan = document.querySelector('.user-info span');
             const userAvatar = document.querySelector('.user-avatar');
             if (userNameSpan && userData.nombre) {
-                userNameSpan.innerHTML = `Bienvenido, <strong>${userData.nombre}</strong>`;
+                userNameSpan.innerHTML = `Bienvenido, <strong>${userData.nombre}</strong> (${userData.rol})`;
             }
             if (userAvatar && userData.nombre) {
                 const iniciales = userData.nombre.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);

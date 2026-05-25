@@ -873,7 +873,6 @@
                 })
             }).catch(e => console.error('Error logging:', e));
         }
-        // ========== FIN DE LA MODIFICACIÓN ==========
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
@@ -1129,8 +1128,7 @@
             `;
             registrarEvento('acceso_denegado', `Intento de acceso a ${modulo} sin permisos`);
         }
-
-                // ========== FUNCIÓN PARA MOSTRAR DOCUMENTOS (MODIFICADA: AÑADE TOKEN) ==========
+        // ========== FUNCIÓN PARA MOSTRAR DOCUMENTOS (MODIFICADA: AÑADE TOKEN) ==========
         function mostrarDocumentos(departamento, titulo) {
             if (window.event) window.event.preventDefault();
             if (!verificarAcceso(departamento)) return;
@@ -1217,6 +1215,16 @@
                         <div style="padding:20px; text-align:center; color:red;">Error de comunicación: ${error.message}</div>
                     `;
                 });
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
         }
 
         // ========== CONSTRUCCIÓN DINÁMICA DEL MENÚ SEGÚN ROL ==========

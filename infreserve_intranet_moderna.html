@@ -847,15 +847,23 @@
         let currentUser = null;
         let currentRol = '';
 
-        // ========== FUNCIÓN DE LOGGING ==========
+        // ========== FUNCIÓN DE LOGGING (MODIFICADA: AÑADE TOKEN) ==========
         function registrarEvento(accion, detalle) {
             if (!currentUser) return;
+            
+            // Obtener el token de la sesión actual
+            let token = null;
+            try {
+                const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
+                if (session) token = JSON.parse(session).token;
+            } catch(e) {}
             
             fetch(LOGIN_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams({
                     action: 'registrarActividad',
+                    token: token || '',  // ← NUEVO: enviar el token
                     usuario: currentUser.nombre,
                     email: currentUser.email,
                     rol: currentUser.rol,
@@ -865,6 +873,7 @@
                 })
             }).catch(e => console.error('Error logging:', e));
         }
+        // ========== FIN DE LA MODIFICACIÓN ==========
 
         // ========== FUNCIÓN PARA CARGAR CONTENIDO DINÁMICO ==========
         function cargarContenido(url, titulo, esIframe = true) {
@@ -1178,10 +1187,10 @@
                             <tr>
                                 <td data-label="Nombre del Documento">${nombreDoc}</td>
                                 <td data-label="Tipo"><span class="badge-tipo">${escapeHtml(d.tipo)}</span></td>
-                                <td data-label="Código">${escapeHtml(d.codigo)}</td>
-                                <td data-label="Procedimiento">${escapeHtml(d.procedimiento || '-')}</td>
+                                <td data-label="Código">${escapeHtml(d.codigo)}</span></td>
+                                <td data-label="Procedimiento">${escapeHtml(d.procedimiento || '-')}</span></td>
                                 <td data-label="Descargar"><a href="${escapeHtml(d.url)}" target="_blank" class="btn-descarga" onclick="registrarEvento('download', '${nombreDoc.replace(/'/g, "\\'")}')"><i class="fas fa-download"></i> Descargar</a></td>
-                            --
+                            </tr>
                         `;
                     });
                     html += `</tbody>}</div>`;
@@ -1398,7 +1407,7 @@
             });
         }
 
-        // ========== FUNCIONES DE SESIÓN (MODIFICADAS PARA SEGURIDAD) ==========
+        // ========== FUNCIONES DE SESIÓN ==========
         function getUserData() {
             try {
                 const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
@@ -1412,31 +1421,40 @@
         }
 
         function validarSesion() {
-            // 1. Buscar token en URL (viene del login después de autenticación exitosa)
-            const urlParams = new URLSearchParams(window.location.search);
-            const tokenParam = urlParams.get('token');
-            
-            if (tokenParam) {
+            const userData = getUserData();
+            const urlToken = getUrlParam('token');
+
+            if (urlToken) {
                 try {
-                    const sessionData = JSON.parse(decodeURIComponent(tokenParam));
-                    if (sessionData.token && sessionData.id) {
-                        // Guardar en localStorage y sessionStorage del dominio actual
+                    const decoded = JSON.parse(decodeURIComponent(urlToken));
+                    if (decoded.token && decoded.id) {
+                        const sessionData = {
+                            id: decoded.id,
+                            email: decoded.email,
+                            nombre: decoded.nombre,
+                            rol: decoded.rol,
+                            departamento: decoded.departamento,
+                            token: decoded.token,
+                            loginTime: new Date().toISOString()
+                        };
                         localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
-                        sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
-                        // Limpiar la URL (eliminar el parámetro token) sin recargar aún
-                        const cleanUrl = window.location.origin + window.location.pathname;
-                        window.history.replaceState({}, document.title, cleanUrl);
-                        // Recargar la página para que use el almacenamiento local
-                        window.location.reload();
+                        currentUser = sessionData;
+                        currentRol = sessionData.rol;
+                        actualizarUI(sessionData);
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                        registrarEvento('login', 'Inicio de sesión');
+                        construirMenu();
+                        construirQuickLinks();
+                        cargarOperaciones();
                         return true;
                     }
-                } catch(e) {
-                    console.error('Error al procesar token:', e);
+                } catch (e) {
+                    console.error('Error procesando token:', e);
+                    redirigirLogin();
+                    return false;
                 }
             }
-            
-            // 2. Si no hay token, leer del almacenamiento normal
-            const userData = getUserData();
+
             if (userData && userData.token && userData.id) {
                 currentUser = userData;
                 currentRol = userData.rol;
@@ -1449,10 +1467,10 @@
                 construirQuickLinks();
                 cargarOperaciones();
                 return true;
-            } else {
-                redirigirLogin();
-                return false;
             }
+
+            redirigirLogin();
+            return false;
         }
 
         function actualizarUI(userData) {
@@ -1480,7 +1498,7 @@
             if (confirm('¿Está seguro que desea cerrar sesión?')) {
                 localStorage.removeItem(SESSION_KEY);
                 sessionStorage.removeItem(SESSION_KEY);
-                window.location.href = LOGIN_URL;  // Directo al login de Apps Script
+                window.location.href = LOGIN_URL;
             }
             return false;
         }

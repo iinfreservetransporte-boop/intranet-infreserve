@@ -1130,7 +1130,7 @@
             registrarEvento('acceso_denegado', `Intento de acceso a ${modulo} sin permisos`);
         }
 
-        // ========== FUNCIÓN PARA MOSTRAR DOCUMENTOS ==========
+                // ========== FUNCIÓN PARA MOSTRAR DOCUMENTOS (MODIFICADA: AÑADE TOKEN) ==========
         function mostrarDocumentos(departamento, titulo) {
             if (window.event) window.event.preventDefault();
             if (!verificarAcceso(departamento)) return;
@@ -1144,7 +1144,19 @@
                 <div class="loading-message">Cargando documentos...</div>
             `;
 
-            const url = `${LOGIN_URL}?departamento=${encodeURIComponent(departamento)}`;
+            // Obtener el token de la sesión actual
+            let token = null;
+            try {
+                const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
+                if (session) token = JSON.parse(session).token;
+            } catch(e) {}
+
+            // Construir URL con el token como parámetro
+            let url = `${LOGIN_URL}?departamento=${encodeURIComponent(departamento)}`;
+            if (token) {
+                url += `&token=${encodeURIComponent(token)}`;
+            }
+            
             fetch(url)
                 .then(response => response.json())
                 .then(result => {
@@ -1205,16 +1217,6 @@
                         <div style="padding:20px; text-align:center; color:red;">Error de comunicación: ${error.message}</div>
                     `;
                 });
-        }
-
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
         }
 
         // ========== CONSTRUCCIÓN DINÁMICA DEL MENÚ SEGÚN ROL ==========

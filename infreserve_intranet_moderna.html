@@ -831,6 +831,7 @@
     <script>
         // ========== CONFIGURACIÓN ==========
         const SESSION_KEY = 'infreserve_session';
+        // URL del login (ya configurada)
         const LOGIN_URL = 'https://script.google.com/macros/s/AKfycbzACIInlUQ-4Z8JuVleQNCB2OLrBbXg8uNyVA6zLkinoDO1pQg7hIZfsxd4Q5ieFz8v/exec';
         
         // URLs de los formularios
@@ -1180,7 +1181,7 @@
                                 <td data-label="Código">${escapeHtml(d.codigo)}</td>
                                 <td data-label="Procedimiento">${escapeHtml(d.procedimiento || '-')}</td>
                                 <td data-label="Descargar"><a href="${escapeHtml(d.url)}" target="_blank" class="btn-descarga" onclick="registrarEvento('download', '${nombreDoc.replace(/'/g, "\\'")}')"><i class="fas fa-download"></i> Descargar</a></td>
-                            </tr>
+                            --
                         `;
                     });
                     html += `</tbody>}</div>`;
@@ -1397,7 +1398,7 @@
             });
         }
 
-        // ========== FUNCIONES DE SESIÓN ==========
+        // ========== FUNCIONES DE SESIÓN (MODIFICADAS PARA SEGURIDAD) ==========
         function getUserData() {
             try {
                 const session = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
@@ -1411,8 +1412,31 @@
         }
 
         function validarSesion() {
+            // 1. Buscar token en URL (viene del login después de autenticación exitosa)
+            const urlParams = new URLSearchParams(window.location.search);
+            const tokenParam = urlParams.get('token');
+            
+            if (tokenParam) {
+                try {
+                    const sessionData = JSON.parse(decodeURIComponent(tokenParam));
+                    if (sessionData.token && sessionData.id) {
+                        // Guardar en localStorage y sessionStorage del dominio actual
+                        localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+                        sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+                        // Limpiar la URL (eliminar el parámetro token) sin recargar aún
+                        const cleanUrl = window.location.origin + window.location.pathname;
+                        window.history.replaceState({}, document.title, cleanUrl);
+                        // Recargar la página para que use el almacenamiento local
+                        window.location.reload();
+                        return true;
+                    }
+                } catch(e) {
+                    console.error('Error al procesar token:', e);
+                }
+            }
+            
+            // 2. Si no hay token, leer del almacenamiento normal
             const userData = getUserData();
-            // Ya no se lee token desde URL
             if (userData && userData.token && userData.id) {
                 currentUser = userData;
                 currentRol = userData.rol;
@@ -1456,7 +1480,6 @@
             if (confirm('¿Está seguro que desea cerrar sesión?')) {
                 localStorage.removeItem(SESSION_KEY);
                 sessionStorage.removeItem(SESSION_KEY);
-                // Redirige a la página de logout limpio o directamente al login
                 window.location.href = 'https://iinfreservetransporte-boop.github.io/intranet-infreserve/logout.html';
             }
             return false;
@@ -1469,6 +1492,11 @@
             const timeStr = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
             const dateEl = document.getElementById('currentDate');
             if (dateEl) dateEl.innerHTML = `${dateStr}<br>${timeStr}`;
+        }
+
+        function getUrlParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
         }
 
         function toggleNav() {

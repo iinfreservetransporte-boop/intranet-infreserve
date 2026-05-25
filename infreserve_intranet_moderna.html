@@ -809,7 +809,7 @@
                     <ul class="dropdown">
                         <li class="dropdown-header">Control de Listas</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarClientes(event)"><span class="icon">👥</span> Clientes</a></li>
-                        <li><a href="#" class="dropdown-link" onclick="cargarSolicitudUtiles(event)"><span class="icon">🧹</span> Solicitud de Útiles y Artículos de Limpieza</a></li>
+                        <!-- Línea eliminada: Solicitud de Útiles movida a Operaciones -->
                         <li><a href="#" class="dropdown-link" onclick="cargarDepartamentos(event)"><span class="icon">🏢</span> Departamentos</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarProveedores(event)"><span class="icon">🤝</span> Proveedores</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarCxCP(event)"><span class="icon">📑</span> CxCP</a></li>
@@ -820,7 +820,7 @@
                         <li><a href="#" class="dropdown-link" onclick="cargarCheques(event)"><span class="icon">💳</span> Impresión de Cheques</a></li>
                     </ul>
                 </li>
-                <!-- ===== OPERACIONES CON SUBMENÚS ANIDADOS ===== -->
+                <!-- ===== OPERACIONES CON SUBMENÚS ANIDADOS (MODIFICADO) ===== -->
                 <li class="nav-item">
                     <button class="nav-link" onclick="toggleDropdown(this)">
                         <span class="icon">🚢</span> Operaciones
@@ -828,6 +828,8 @@
                     <ul class="dropdown">
                         <li class="dropdown-header">Gestión Operativa</li>
                         <li><a href="#" class="dropdown-link" onclick="cargarOperaciones(event)"><span class="icon">📊</span> Dashboard de Operaciones</a></li>
+                        <!-- Ítem movido de Administración a Operaciones -->
+                        <li><a href="#" class="dropdown-link" onclick="cargarSolicitudUtiles(event)"><span class="icon">🧹</span> Solicitud de Útiles y Artículos de Limpieza</a></li>
                         <li><a href="#" class="dropdown-link" onclick="cargarSeguimientoCargas(event)"><span class="icon">📦</span> Seguimiento de Cargas</a></li>
                         <li><a href="#" class="dropdown-link" onclick="mostrarDocumentos('Operaciones y Logística', 'Documentos Operaciones')"><span class="icon">📁</span> Documentos y Formatos</a></li>
                         <li class="dropdown-divider"></li>

@@ -1480,7 +1480,7 @@
             if (confirm('¿Está seguro que desea cerrar sesión?')) {
                 localStorage.removeItem(SESSION_KEY);
                 sessionStorage.removeItem(SESSION_KEY);
-                window.location.href = 'https://iinfreservetransporte-boop.github.io/intranet-infreserve/logout.html';
+                window.location.href = LOGIN_URL;  // Directo al login de Apps Script
             }
             return false;
         }

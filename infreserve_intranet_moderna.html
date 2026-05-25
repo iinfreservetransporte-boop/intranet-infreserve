@@ -1431,57 +1431,48 @@
         }
 
         function validarSesion() {
-            const userData = getUserData();
-            const urlToken = getUrlParam('token');
-
-            if (urlToken) {
-                try {
-                    const decoded = JSON.parse(decodeURIComponent(urlToken));
-                    if (decoded.token && decoded.id) {
-                        const sessionData = {
-                            id: decoded.id,
-                            email: decoded.email,
-                            nombre: decoded.nombre,
-                            rol: decoded.rol,
-                            departamento: decoded.departamento,
-                            token: decoded.token,
-                            loginTime: new Date().toISOString()
-                        };
-                        localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
-                        currentUser = sessionData;
-                        currentRol = sessionData.rol;
-                        actualizarUI(sessionData);
-                        window.history.replaceState({}, document.title, window.location.pathname);
-                        registrarEvento('login', 'Inicio de sesión');
-                        construirMenu();
-                        construirQuickLinks();
-                        cargarOperaciones();
-                        return true;
-                    }
-                } catch (e) {
-                    console.error('Error procesando token:', e);
-                    redirigirLogin();
-                    return false;
-                }
-            }
-
-            if (userData && userData.token && userData.id) {
-                currentUser = userData;
-                currentRol = userData.rol;
-                actualizarUI(userData);
-                if (!sessionStorage.getItem('login_logged')) {
-                    registrarEvento('login', 'Inicio de sesión (recarga)');
-                    sessionStorage.setItem('login_logged', 'true');
-                }
-                construirMenu();
-                construirQuickLinks();
-                cargarOperaciones();
+    // 1. Buscar token en URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenParam = urlParams.get('token');
+    
+    if (tokenParam) {
+        try {
+            const sessionData = JSON.parse(decodeURIComponent(tokenParam));
+            if (sessionData.token && sessionData.id) {
+                // Guardar en localStorage y sessionStorage del dominio actual
+                localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+                sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+                // Limpiar la URL (eliminar el parámetro token)
+                const cleanUrl = window.location.origin + window.location.pathname;
+                window.history.replaceState({}, document.title, cleanUrl);
+                // Recargar la página para que use el almacenamiento local
+                window.location.reload();
                 return true;
             }
-
-            redirigirLogin();
-            return false;
+        } catch(e) {
+            console.error('Error al procesar token:', e);
         }
+    }
+    
+    // 2. Si no hay token, leer del almacenamiento normal
+    const userData = getUserData();
+    if (userData && userData.token && userData.id) {
+        currentUser = userData;
+        currentRol = userData.rol;
+        actualizarUI(userData);
+        if (!sessionStorage.getItem('login_logged')) {
+            registrarEvento('login', 'Inicio de sesión (recarga)');
+            sessionStorage.setItem('login_logged', 'true');
+        }
+        construirMenu();
+        construirQuickLinks();
+        cargarOperaciones();
+        return true;
+    } else {
+        redirigirLogin();
+        return false;
+    }
+}
 
         function actualizarUI(userData) {
             const userNameSpan = document.querySelector('.user-info span');

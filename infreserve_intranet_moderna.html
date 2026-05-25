@@ -831,7 +831,6 @@
     <script>
         // ========== CONFIGURACIÓN ==========
         const SESSION_KEY = 'infreserve_session';
-        // URL del login (ya configurada)
         const LOGIN_URL = 'https://script.google.com/macros/s/AKfycbzACIInlUQ-4Z8JuVleQNCB2OLrBbXg8uNyVA6zLkinoDO1pQg7hIZfsxd4Q5ieFz8v/exec';
         
         // URLs de los formularios
@@ -1184,7 +1183,7 @@
                             </tr>
                         `;
                     });
-                    html += `</tbody></table></div>`;
+                    html += `</tbody>}</div>`;
                     container.innerHTML = html;
                 })
                 .catch(error => {
@@ -1413,39 +1412,7 @@
 
         function validarSesion() {
             const userData = getUserData();
-            const urlToken = getUrlParam('token');
-
-            if (urlToken) {
-                try {
-                    const decoded = JSON.parse(decodeURIComponent(urlToken));
-                    if (decoded.token && decoded.id) {
-                        const sessionData = {
-                            id: decoded.id,
-                            email: decoded.email,
-                            nombre: decoded.nombre,
-                            rol: decoded.rol,
-                            departamento: decoded.departamento,
-                            token: decoded.token,
-                            loginTime: new Date().toISOString()
-                        };
-                        localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
-                        currentUser = sessionData;
-                        currentRol = sessionData.rol;
-                        actualizarUI(sessionData);
-                        window.history.replaceState({}, document.title, window.location.pathname);
-                        registrarEvento('login', 'Inicio de sesión');
-                        construirMenu();
-                        construirQuickLinks();
-                        cargarOperaciones();
-                        return true;
-                    }
-                } catch (e) {
-                    console.error('Error procesando token:', e);
-                    redirigirLogin();
-                    return false;
-                }
-            }
-
+            // Ya no se lee token desde URL
             if (userData && userData.token && userData.id) {
                 currentUser = userData;
                 currentRol = userData.rol;
@@ -1458,10 +1425,10 @@
                 construirQuickLinks();
                 cargarOperaciones();
                 return true;
+            } else {
+                redirigirLogin();
+                return false;
             }
-
-            redirigirLogin();
-            return false;
         }
 
         function actualizarUI(userData) {
@@ -1489,7 +1456,8 @@
             if (confirm('¿Está seguro que desea cerrar sesión?')) {
                 localStorage.removeItem(SESSION_KEY);
                 sessionStorage.removeItem(SESSION_KEY);
-                window.location.href = LOGIN_URL;
+                // Redirige a la página de logout limpio o directamente al login
+                window.location.href = 'https://iinfreservetransporte-boop.github.io/intranet-infreserve/logout.html';
             }
             return false;
         }
@@ -1501,11 +1469,6 @@
             const timeStr = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
             const dateEl = document.getElementById('currentDate');
             if (dateEl) dateEl.innerHTML = `${dateStr}<br>${timeStr}`;
-        }
-
-        function getUrlParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
         }
 
         function toggleNav() {

@@ -78,12 +78,17 @@
             font-size: 14px;
             color: var(--white);
         }
+        
+        .user-info span {
+            font-size: 18px;
+            font-weight: 600;
+        }
 
         .btn-logout {
             background: rgba(255,255,255,0.15);
             border: 1px solid rgba(255,255,255,0.3);
             color: var(--white);
-            padding: 6px 16px;
+            padding: 8px 20px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 14px;
@@ -176,7 +181,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 20px;
+            padding: 14px 24px;
             color: rgba(255,255,255,0.9);
             text-decoration: none;
             font-size: 16px;
@@ -618,25 +623,6 @@
                 padding: 4px 12px;
                 font-size: 11px;
             }
-
-            /* Ajustes de tamaños en móvil */
-            .nav-link {
-                font-size: 14px;
-                padding: 12px 16px;
-            }
-            .btn-logout {
-                font-size: 12px;
-                padding: 6px 12px;
-            }
-            .user-info span {
-                font-size: 14px;
-            }
-            .welcome-date .hora {
-                font-size: 18px;
-            }
-            .welcome-date .fecha {
-                font-size: 11px;
-            }
         }
 
         /* ===== FOOTER ===== */
@@ -889,10 +875,10 @@
         <div class="footer-inner">
             <div class="footer-logo">
                 <span>🌐</span>
-                <span>InfreServe Panama</span>
+                <span>Infreserve Panama</span>
             </div>
             <div class="footer-copy">
-                © 2005 - 2026 InfreServe Panama. Todos los derechos reservados.
+                © 2005 - 2026 Infreserve Panama. Todos los derechos reservados.
             </div>
             <div class="footer-links">
                 <a href="#" class="footer-link">Políticas</a>
@@ -1609,7 +1595,7 @@
                 const iniciales = userData.nombre.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
                 userAvatar.textContent = iniciales;
             }
-            console.log('Sesión activa para:', userData.nombre);
+            console.log('Sesión activa para:', userData.nombre, 'Rol:', userData.rol);
         }
 
         function redirigirLogin() {

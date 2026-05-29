@@ -225,13 +225,13 @@
             transform: translateY(0);
         }
 
-        /* ===== DROPDOWN NIVEL 2 y 3 (a la derecha del padre) ===== */
+        /* ===== DROPDOWN NIVEL 2+ (a la derecha del padre) ===== */
         .dropdown .dropdown {
             position: absolute;
             top: 0;
             left: 100%;
             min-width: 260px;
-            margin-left: 2px;
+            margin-left: 0;
             border-radius: var(--radius-sm);
             opacity: 0;
             visibility: hidden;
@@ -239,11 +239,16 @@
             transition: var(--transition);
         }
 
-        /* Selector universal para mostrar cualquier dropdown hijo al hacer hover sobre el li padre */
+        /* Selector CRÍTICO: cualquier li dentro de dropdown que tenga un dropdown hijo directo */
         .dropdown li:hover > .dropdown {
             opacity: 1;
             visibility: visible;
             transform: translateX(0);
+        }
+
+        /* Asegurar que los li con submenús tengan posición relativa para el posicionamiento absoluto del hijo */
+        .dropdown li {
+            position: relative;
         }
 
         .dropdown-link {

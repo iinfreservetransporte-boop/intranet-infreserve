@@ -1119,7 +1119,8 @@
             if (event) event.preventDefault();
             if (!verificarAcceso('Operaciones')) return;
             registrarEvento('view_module', 'Revisados - Vehículos');
-            cargarContenido('#', 'Vehículos Revisados (próximamente)', false);
+            // Abrir la carpeta de SharePoint en una nueva pestaña
+            window.open('https://internationalfreightserv711.sharepoint.com/:f:/s/operaciones/IgCkM6cv8cccRZHZkeGZkgFcAYArnu5ntgb6IMvNf3J9cq4?e=XnAbdl', '_blank');
         }
 
         function cargarPolizas(event) {

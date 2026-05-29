@@ -1094,25 +1094,6 @@
             cargarContenido(UBICACION_EXTINTORES_URL, 'Ubicación de Extintores', true);
         }
 
-        // ========== NUEVA FUNCIÓN PARA LAS CARPETAS DE MANTENIMIENTO ==========
-        function mostrarMensajeCarpeta(nombreCarpeta) {
-            const container = document.getElementById('dynamicContent');
-            if (!container) return;
-            registrarEvento('view_module', `Carpeta: ${nombreCarpeta} (Mantenimiento)`);
-            container.innerHTML = `
-                <div class="content-header">
-                    <div class="content-title">📁 ${nombreCarpeta}</div>
-                    <button class="btn-back-home" onclick="cargarOperaciones(event)">← Volver al Dashboard</button>
-                </div>
-                <div style="text-align:center; padding:60px;">
-                    <i class="fas fa-folder-open" style="font-size:48px; color:#86C440; margin-bottom:20px;"></i>
-                    <h3>Carpeta: ${nombreCarpeta}</h3>
-                    <p>Aquí puedes mostrar documentos, formularios o enlaces específicos.</p>
-                    <p>Por ahora es solo un marcador de posición. Reemplaza la función <strong>mostrarMensajeCarpeta</strong> por la lógica que necesites.</p>
-                </div>
-            `;
-        }
-
         // ========== VERIFICACIÓN DE PERMISOS ==========
         function tienePermisoDepartamento(departamento) {
             if (currentRol === 'Admin') return true;
@@ -1251,7 +1232,7 @@
             const navList = document.getElementById('navList');
             if (!navList) return;
 
-            // Estructura completa del menú CON LA NUEVA JERARQUÍA DE MANTENIMIENTO
+            // Estructura completa del menú (igual que el original, con etiquetas de permiso)
             const menuItems = [
                 { id: 'inicio', texto: 'Inicio', icono: '🏠', onClick: 'cargarOperaciones(event)', requiere: 'todos' },
                 { id: 'procesos', texto: 'Procesos', icono: '📋', esDropdown: true, requiere: 'todos',
@@ -1281,25 +1262,10 @@
                           { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionBodega(event)', requiere: 'todos' },
                           { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Bodega')", requiere: 'todos' }
                       ] },
-                      // ========== NUEVA ESTRUCTURA DE MANTENIMIENTO ==========
-                      { texto: 'Mantenimiento', icono: '🛠️', esSubDropdown: true, requiere: 'todos',
-                        subItems: [
-                            { texto: 'Flota', icono: '🚛', esSubDropdown: true, requiere: 'todos',
-                              subItems: [
-                                  { texto: 'Vehículos', icono: '🚗', esSubDropdown: true, requiere: 'todos',
-                                    subItems: [
-                                        { texto: 'Fumigación', icono: '🐜', onClick: "mostrarMensajeCarpeta('Fumigación')", requiere: 'todos' },
-                                        { texto: 'Revisados', icono: '✅', onClick: "mostrarMensajeCarpeta('Revisados')", requiere: 'todos' },
-                                        { texto: 'Pólizas', icono: '📄', onClick: "mostrarMensajeCarpeta('Pólizas')", requiere: 'todos' },
-                                        { texto: 'Registros Únicos', icono: '📋', onClick: "mostrarMensajeCarpeta('Registros Únicos')", requiere: 'todos' }
-                                    ]
-                                  }
-                              ]
-                            },
-                            { texto: 'Varios', icono: '📁', onClick: "mostrarMensajeCarpeta('Varios')", requiere: 'todos' }
-                        ]
-                      },
-                      // ========== FIN NUEVA ESTRUCTURA ==========
+                      { texto: 'Mantenimiento', icono: '🛠️', esSubDropdown: true, subItems: [
+                          { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionMantenimiento(event)', requiere: 'todos' },
+                          { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Mantenimiento')", requiere: 'todos' }
+                      ] },
                       { texto: 'Transporte', icono: '🚛', esSubDropdown: true, subItems: [
                           { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionTransporte(event)', requiere: 'todos' },
                           { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Transporte')", requiere: 'todos' }
@@ -1355,38 +1321,6 @@
                 return false;
             }
 
-            // Función recursiva para construir submenús de cualquier profundidad
-            function construirSubItems(subItems, parentUl) {
-                subItems.forEach(sub => {
-                    if (sub.esSubDropdown) {
-                        const subLi = document.createElement('li');
-                        subLi.className = 'dropdown-item-has-sub';
-                        const subLink = document.createElement('a');
-                        subLink.href = '#';
-                        subLink.className = 'dropdown-link';
-                        subLink.innerHTML = `<span class="icon">${sub.icono}</span> ${sub.texto}`;
-                        subLink.onclick = (e) => { e.preventDefault(); if (window.innerWidth <= 768) subLi.classList.toggle('open'); };
-                        const subUl = document.createElement('ul');
-                        subUl.className = 'dropdown';
-                        construirSubItems(sub.subItems, subUl);
-                        subLi.appendChild(subLink);
-                        subLi.appendChild(subUl);
-                        parentUl.appendChild(subLi);
-                    } else {
-                        if (tienePermiso(sub)) {
-                            const liSub = document.createElement('li');
-                            const a = document.createElement('a');
-                            a.href = '#';
-                            a.className = 'dropdown-link';
-                            a.innerHTML = `<span class="icon">${sub.icono}</span> ${sub.texto}`;
-                            a.onclick = (e) => { e.preventDefault(); eval(sub.onClick); };
-                            liSub.appendChild(a);
-                            parentUl.appendChild(liSub);
-                        }
-                    }
-                });
-            }
-
             function crearElemento(item) {
                 if (!tienePermiso(item)) return null;
                 const li = document.createElement('li');
@@ -1398,7 +1332,45 @@
                     btn.onclick = () => toggleDropdown(btn);
                     const ul = document.createElement('ul');
                     ul.className = 'dropdown';
-                    construirSubItems(item.subItems, ul);
+                    item.subItems.forEach(sub => {
+                        if (sub.esSubDropdown) {
+                            const subLi = document.createElement('li');
+                            subLi.className = 'dropdown-item-has-sub';
+                            const subLink = document.createElement('a');
+                            subLink.href = '#';
+                            subLink.className = 'dropdown-link';
+                            subLink.innerHTML = `<span class="icon">${sub.icono}</span> ${sub.texto}`;
+                            subLink.onclick = (e) => { e.preventDefault(); if (window.innerWidth <= 768) subLi.classList.toggle('open'); };
+                            const subUl = document.createElement('ul');
+                            subUl.className = 'dropdown';
+                            sub.subItems.forEach(subSub => {
+                                if (tienePermiso(subSub)) {
+                                    const liSub = document.createElement('li');
+                                    const a = document.createElement('a');
+                                    a.href = '#';
+                                    a.className = 'dropdown-link';
+                                    a.innerHTML = `<span class="icon">${subSub.icono}</span> ${subSub.texto}`;
+                                    a.onclick = (e) => { e.preventDefault(); eval(subSub.onClick); };
+                                    liSub.appendChild(a);
+                                    subUl.appendChild(liSub);
+                                }
+                            });
+                            subLi.appendChild(subLink);
+                            subLi.appendChild(subUl);
+                            ul.appendChild(subLi);
+                        } else {
+                            if (tienePermiso(sub)) {
+                                const liSub = document.createElement('li');
+                                const a = document.createElement('a');
+                                a.href = '#';
+                                a.className = 'dropdown-link';
+                                a.innerHTML = `<span class="icon">${sub.icono}</span> ${sub.texto}`;
+                                a.onclick = (e) => { e.preventDefault(); eval(sub.onClick); };
+                                liSub.appendChild(a);
+                                ul.appendChild(liSub);
+                            }
+                        }
+                    });
                     li.appendChild(btn);
                     li.appendChild(ul);
                 } else {
@@ -1417,7 +1389,6 @@
                 const el = crearElemento(item);
                 if (el) navList.appendChild(el);
             });
-            console.log('Menú construido correctamente. Número de elementos:', navList.children.length);
         }
 
         function construirQuickLinks() {
@@ -1460,48 +1431,48 @@
         }
 
         function validarSesion() {
-            // 1. Buscar token en URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const tokenParam = urlParams.get('token');
-            
-            if (tokenParam) {
-                try {
-                    const sessionData = JSON.parse(decodeURIComponent(tokenParam));
-                    if (sessionData.token && sessionData.id) {
-                        // Guardar en localStorage y sessionStorage del dominio actual
-                        localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
-                        sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
-                        // Limpiar la URL (eliminar el parámetro token)
-                        const cleanUrl = window.location.origin + window.location.pathname;
-                        window.history.replaceState({}, document.title, cleanUrl);
-                        // Recargar la página para que use el almacenamiento local
-                        window.location.reload();
-                        return true;
-                    }
-                } catch(e) {
-                    console.error('Error al procesar token:', e);
-                }
-            }
-            
-            // 2. Si no hay token, leer del almacenamiento normal
-            const userData = getUserData();
-            if (userData && userData.token && userData.id) {
-                currentUser = userData;
-                currentRol = userData.rol;
-                actualizarUI(userData);
-                if (!sessionStorage.getItem('login_logged')) {
-                    registrarEvento('login', 'Inicio de sesión (recarga)');
-                    sessionStorage.setItem('login_logged', 'true');
-                }
-                construirMenu();
-                construirQuickLinks();
-                cargarOperaciones();
+    // 1. Buscar token en URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenParam = urlParams.get('token');
+    
+    if (tokenParam) {
+        try {
+            const sessionData = JSON.parse(decodeURIComponent(tokenParam));
+            if (sessionData.token && sessionData.id) {
+                // Guardar en localStorage y sessionStorage del dominio actual
+                localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+                sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+                // Limpiar la URL (eliminar el parámetro token)
+                const cleanUrl = window.location.origin + window.location.pathname;
+                window.history.replaceState({}, document.title, cleanUrl);
+                // Recargar la página para que use el almacenamiento local
+                window.location.reload();
                 return true;
-            } else {
-                redirigirLogin();
-                return false;
             }
+        } catch(e) {
+            console.error('Error al procesar token:', e);
         }
+    }
+    
+    // 2. Si no hay token, leer del almacenamiento normal
+    const userData = getUserData();
+    if (userData && userData.token && userData.id) {
+        currentUser = userData;
+        currentRol = userData.rol;
+        actualizarUI(userData);
+        if (!sessionStorage.getItem('login_logged')) {
+            registrarEvento('login', 'Inicio de sesión (recarga)');
+            sessionStorage.setItem('login_logged', 'true');
+        }
+        construirMenu();
+        construirQuickLinks();
+        cargarOperaciones();
+        return true;
+    } else {
+        redirigirLogin();
+        return false;
+    }
+}
 
         function actualizarUI(userData) {
             const userNameSpan = document.querySelector('.user-info span');
@@ -1542,6 +1513,11 @@
             if (dateEl) dateEl.innerHTML = `${dateStr}<br>${timeStr}`;
         }
 
+        function getUrlParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
         function toggleNav() {
             const nav = document.getElementById('mainNav');
             if (nav) nav.classList.toggle('open');
@@ -1555,6 +1531,22 @@
         }
 
         // Manejo de submenús en móvil
+        document.addEventListener('DOMContentLoaded', function() {
+            const submenuParents = document.querySelectorAll('.dropdown-item-has-sub');
+            submenuParents.forEach(parent => {
+                const link = parent.querySelector('.dropdown-link');
+                if (link) {
+                    link.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 768) {
+                            e.preventDefault();
+                            parent.classList.toggle('open');
+                        }
+                    });
+                }
+            });
+        });
+
+        // ========== INICIALIZACIÓN ==========
         document.addEventListener('DOMContentLoaded', function() {
             updateDate();
             setInterval(updateDate, 60000);

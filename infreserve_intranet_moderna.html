@@ -1132,7 +1132,8 @@
             if (event) event.preventDefault();
             if (!verificarAcceso('Operaciones')) return;
             registrarEvento('view_module', 'Registros Únicos - Vehículos');
-            cargarContenido('#', 'Registros Únicos de Vehículos (próximamente)', false);
+            // Abrir la carpeta de SharePoint en una nueva pestaña
+            window.open('https://internationalfreightserv711.sharepoint.com/:f:/s/operaciones/IgC7VB7IdGQFQagEcnaMdtqgAeuUQzzLjHKrJGUhFiU2ETM?e=cBIInG', '_blank');
         }
 
         function cargarVarios(event) {

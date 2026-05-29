@@ -1584,7 +1584,7 @@
             const userNameSpan = document.querySelector('.user-info span');
             const userAvatar = document.querySelector('.user-avatar');
             if (userNameSpan && userData.nombre) {
-                userNameSpan.innerHTML = `Bienvenido, <strong>${userData.nombre}</strong> (${userData.rol})`;
+                userNameSpan.innerHTML = `Bienvenido, <strong>${userData.nombre}</strong>`;
             }
             if (userAvatar && userData.nombre) {
                 const iniciales = userData.nombre.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);

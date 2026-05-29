@@ -216,7 +216,7 @@
             transition: var(--transition);
             z-index: 100;
             list-style: none;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .nav-item:hover > .dropdown {
@@ -225,7 +225,7 @@
             transform: translateY(0);
         }
 
-        /* ===== DROPDOWN NIVEL 2 (a la derecha del nivel 1) ===== */
+        /* ===== DROPDOWN NIVEL 2 y 3 (a la derecha del padre) ===== */
         .dropdown .dropdown {
             position: absolute;
             top: 0;
@@ -239,31 +239,8 @@
             transition: var(--transition);
         }
 
+        /* Selector universal para mostrar cualquier dropdown hijo al hacer hover sobre el li padre */
         .dropdown li:hover > .dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(0);
-        }
-
-        /* ===== DROPDOWN NIVEL 3 (a la derecha del nivel 2) ===== */
-        .dropdown .dropdown .dropdown {
-            position: absolute;
-            top: 0;
-            left: 100%;
-            min-width: 220px;
-            margin-left: 2px;
-            border-radius: var(--radius-sm);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateX(-10px);
-            transition: var(--transition);
-            background: var(--white);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            list-style: none;
-            overflow: hidden;
-        }
-
-        .dropdown li:hover > .dropdown .dropdown {
             opacity: 1;
             visibility: visible;
             transform: translateX(0);
@@ -737,24 +714,6 @@
             }
 
             .dropdown li.open > .dropdown {
-                max-height: 2000px;
-            }
-
-            /* 3er nivel en móvil */
-            .dropdown .dropdown .dropdown {
-                position: static;
-                left: 0;
-                margin-left: 20px;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                max-height: 0;
-                overflow: hidden;
-                box-shadow: none;
-                background: rgba(0,0,0,0.05);
-            }
-            
-            .dropdown li.open > .dropdown .dropdown {
                 max-height: 2000px;
             }
 

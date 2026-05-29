@@ -1308,12 +1308,10 @@
                       { texto: 'Seguimiento de Cargas', icono: '📦', onClick: 'cargarSeguimientoCargas(event)', requiere: 'todos' },
                       { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Operaciones')", requiere: 'todos' },
                       { texto: 'Bodega', icono: '🏪', esSubDropdown: true, subItems: [
-                          { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionBodega(event)', requiere: 'todos' },
-                          { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Bodega')", requiere: 'todos' }
+                          { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionBodega(event)', requiere: 'todos' }
                       ] },
                       { texto: 'Mantenimiento', icono: '🛠️', esSubDropdown: true, subItems: [
                           { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionMantenimiento(event)', requiere: 'todos' },
-                          { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Mantenimiento')", requiere: 'todos' },
                           { texto: 'Flota', icono: '🚛', esSubDropdown: true, subItems: [
                               { texto: 'Vehículos', icono: '🚗', esSubDropdown: true, subItems: [
                                   { texto: 'Fumigación', icono: '🌿', onClick: 'cargarFumigacion(event)', requiere: 'todos' },
@@ -1325,8 +1323,7 @@
                           { texto: 'Varios', icono: '📦', onClick: 'cargarVarios(event)', requiere: 'todos' }
                       ] },
                       { texto: 'Transporte', icono: '🚛', esSubDropdown: true, subItems: [
-                          { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionTransporte(event)', requiere: 'todos' },
-                          { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Transporte')", requiere: 'todos' }
+                          { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionTransporte(event)', requiere: 'todos' }
                       ] }
                   ] },
                 { id: 'geshumana', texto: 'Ges. Humana', icono: '👤', esDropdown: true, requiere: 'todos',

@@ -1113,7 +1113,7 @@
 
         function cargarUbicacionExtintores(event) {
             if (event) event.preventDefault();
-            if (!verificarAcceso('Tecnología')) return;
+            if (!verificarAcceso('Operaciones')) return;
             registrarEvento('view_module', 'Ubicación de Extintores');
             cargarContenido(UBICACION_EXTINTORES_URL, 'Ubicación de Extintores', true);
         }
@@ -1268,7 +1268,7 @@
                             </tr>
                         `;
                     });
-                    html += `</tbody></table></div>`;
+                    html += `</tbody>}</div>`;
                     container.innerHTML = html;
                 })
                 .catch(error => {
@@ -1323,6 +1323,7 @@
                       { texto: 'Solicitud de Útiles y Artículos de Limpieza', icono: '🧹', onClick: 'cargarSolicitudUtiles(event)', requiere: 'todos' },
                       { texto: 'Seguimiento de Cargas', icono: '📦', onClick: 'cargarSeguimientoCargas(event)', requiere: 'todos' },
                       { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Operaciones')", requiere: 'todos' },
+                      { texto: 'Ubicación de Extintores', icono: '🔥', onClick: 'cargarUbicacionExtintores(event)', requiere: 'todos' },
                       { texto: 'Bodega', icono: '🏪', esSubDropdown: true, subItems: [
                           { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionBodega(event)', requiere: 'todos' }
                       ] },
@@ -1351,7 +1352,6 @@
                   subItems: [
                       { texto: 'Tecnología', icono: '💻', onClick: 'cargarTecnologia(event)', requiere: 'admin_supervisor' },
                       { texto: 'Ubicación de Cámaras', icono: '📷', onClick: 'cargarUbicacionCamaras(event)', requiere: 'admin_supervisor' },
-                      { texto: 'Ubicación de Extintores', icono: '🔥', onClick: 'cargarUbicacionExtintores(event)', requiere: 'admin_supervisor' },
                       { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Tecnología de la Información', 'Documentos Tecnología')", requiere: 'admin_supervisor' }
                   ] },
                 { id: 'seguridad', texto: 'Seguridad', icono: '🔒', esDropdown: true, requiere: 'admin_supervisor',

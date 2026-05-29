@@ -863,7 +863,7 @@
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams({
                     action: 'registrarActividad',
-                    token: token || '',
+                    token: token || '',  // ← NUEVO: enviar el token
                     usuario: currentUser.nombre,
                     email: currentUser.email,
                     rol: currentUser.rol,
@@ -1246,12 +1246,12 @@
             });
         }
 
-        // ========== CONSTRUCCIÓN DINÁMICA DEL MENÚ SEGÚN ROL ==========
+        // ========== CONSTRUCCIÓN DINÁMICA DEL MENÚ SEGÚN ROL (CON NUEVA ESTRUCTURA) ==========
         function construirMenu() {
             const navList = document.getElementById('navList');
             if (!navList) return;
 
-            // Estructura completa del menú (con la nueva jerarquía de Mantenimiento)
+            // Estructura completa del menú con la nueva jerarquía de Mantenimiento
             const menuItems = [
                 { id: 'inicio', texto: 'Inicio', icono: '🏠', onClick: 'cargarOperaciones(event)', requiere: 'todos' },
                 { id: 'procesos', texto: 'Procesos', icono: '📋', esDropdown: true, requiere: 'todos',
@@ -1281,7 +1281,7 @@
                           { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionBodega(event)', requiere: 'todos' },
                           { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Bodega')", requiere: 'todos' }
                       ] },
-                      // NUEVA ESTRUCTURA DE MANTENIMIENTO CON FLOTA Y VARIOS
+                      // ========== NUEVA ESTRUCTURA DE MANTENIMIENTO ==========
                       { texto: 'Mantenimiento', icono: '🛠️', esSubDropdown: true, requiere: 'todos',
                         subItems: [
                             { texto: 'Flota', icono: '🚛', esSubDropdown: true, requiere: 'todos',
@@ -1299,7 +1299,7 @@
                             { texto: 'Varios', icono: '📁', onClick: "mostrarMensajeCarpeta('Varios')", requiere: 'todos' }
                         ]
                       },
-                      // Fin de la nueva estructura
+                      // ========== FIN NUEVA ESTRUCTURA ==========
                       { texto: 'Transporte', icono: '🚛', esSubDropdown: true, subItems: [
                           { texto: 'Inspecciones', icono: '🔍', onClick: 'cargarInspeccionTransporte(event)', requiere: 'todos' },
                           { texto: 'Documentos y Formatos', icono: '📁', onClick: "mostrarDocumentos('Operaciones y Logística', 'Documentos Transporte')", requiere: 'todos' }
@@ -1355,6 +1355,38 @@
                 return false;
             }
 
+            // Función recursiva para construir submenús de cualquier profundidad
+            function construirSubItems(subItems, parentUl) {
+                subItems.forEach(sub => {
+                    if (sub.esSubDropdown) {
+                        const subLi = document.createElement('li');
+                        subLi.className = 'dropdown-item-has-sub';
+                        const subLink = document.createElement('a');
+                        subLink.href = '#';
+                        subLink.className = 'dropdown-link';
+                        subLink.innerHTML = `<span class="icon">${sub.icono}</span> ${sub.texto}`;
+                        subLink.onclick = (e) => { e.preventDefault(); if (window.innerWidth <= 768) subLi.classList.toggle('open'); };
+                        const subUl = document.createElement('ul');
+                        subUl.className = 'dropdown';
+                        construirSubItems(sub.subItems, subUl);
+                        subLi.appendChild(subLink);
+                        subLi.appendChild(subUl);
+                        parentUl.appendChild(subLi);
+                    } else {
+                        if (tienePermiso(sub)) {
+                            const liSub = document.createElement('li');
+                            const a = document.createElement('a');
+                            a.href = '#';
+                            a.className = 'dropdown-link';
+                            a.innerHTML = `<span class="icon">${sub.icono}</span> ${sub.texto}`;
+                            a.onclick = (e) => { e.preventDefault(); eval(sub.onClick); };
+                            liSub.appendChild(a);
+                            parentUl.appendChild(liSub);
+                        }
+                    }
+                });
+            }
+
             function crearElemento(item) {
                 if (!tienePermiso(item)) return null;
                 const li = document.createElement('li');
@@ -1366,73 +1398,7 @@
                     btn.onclick = () => toggleDropdown(btn);
                     const ul = document.createElement('ul');
                     ul.className = 'dropdown';
-                    item.subItems.forEach(sub => {
-                        if (sub.esSubDropdown) {
-                            const subLi = document.createElement('li');
-                            subLi.className = 'dropdown-item-has-sub';
-                            const subLink = document.createElement('a');
-                            subLink.href = '#';
-                            subLink.className = 'dropdown-link';
-                            subLink.innerHTML = `<span class="icon">${sub.icono}</span> ${sub.texto}`;
-                            subLink.onclick = (e) => { e.preventDefault(); if (window.innerWidth <= 768) subLi.classList.toggle('open'); };
-                            const subUl = document.createElement('ul');
-                            subUl.className = 'dropdown';
-                            sub.subItems.forEach(subSub => {
-                                if (tienePermiso(subSub)) {
-                                    if (subSub.esSubDropdown) {
-                                        // Manejo de tercer nivel (Vehículos -> sus 4 subcarpetas)
-                                        const subSubLi = document.createElement('li');
-                                        subSubLi.className = 'dropdown-item-has-sub';
-                                        const subSubLink = document.createElement('a');
-                                        subSubLink.href = '#';
-                                        subSubLink.className = 'dropdown-link';
-                                        subSubLink.innerHTML = `<span class="icon">${subSub.icono}</span> ${subSub.texto}`;
-                                        subSubLink.onclick = (e) => { e.preventDefault(); if (window.innerWidth <= 768) subSubLi.classList.toggle('open'); };
-                                        const subSubUl = document.createElement('ul');
-                                        subSubUl.className = 'dropdown';
-                                        subSub.subItems.forEach(subSubSub => {
-                                            if (tienePermiso(subSubSub)) {
-                                                const leafLi = document.createElement('li');
-                                                const leafA = document.createElement('a');
-                                                leafA.href = '#';
-                                                leafA.className = 'dropdown-link';
-                                                leafA.innerHTML = `<span class="icon">${subSubSub.icono}</span> ${subSubSub.texto}`;
-                                                leafA.onclick = (e) => { e.preventDefault(); eval(subSubSub.onClick); };
-                                                leafLi.appendChild(leafA);
-                                                subSubUl.appendChild(leafLi);
-                                            }
-                                        });
-                                        subSubLi.appendChild(subSubLink);
-                                        subSubLi.appendChild(subSubUl);
-                                        subUl.appendChild(subSubLi);
-                                    } else {
-                                        const liSub = document.createElement('li');
-                                        const a = document.createElement('a');
-                                        a.href = '#';
-                                        a.className = 'dropdown-link';
-                                        a.innerHTML = `<span class="icon">${subSub.icono}</span> ${subSub.texto}`;
-                                        a.onclick = (e) => { e.preventDefault(); eval(subSub.onClick); };
-                                        liSub.appendChild(a);
-                                        subUl.appendChild(liSub);
-                                    }
-                                }
-                            });
-                            subLi.appendChild(subLink);
-                            subLi.appendChild(subUl);
-                            ul.appendChild(subLi);
-                        } else {
-                            if (tienePermiso(sub)) {
-                                const liSub = document.createElement('li');
-                                const a = document.createElement('a');
-                                a.href = '#';
-                                a.className = 'dropdown-link';
-                                a.innerHTML = `<span class="icon">${sub.icono}</span> ${sub.texto}`;
-                                a.onclick = (e) => { e.preventDefault(); eval(sub.onClick); };
-                                liSub.appendChild(a);
-                                ul.appendChild(liSub);
-                            }
-                        }
-                    });
+                    construirSubItems(item.subItems, ul);
                     li.appendChild(btn);
                     li.appendChild(ul);
                 } else {
@@ -1501,10 +1467,13 @@
                 try {
                     const sessionData = JSON.parse(decodeURIComponent(tokenParam));
                     if (sessionData.token && sessionData.id) {
+                        // Guardar en localStorage y sessionStorage del dominio actual
                         localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
                         sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+                        // Limpiar la URL (eliminar el parámetro token)
                         const cleanUrl = window.location.origin + window.location.pathname;
                         window.history.replaceState({}, document.title, cleanUrl);
+                        // Recargar la página para que use el almacenamiento local
                         window.location.reload();
                         return true;
                     }
@@ -1513,6 +1482,7 @@
                 }
             }
             
+            // 2. Si no hay token, leer del almacenamiento normal
             const userData = getUserData();
             if (userData && userData.token && userData.id) {
                 currentUser = userData;

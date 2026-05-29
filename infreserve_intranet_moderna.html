@@ -957,7 +957,8 @@
             if (event) event.preventDefault();
             if (!verificarAcceso('Operaciones')) return;
             registrarEvento('view_module', 'Inspecciones de Bodega');
-            cargarContenido('#', 'Inspecciones de Bodega (próximamente)', false);
+            // Abrir la carpeta de SharePoint en una nueva pestaña
+            window.open('https://internationalfreightserv711.sharepoint.com/:f:/s/operaciones/IgApUY_t4-WbQo8iTVxf3fkSAT4vyWpDFvBQjRCCzm_t3H4?e=6r9zlS', '_blank');
         }
 
         function cargarInspeccionMantenimiento(event) {

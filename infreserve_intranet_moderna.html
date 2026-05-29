@@ -1147,6 +1147,7 @@
             `;
             registrarEvento('acceso_denegado', `Intento de acceso a ${modulo} sin permisos`);
         }
+
         // ========== FUNCIÓN PARA MOSTRAR DOCUMENTOS (MODIFICADA: AÑADE TOKEN) ==========
         function mostrarDocumentos(departamento, titulo) {
             if (window.event) window.event.preventDefault();
@@ -1246,12 +1247,12 @@
             });
         }
 
-        // ========== CONSTRUCCIÓN DINÁMICA DEL MENÚ SEGÚN ROL (CON NUEVA ESTRUCTURA) ==========
+        // ========== CONSTRUCCIÓN DINÁMICA DEL MENÚ CON SOPORTE DE MÚLTIPLES NIVELES ==========
         function construirMenu() {
             const navList = document.getElementById('navList');
             if (!navList) return;
 
-            // Estructura completa del menú con la nueva jerarquía de Mantenimiento
+            // Estructura completa del menú CON LA NUEVA JERARQUÍA DE MANTENIMIENTO
             const menuItems = [
                 { id: 'inicio', texto: 'Inicio', icono: '🏠', onClick: 'cargarOperaciones(event)', requiere: 'todos' },
                 { id: 'procesos', texto: 'Procesos', icono: '📋', esDropdown: true, requiere: 'todos',
@@ -1417,8 +1418,10 @@
                 const el = crearElemento(item);
                 if (el) navList.appendChild(el);
             });
+            console.log('Menú construido correctamente. Número de elementos:', navList.children.length);
         }
 
+        // ========== QUICK LINKS ==========
         function construirQuickLinks() {
             const quickBar = document.getElementById('quickBar');
             if (!quickBar) return;
@@ -1541,11 +1544,6 @@
             if (dateEl) dateEl.innerHTML = `${dateStr}<br>${timeStr}`;
         }
 
-        function getUrlParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-
         function toggleNav() {
             const nav = document.getElementById('mainNav');
             if (nav) nav.classList.toggle('open');
@@ -1559,22 +1557,6 @@
         }
 
         // Manejo de submenús en móvil
-        document.addEventListener('DOMContentLoaded', function() {
-            const submenuParents = document.querySelectorAll('.dropdown-item-has-sub');
-            submenuParents.forEach(parent => {
-                const link = parent.querySelector('.dropdown-link');
-                if (link) {
-                    link.addEventListener('click', function(e) {
-                        if (window.innerWidth <= 768) {
-                            e.preventDefault();
-                            parent.classList.toggle('open');
-                        }
-                    });
-                }
-            });
-        });
-
-        // ========== INICIALIZACIÓN ==========
         document.addEventListener('DOMContentLoaded', function() {
             updateDate();
             setInterval(updateDate, 60000);

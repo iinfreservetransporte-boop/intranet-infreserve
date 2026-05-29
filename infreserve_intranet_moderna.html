@@ -1093,9 +1093,20 @@
             cargarContenido('#', 'Gestión de Control (próximamente)', false);
         }
 
+        // Contraseña para acceso a Ubicación de Cámaras
+        const PASSWORD_CAMARAS = "Infreserve2026";  // ← Cambia esta contraseña por la que quieras
+        
         function cargarUbicacionCamaras(event) {
             if (event) event.preventDefault();
             if (!verificarAcceso('Tecnología')) return;
+            
+            // Pedir contraseña
+            const pass = prompt("Acceso restringido. Ingrese la contraseña para ver Ubicación de Cámaras:");
+            if (pass !== PASSWORD_CAMARAS) {
+                alert("Contraseña incorrecta. Acceso denegado.");
+                return;
+            }
+            
             registrarEvento('view_module', 'Ubicación de Cámaras');
             cargarContenido(UBICACION_CAMARAS_URL, 'Ubicación de Cámaras', true);
         }

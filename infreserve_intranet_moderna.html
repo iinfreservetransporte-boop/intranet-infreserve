@@ -1111,7 +1111,8 @@
             if (event) event.preventDefault();
             if (!verificarAcceso('Operaciones')) return;
             registrarEvento('view_module', 'Fumigación - Vehículos');
-            cargarContenido('#', 'Fumigación de Vehículos (próximamente)', false);
+            // Abrir la carpeta de SharePoint en una nueva pestaña
+            window.open('https://internationalfreightserv711.sharepoint.com/:f:/s/operaciones/IgB81xAhJU7iSK2DI6LTvakeAVkCvCABZez1u0K2kXteOyY?e=Vf2X9y', '_blank');
         }
 
         function cargarRevisados(event) {
@@ -1125,7 +1126,8 @@
             if (event) event.preventDefault();
             if (!verificarAcceso('Operaciones')) return;
             registrarEvento('view_module', 'Pólizas - Vehículos');
-            cargarContenido('#', 'Pólizas de Vehículos (próximamente)', false);
+            // Abrir la carpeta de SharePoint en una nueva pestaña
+            window.open('https://internationalfreightserv711.sharepoint.com/:f:/s/operaciones/IgDIS4NTPbzVRblHirs2xZAAAfQC3dgqypZEkxTJyxaZWjE?e=1nZFqg', '_blank');
         }
 
         function cargarRegistrosUnicos(event) {

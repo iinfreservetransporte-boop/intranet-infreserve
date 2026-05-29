@@ -347,13 +347,49 @@
             position: relative;
         }
 
+        /* ===== RELOJ PROFESIONAL ===== */
         .welcome-date {
             position: absolute;
             top: 24px;
             right: 32px;
-            text-align: right;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 10px 20px;
+            text-align: center;
+            min-width: 200px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .welcome-date:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .welcome-date .fecha {
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+
+        .welcome-date .hora {
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.2;
+            font-family: 'Segoe UI', monospace;
+            letter-spacing: 1px;
+        }
+
+        .welcome-date .hora i {
+            font-size: 16px;
+            margin-right: 6px;
             opacity: 0.8;
-            font-size: 12px;
         }
 
         /* ===== QUICK LINKS BAR ===== */
@@ -745,10 +781,14 @@
                 font-size: 24px;
             }
 
+            /* Reloj en móvil */
             .welcome-date {
                 position: static;
-                text-align: left;
-                margin-top: 12px;
+                display: inline-block;
+                margin-top: 15px;
+                background: rgba(0,0,0,0.2);
+                backdrop-filter: none;
+                width: auto;
             }
 
             .quick-bar {
@@ -808,7 +848,10 @@
     <main class="main">
         <!-- Welcome Section -->
         <section class="welcome-section">
-            <div class="welcome-date" id="currentDate"></div>
+            <div class="welcome-date" id="currentDate">
+                <div class="fecha"><i class="far fa-calendar-alt"></i> <span id="fechaTexto">--</span></div>
+                <div class="hora"><i class="far fa-clock"></i> <span id="horaTexto">--:--</span></div>
+            </div>
             <h1 class="welcome-title">Bienvenidos a nuestra Intranet</h1>
             <p class="welcome-text">Accede a todos los procesos, herramientas y recursos de Infreserve desde un solo lugar. Plataforma centralizada para la gestión operativa y administrativa.</p>
         </section>
@@ -1567,18 +1610,18 @@
             return false;
         }
 
+        // ========== NUEVA FUNCIÓN DE FECHA Y HORA PROFESIONAL ==========
         function updateDate() {
             const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const dateStr = now.toLocaleDateString('es-ES', options);
+            const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            let dateStr = now.toLocaleDateString('es-ES', optionsDate);
+            // Capitalizar primera letra de la fecha
+            dateStr = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
             const timeStr = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-            const dateEl = document.getElementById('currentDate');
-            if (dateEl) dateEl.innerHTML = `${dateStr}<br>${timeStr}`;
-        }
-
-        function getUrlParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
+            const fechaSpan = document.getElementById('fechaTexto');
+            const horaSpan = document.getElementById('horaTexto');
+            if (fechaSpan) fechaSpan.textContent = dateStr;
+            if (horaSpan) horaSpan.textContent = timeStr;
         }
 
         function toggleNav() {

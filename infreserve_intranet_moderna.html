@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌐%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== ESTILOS (MANTENIDOS IGUALES) ===== */
+        /* ===== ESTILOS (MANTENIDOS IGUALES A SU ORIGINAL) ===== */
         :root {
             --primary: #4161A8;
             --primary-dark: #2E4A7A;
@@ -320,7 +320,7 @@
             right: -10%;
             width: 400px;
             height: 400px;
-            background: rgba(134, 196, 64, 0.15);
+            background: rgba(134,196,64,0.15);
             border-radius: 50%;
         }
 
@@ -863,7 +863,7 @@
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams({
                     action: 'registrarActividad',
-                    token: token || '',  // ← NUEVO: enviar el token
+                    token: token || '',
                     usuario: currentUser.nombre,
                     email: currentUser.email,
                     rol: currentUser.rol,
@@ -1247,7 +1247,7 @@
             });
         }
 
-        // ========== CONSTRUCCIÓN DINÁMICA DEL MENÚ CON SOPORTE DE MÚLTIPLES NIVELES ==========
+        // ========== CONSTRUCCIÓN DINÁMICA DEL MENÚ SEGÚN ROL ==========
         function construirMenu() {
             const navList = document.getElementById('navList');
             if (!navList) return;
@@ -1356,7 +1356,7 @@
                 return false;
             }
 
-            // Función recursiva para construir submenús de cualquier profundidad
+            // Función recursiva para construir submenús de cualquier nivel
             function construirSubItems(subItems, parentUl) {
                 subItems.forEach(sub => {
                     if (sub.esSubDropdown) {
@@ -1421,7 +1421,6 @@
             console.log('Menú construido correctamente. Número de elementos:', navList.children.length);
         }
 
-        // ========== QUICK LINKS ==========
         function construirQuickLinks() {
             const quickBar = document.getElementById('quickBar');
             if (!quickBar) return;
@@ -1470,13 +1469,10 @@
                 try {
                     const sessionData = JSON.parse(decodeURIComponent(tokenParam));
                     if (sessionData.token && sessionData.id) {
-                        // Guardar en localStorage y sessionStorage del dominio actual
                         localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
                         sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
-                        // Limpiar la URL (eliminar el parámetro token)
                         const cleanUrl = window.location.origin + window.location.pathname;
                         window.history.replaceState({}, document.title, cleanUrl);
-                        // Recargar la página para que use el almacenamiento local
                         window.location.reload();
                         return true;
                     }
@@ -1485,7 +1481,6 @@
                 }
             }
             
-            // 2. Si no hay token, leer del almacenamiento normal
             const userData = getUserData();
             if (userData && userData.token && userData.id) {
                 currentUser = userData;
